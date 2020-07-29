@@ -1,0 +1,138 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Oswald', sans-serif;
+}
+html,body,.content
+{
+    height: 100vh;
+}
+body
+{
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+}
+.content
+{
+    border-radius: 90px 0 0 0;
+    background-color: white;
+    margin-top: 40px;
+}
+.backgroundBar
+{
+    border-radius: 5% 5% 0 0;
+    margin-right: 100px;
+    position: fixed;
+    border-top: 2px solid rgb(114, 114, 114,0.6);
+    top: 90%;
+    background-image: linear-gradient(90deg,#fff,#fff);
+    height: 80px;
+    width: 100%;
+    z-index: 3;
+}
+.backgroundRound
+{
+    position: fixed;
+    left: calc(50% - 40px);
+    border-top: 2px solid rgb(114, 114, 114,0.6);
+    border-radius: 50%;
+    top: 88%;
+    background-image: url(/image/iconRoom.png);
+    height: 80px;
+    width: 80px;
+    z-index: 4;
+}
+
+.icon{
+    position: fixed;
+    height: 8vh;
+    width: 100%;
+    top: 89%;
+    z-index: 5;
+    margin-top: 10px;
+}
+#iconNewsfeed,#iconSearch,#iconNoti,#iconProfile
+{
+    position: relative;;
+    height: 4.5vh;
+    width: 4.5vh;
+    top: 10px;
+}
+
+#iconRoom
+{
+    height: 6vh;
+    width: 6vh;
+    top: 0px;
+}
+.icon_Room
+{
+    height: 7.5vh;
+    width: 7.5vh;
+    border-radius: 50%;
+    transform: translate(20%,10%);
+}
+.multimedia
+{
+    height: 200px;
+    width: 120px;
+}
+.row
+{
+    margin: 0;
+    padding: 0;
+}
+.col-re-3
+{
+    flex: 0 0 20.833333%;
+    max-width: 20.833333%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.col-1,.col-2,.col-3,.col-8,.col-10,.col-9
+{
+    padding: 0px;
+    padding-left: 10px;
+    line-height: 1.5rem;
+}
+.sharp
+{
+    font-size: 250%;
+    font-weight: 500;
+    text-align: right;
+}
+#category
+{
+    font-weight: 600;
+    font-size: 90%;
+}
+.SearchTool
+{
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+.Icon
+{
+    transform: translate(50%,0);
+}
+input
+{
+    background-color: rgba(74, 78, 77,0.4);
+    color: white;
+    border-radius: 10px 0 0 0 ;
+    border: 0;
+    letter-spacing: 0.1rem;
+    width: 100%;
+    padding-left: 15%;
+}
+input::placeholder
+{
+    color: white;
+}
+a,a:hover,a:visited
+{
+    color: black;
+}
+.listVideo
+{
+    margin-bottom: 20px;
+}

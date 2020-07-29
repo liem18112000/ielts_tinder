@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/stylesMainNewsfeed.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/1918a957af.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="filter">
+            <img src="image/filter.png" id="filter" alt="">
+        </div>
+        <div class="menu row">
+            <div class="col-1"></div>
+            <div class="menu1 col-5"><a href="newsfeed-following.html" class="linkNewsfeed navlink all">ALL</a>
+            </div>
+            <div class="menu2 col-5"><a href="newsfeed-moments.html" class="linkNewsfeed navlink moments">NEAR
+                    BY</a></div>
+        </div>
+        <section class="section-content">
+            <div class="user-1">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="image/avatar-main1.png" class="avatar-user" alt="">
+                    </div>
+                    <div class="col-8">
+                        <div class="status1">
+                            <span><img src="image/online.png" alt="" class="online"></span>
+                            <span class="username"><a href=""> Anthony Lê Thịnh</a></span>
+                            <span><img src="image/VietNam.png" class="country" alt=""></span>
+                        </div>
+                        <span><img src="image/score.png" class="info" alt=""></span>
+                        <span class="detail">5.5</span>
+                        <div class="player">
+                            <span> <img src="image/player.png" class="info" alt=""></span>
+                            <span class="detail">13</span>
+                        </div>
+                        <div class="age">
+                            <span> <img src="image/Age.png" class="info" alt=""></span>
+                            <span class="detail">20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row descrip">
+                    <p>I'm willing talk about anyyyything! <br> Let's share about everything</p>
+                </div>
+                <div class=" row control">
+                    <div class="col-5"> <button type="button" class="btn btnFollow">MORE</button></div>
+                    <div class="col-1"></div>
+                    <div class="col-5"><button type="button" class="btn btnFollow follow">+ FOLLOW</button></div>
+                </div>
+            </div>
+            <div class="user-1">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="image/avatar-main2.png" class="avatar-user" alt="">
+                    </div>
+                    <div class="col-8">
+                        <div class="status1">
+                            <span><img src="image/offline.png" alt="" class="online"></span>
+                            <span class="username"><a href=""> Minh Tú Lê</a></span>
+                            <span><img src="image/VietNam.png" class="country" alt=""></span>
+                        </div>
+                        <span><img src="image/score.png" class="info" alt=""></span>
+                        <span class="detail">7</span>
+                        <div class="player">
+                            <span> <img src="image/player.png" class="info" alt=""></span>
+                            <span class="detail">13</span>
+                        </div>
+                        <div class="age">
+                            <span> <img src="image/Age.png" class="info" alt=""></span>
+                            <span class="detail">20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row descrip">
+                    <p>Diversity in culture. Travel and work experiences. <br> Thoughts about current global issues.</p>
+                </div>
+                <div class=" row control">
+                    <div class="col-5"> <button type="button" class="btn btnFollow">MORE</button></div>
+                    <div class="col-1"></div>
+                    <div class="col-5"><button type="button" class="btn btnFollow follow">+ FOLLOW</button></div>
+                </div>
+            </div>
+            <div class="user-1 last">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="image/avatar-main1.png" class="avatar-user" alt="">
+                    </div>
+                    <div class="col-8">
+                        <div class="status1">
+                            <span><img src="image/online.png" alt="" class="online"></span>
+                            <span class="username"><a href=""> Minh Tú Lê</a></span>
+                            <span><img src="image/VietNam.png" class="country" alt=""></span>
+                        </div>
+                        <span><img src="image/score.png" class="info" alt=""></span>
+                        <span class="detail">5.5</span>
+                        <div class="player">
+                            <span> <img src="image/player.png" class="info" alt=""></span>
+                            <span class="detail">123</span>
+                        </div>
+                        <div class="age">
+                            <span> <img src="image/Age.png" class="info" alt=""></span>
+                            <span class="detail">320</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row descrip">
+                    <p id="last">I'm willing talk about anyyyything! <br> Let's share about everything</p>
+                </div>
+                <div class=" row control">
+                    <div class="col-5"> <button type="button" class="btn btnFollow">MORE</button></div>
+                    <div class="col-1"></div>
+                    <div class="col-5"><button type="button" class="btn btnFollow follow">+ FOLLOW</button></div>
+                </div>
+            </div>
+        </section>
+        <div class="icon">
+            <div class="row align-items-center">
+                <div class="col">
+                    <a href="newsfeed-following.html"> <img id="iconNewsfeed" src="image/iconNewsfeed.png" alt=""></a>
+                </div>
+                <div class="col">
+                    <a href="search.html"> <img id="iconSearch" src="image/icon_search.png" alt=""></a>
+                </div>
+                <div class="col">
+                    <div class="backgroundRound">
+                        <a href="Main-newsfeed.html"> <img class="icon_Room" src="image/iconRoom.png"></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="notifications.html"> <img id="iconNoti" src="image/icon_noti.png" alt=""></a>
+                </div>
+                <div class="col">
+                    <a href="profile.html"> <img id="iconProfile" src="image/icon_profile.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="backgroundBar"></div>
+
+    </div>
+</body>
+
+</html>

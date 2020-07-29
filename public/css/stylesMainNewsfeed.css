@@ -1,0 +1,192 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+html,body,.content
+{
+    height: 120vh;
+}
+body
+{
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+}
+p
+{
+    font-weight: 500;
+    padding-left: 20px;
+}
+section
+{
+    height: 100vh;
+}
+.content
+{
+    border-radius: 90px 0 0 0;
+    background-color: white;
+    margin-top: 40px;
+}
+.backgroundBar
+{
+    border-radius: 5% 5% 0 0;
+    margin-right: 100px;
+    position: fixed;
+    border-top: 2px solid rgb(114, 114, 114,0.6);
+    top: 90%;
+    background-image: linear-gradient(90deg,#fff,#fff);
+    height: 80px;
+    width: 100%;
+    z-index: 3;
+}
+.backgroundRound
+{
+    position: fixed;
+    left: calc(50% - 40px);
+    border-top: 2px solid rgb(114, 114, 114,0.6);
+    border-radius: 50%;
+    top: 88%;
+    background-image: url(/image/iconRoom.png);
+    height: 80px;
+    width: 80px;
+    z-index: 4;
+}
+
+.icon{
+    position: fixed;
+    height: 8vh;
+    width: 100%;
+    top: 89%;
+    z-index: 5;
+    margin-top: 10px;
+}
+#iconNewsfeed,#iconSearch,#iconNoti,#iconProfile
+{
+    position: relative;
+    height: 4.5vh;
+    width: 4.5vh;
+    top: 10px;
+}
+#iconRoom
+{
+    height: 6vh;
+    width: 6vh;
+    top: 0px;
+}
+.icon_Room
+{
+    height: 7.5vh;
+    width: 7.5vh;
+    border-radius: 50%;
+    transform: translate(20%,10%);
+}
+.col-2,.col-10,.col-4,.col-8
+{
+    padding-right: 0px;
+
+}
+
+#filter
+{
+    width: 7%;
+    margin-left: 87%;
+    margin-top: 10px;
+}
+.user-1
+{
+    margin: 15px;
+    border: 2px grey solid;
+    border-radius: 20px;
+    margin: 20px;
+}
+.avatar-user
+{
+    width: 100%;
+    margin-top: 15%;
+    height: 87%;
+    margin-left: 5px;
+}
+.status1
+{
+    margin-top: 2%;
+}
+.online
+{
+    width: 5%;
+}
+.country
+{
+    width: 20%;  
+}
+.info
+{
+    width: 10%;
+}
+.detail
+{
+    line-height: 2rem;
+    vertical-align: top;
+}
+.descrip,.control
+{
+    margin-left: 15px;
+    margin-right: 0px;
+}
+.control
+{
+    margin-bottom: 10px;
+    
+}
+.username
+{
+    margin-left: 1%;
+}
+.menu1
+{
+    color: #3C99DC;
+    border-bottom: #3C99DC 1px solid;
+    text-align: center;
+    padding-left: 2px;
+}
+.menu2 a,.menu2 a:hover,.menu2 a:visited
+{
+    color: rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+.menu1 a,.menu1 a:hover,.menu1 a:visited
+{
+    text-decoration: none;
+    color: #3C99DC;
+}
+.menu2
+{
+    color: rgba(0,0,0,0.2);
+    border-bottom: rgba(0,0,0,0.2) 1px solid;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 0;
+}
+.username a
+{
+    color: black;
+    font-weight: 500;
+}
+.btnFollow
+{
+    padding: 0px 10px 0px 10px; 
+    margin-top: 0;
+    margin-bottom: 0px;
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+    border-radius: 50px;
+    font-weight: 700;
+    border: none;   
+    font-size: 90%;
+}
+.last
+{
+    margin-bottom: 80px;
+}
+.row
+{
+    margin-left: 0;
+    margin-right: 0;
+}

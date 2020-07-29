@@ -1,0 +1,92 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Twilio\Rest\Client;
+use Twilio\Jwt\AccessToken;
+use Twilio\Jwt\Grants\VideoGrant;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+class VideoRoomController extends Controller
+{
+    protected $sid;
+    protected $token;
+    protected $key;
+    protected $secret;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->sid = config('services.twilio.sid');
+        $this->token = config('services.twilio.token');
+        $this->key = config('services.twilio.key');
+        $this->secret = config('services.twilio.secret');
+    }
+
+
+    public function join($room)
+    {
+        // A unique identifier for this user
+        $identity = Auth::user()->name . "@" . rand(3,10000);
+
+        Log::debug("joined with identity: $identity");
+        $token = new AccessToken($this->sid, $this->key, $this->secret, 3600, $identity);
+
+        $videoGrant = new VideoGrant();
+        $videoGrant->setRoom($room);
+
+        $token->addGrant($videoGrant);
+
+        return view('room.room',[
+            'accessToken'   => $token->toJWT(),
+            'room'          => $room
+        ]);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $rooms = [];
+        try {
+            $client = new Client($this->sid, $this->token);
+            $allRooms = $client->video->rooms->read([]);
+        } catch (\Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        return view('room.index', ['rooms' => $allRooms]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        $client = new Client($this->sid, $this->token);
+
+        $exists = $client->video->rooms->read(['uniqueName' => $request->roomName]);
+
+        if (empty($exists)) {
+            $client->video->rooms->create([
+                'uniqueName'                    => $request->room,
+                'type'                          => 'peer-to-peer',
+                'recordParticipantsOnConnect'   => true
+            ]);
+
+            Log::debug("created new room: " . $request->room);
+        }
+
+        return redirect()->action('VideoRoomController@join', [
+            'room' => $request->room
+        ]);
+    }
+
+}
