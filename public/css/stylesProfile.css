@@ -7,7 +7,7 @@
 html,
 body,
 .content {
-    height: 100vh;
+    height: fit-content;
 }
 
 body {
@@ -198,7 +198,7 @@ h1 {
     position: relative;
     top: 0;
     left: 0;
-    height: 30vh;
+    height: 60vh;
     width: 100vw;
     z-index: 3;
     background-color: #fff;
@@ -207,7 +207,22 @@ h1 {
 #chart-container {
     position: relative;
     top: 2%;
-    height: 200%;
+    height: 85%;
     width: 100%;
     margin-bottom: 12%;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+    /* For desktop: */
+    .multimedia {
+        height: 60vh;
+        width: 100%;
+    }
+
+    .container {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
 }

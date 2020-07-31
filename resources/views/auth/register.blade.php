@@ -6,11 +6,12 @@
 
 @section('content')
 <div class="content">
+    <div class="container">
     <form method="POST" action="{{ route('register') }}">
         @csrf
         @method('POST')
         <input id="name" type="text" class="Input email"
-            name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+            name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Fullname" autofocus>
         <input type="email" name="email" class="Input email" placeholder="Email"
             name="email" value="{{ old('email') }}">
         <input type="password" class="Input password" placeholder="Password"
@@ -25,5 +26,6 @@
             <button type="submit" class="btn btn-lg btnLink">Sign me up</button>
         </div>
     </form>
+    </div>
 </div>
 @endsection

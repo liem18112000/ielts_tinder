@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appWithoutNavbar')
 
 @section('styles')
     <link rel="stylesheet" href="{{asset('css/stylesNotifications.css')}}">
@@ -12,82 +12,101 @@
 
         <div class='row'>
 
-            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4 '>
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Create new room</h3>
+            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4 mt-4'>
+
+                <h3>Create new room</h3>
+
+                <form action = '{{route('room.create')}}' method='post'>
+                    @csrf
+                    <div class="form-group">
+                        <label for="room">Room Name</label>
+                        <input type="text" name="room" id="room" class="form-control" value="{{$newRoomName}}"
+                            placeholder="Enter room name" aria-describedby="helpId" required="required">
+                        <small id="helpId" class="text-muted">You can change room name if you want</small>
                     </div>
-                    <div class="card-body">
-                        <form action = '{{route('room.create')}}' method='post'>
-                                @csrf
-                                <div class="form-group">
-                                    <label for="room">Room Name</label>
-                                    <input type="text" name="room" id="room" class="form-control" placeholder="Enter room name" aria-describedby="helpId">
-                                    <small id="helpId" class="text-muted">Create a new room</small>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">Go!</button>
-                            </form>
+                    <div class="form-group">
+                        <label for="">Room Type</label>
+                        <select class="form-control" name="type" id="type" aria-describedby="helpId2">
+                            <option value='group-small'>Recommended : Small room with 4 users</option>
+                            <option value='peer-to-peer'>Private room with 2 users only </option>
+                            <option value='group'> Regular room with 50 users or more </option>
+                        </select>
+                        <small id="helpId2" class="text-muted">Choose room type</small>
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-primary btn-block">Go!</button>
+                </form>
+
             </div>
 
 
             @if($rooms)
 
             <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-                <div class="card">
-                    <div class="card-header">
-                        <h3>List of Rooms</h3>
-                    </div>
-                    <div class="card-body">
-                            <table class='display' id='tableID'>
-                                <thead class='thead-dark'>
-                                    <tr align="center">
-                                        <th>ID</th>
-                                        <th>Room</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Date Created</th>
-                                        <th>Action</>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $i = 1001;
-                                    @endphp
-                                    @foreach ($rooms as $room)
-                                    <tr align="center">
-                                        <td>{{$i}}</td>
-                                        <td><b>{{$room->uniqueName}}</b></td>
-                                        <td>{{$room->type}}</td>
-                                        <td><b style='color:green'>{{$room->status}}</b></td>
-                                        <td>{{ \Carbon\Carbon::parse($room->dateCreated) }}</td>
-                                        <td>
-                                            <a name="" id="" class="btn btn-primary btn-block" href="{{ route('room.join', $room->uniqueName) }}" role="button">Join</a>
-                                        </td>
-                                    </tr>
-                                    @php
-                                        $i++;
-                                    @endphp
-                                    @endforeach
-                                </tbody>
-                            </table>
-                    </div>
-                </div>
+
+                <h3>List of Rooms</h3>
+
+                <table class="table table-striped table-inverse table-responsive" >
+                    <thead class="thead-inverse" >
+                        <tr style="text-align:center">
+                            <th style="width: 50%;">Name</th>
+                            <th style="width: 50%;">Type</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($rooms as $room)
+                            <tr style="text-align:center">
+                                <td scope="row">{{$room->uniqueName }}</td>
+                                <td>
+                                    @if($room->type == 'peer-to-peer')
+                                        Private
+                                    @elseif($room->type == 'group-small')
+                                        Small
+                                    @else
+                                        Regular
+                                    @endif
+                                </td>
+                                <td style='padding: 4px;'>
+                                    <a class="btn btn-primary btn-block" style="margin: 0" href="{{route('room.join', $room->uniqueName)}}" role="button">Join</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                </table>
             </div>
 
             @endif
-
         </div>
 
+
     </div>
+    <div class="icon">
+        <div class="row align-items-center">
+            <div class="col">
+                <a href="{{route('feeds.index')}}"> <img id="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
+            </div>
+            <div class="col">
+                <a href="{{route('search')}}"> <img id="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
+            </div>
+            <div class="col">
+                <div class="backgroundRound">
+                    <a href="{{route('room.index')}}"> <img class="icon_Room" src="{{asset('image/iconRoom.png')}}"></a>
+                </div>
+            </div>
+            <div class="col">
+                <a href="{{route('notify.index')}}"> <img id="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
+            </div>
+            <div class="col">
+                <a href="{{route('profile.show', Auth::user()->id)}}"> <img id="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="backgroundBar"></div>
 </div>
 
 
 @endsection
 
-
-
-@section('scripts')
-    $('#tableID').DataTable();
-@endsection

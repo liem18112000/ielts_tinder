@@ -20,11 +20,11 @@ span
 input[type=checkbox]
 {
     background-color: rgba(0,0,0,0.1) !important;
-    transform: scale(2); 
+    transform: scale(2);
     margin-left: 20px;
     margin-right: 10px;
 }
-input[type=checkbox]:checked 
+input[type=checkbox]:checked
 {
     background-color: rgba(0,0,0,0) !important;
 }
@@ -50,12 +50,12 @@ input[type=checkbox]:checked
     font-weight: 200;
     font-size: 120%;
 }
-.Input:focus::placeholder 
+.Input:focus::placeholder
 {
     transition: all 0.4s;
     color: transparent;
     text-align: left;
-    
+
 }
 .cor-password
 {
@@ -76,7 +76,7 @@ input[type=checkbox]:checked
     border-radius: 25px;
     padding: 10px 50px;
     font-size: 90%;
-    
+
 }
 .btn:hover,
 .btn:visited
@@ -86,4 +86,12 @@ input[type=checkbox]:checked
 .link:hover
 {
     text-decoration:none;
+}
+
+@media only screen and (min-width: 768px) {
+
+    .container {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
 }

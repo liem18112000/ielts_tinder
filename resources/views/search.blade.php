@@ -11,142 +11,55 @@
 
 @section('content')
     <div class="content">
-        <span class="row SearchTool">
-            <div class="col-2 Icon">
-                <a href=""> <i class="fas fa-search"></i></a>
+
+        <div class="container-fluid" style='padding-bottom: 15%'>
+
+            <span class="row SearchTool">
+                <div class="col-2 Icon">
+                    <a href=""> <i class="fas fa-search"></i></a>
+                </div>
+                <div class="col-8 inputBar">
+                    <input type="text" placeholder="Searching">
+                </div>
+            </span>
+
+            @for($i = 0; $i < 10; $i++)
+            <div class="category row">
+                <div class="col-1 sharp">
+                    <span id="sharp">#</span>
+                </div>
+                <div class="col-11">
+                    <span id="category">Pet</span>
+                </div>
             </div>
-            <div class="col-8 inputBar">
-                <input type="text" placeholder="Searching">
+            <div class="row listVideo">
+                <div class="col-1"></div>
+                <div class="col-re-3">
+                    <div class="embed-responsive embed-responsive-1by1">
+                        <iframe class="embed-responsive-item multimedia"
+                            src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
+                    </div>
+                </div>
+                <div class="col-re-3">
+                    <div class="embed-responsive embed-responsive-1by1">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
+                    </div>
+                </div>
+                <div class="col-re-3">
+                    <div class="embed-responsive embed-responsive-1by1">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
+                    </div>
+                </div>
+                <div class="col-re-3">
+                    <div class="embed-responsive embed-responsive-1by1">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
+                    </div>
+                </div>
             </div>
-        </span>
-        <div class="category row">
-            <div class="col-2 sharp">
-                <span id="sharp">#</span>
-            </div>
-            <div class="col-10">
-                <span id="category">Pet</span>
-            </div>
+            @endfor
+
         </div>
-        <div class="row listVideo">
-            <div class="col-2"></div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item multimedia"
-                        src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-        </div>
-        <div class="category row">
-            <div class="col-2 sharp">
-                <span id="sharp">#</span>
-            </div>
-            <div class="col-10">
-                <span id="category">Family</span>
-            </div>
-        </div>
-        <div class="row listVideo">
-            <div class="col-2 "></div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item multimedia"
-                        src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-        </div>
-        <div class="category row">
-            <div class="col-2 sharp">
-                <span id="sharp">#</span>
-            </div>
-            <div class="col-10">
-                <span id="category">Environment</span>
-            </div>
-        </div>
-        <div class="row listVideo">
-            <div class="col-2"></div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item multimedia"
-                        src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-        </div>
-        <div class="category row">
-            <div class="col-2 sharp">
-                <span id="sharp">#</span>
-            </div>
-            <div class="col-10">
-                <span id="category">Environment</span>
-            </div>
-        </div>
-        <div class="row listVideo">
-            <div class="col-2"></div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item multimedia"
-                        src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-            <div class="col-re-3">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lHJN6IO6jYI"></iframe>
-                </div>
-            </div>
-        </div>
+
         <div class="icon">
             <div class="row align-items-center">
                 <div class="col">

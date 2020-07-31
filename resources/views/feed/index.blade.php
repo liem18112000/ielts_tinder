@@ -23,7 +23,9 @@
                         <img src="{{asset('image/avatar1.png')}}" alt="avatar" class="avatar">
                     </div>
                     <div class="col-10">
-                        <div class="row username"><a href="">Hồ Điệp</a></div>
+                        <div class="row username">
+                            <a href="">Hồ Điệp</a>
+                        </div>
                         <div class="row status">
                             <p>Today I'll talk about my hometown life</p>
                         </div>
@@ -82,6 +84,34 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="icon">
+            <div class="row align-items-center">
+                <div class="col">
+                    <a href="{{route('feeds.index')}}"> <img id="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
+                </div>
+                <div class="col">
+                    <a href="{{route('search')}}"> <img id="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
+                </div>
+                <div class="col">
+                    <div class="backgroundRound">
+                        <a href="{{route('room.index')}}"> <img class="icon_Room" src="{{asset('image/iconRoom.png')}}"></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="{{route('notify.index')}}"> <img id="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
+                </div>
+                <div class="col">
+                    <a href="{{route('profile.show', Auth::user()->id)}}"> <img id="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="backgroundBar"></div>
     </div>
 @endsection
 

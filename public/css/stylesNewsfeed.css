@@ -5,7 +5,7 @@
 }
 html,body,.content
 {
-    height: 100vh;
+    height: fit-content;
 }
 body
 {
@@ -127,7 +127,7 @@ a,a:hover,a:visited
 
     /* For desktop: */
     .multimedia {
-        height: 40vh;
+        height: 60vh;
         width: 100%;
     }
 

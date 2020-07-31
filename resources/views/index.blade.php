@@ -6,7 +6,7 @@
 
 @section('content')
 
- <div class="content">
+<div class="content">
     <h1>Hello!</h1>
     <img src="{{asset('image/logo.png')}}" alt="">
     <h2>IELTS TINDER</h2>

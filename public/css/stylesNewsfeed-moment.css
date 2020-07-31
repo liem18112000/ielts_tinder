@@ -5,16 +5,15 @@
 }
 html,body,.content
 {
-    height: 100vh;
+    height: fit-content;
 }
 body
 {
     background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
 }
-iframe
-{
-    width: 90%;
-    height: 80%;
+iframe {
+    width: 100%;
+    height: auto;
 }
 a,a:hover,a:visited
 {
@@ -124,13 +123,13 @@ a,a:hover,a:visited
 }
 .btnFollow
 {
-    padding: 0px 10px 0px 10px; 
+    padding: 0px 10px 0px 10px;
     margin-top: 0;
     margin-bottom: 0px;
     background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
     border-radius: 50px;
     font-weight: 700;
-    border: none;   
+    border: none;
     font-size: 90%;
 }
 
@@ -153,4 +152,18 @@ a,a:hover,a:visited
 i.far
 {
     padding-left: 20%;
+}
+
+@media only screen and (min-width: 768px) {
+
+    /* For desktop: */
+    .multimedia {
+        height: 60vh;
+        width: 100%;
+    }
+
+    .container {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
 }

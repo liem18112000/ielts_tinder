@@ -44,7 +44,7 @@ return [
 
     'twilio' => [
         'sid' => 'AC62aae91ce54957c4be10dcd347a77a00',
-        'token' => 'cee741eca31d06137288ac1ca897d8c1',
+        'token' => '4f036071e608e4c7497f284421572762',
         'key' => 'SK30875e6b838142be1ce09df6ad9c75b3',
         'secret' => 'Wfc12NdHJqMrZPRQNfiLXONkvsgwVXan'
     ]

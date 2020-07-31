@@ -291,81 +291,111 @@
 @section('content')
 
 	<div class="content">
-		<div class="row">
-			<div class="col-6 info">
-				<h2 style='margin-top:50px'>{{$profile->user->name}}</h2>
-				<div class="row">
-					<img src="{{asset('image/location.png')}}" class="age" alt="">
-					<span class="detail">
-						@if(!$profile->home)
-							Not Available
-						@else
-							{{$profile->home}}
-						@endif
-					</span>
-				</div>
-				<div class="row">
-					<img src="{{asset('image/Age.png')}}" class="age" alt="">
-					<span class="detail">
-						@if(!$profile->dob)
-							Not Available
-						@else
-							{{$profile->dob}}
-						@endif
-					</span>
-				</div>
-				<div class="row">
-                    <div class="col-4">
-                        <a href='{{ route('profile.edit', $profile)}}' class="btn btnEdit">Edit</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="btn btnEdit" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
+        <div class="container">
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+            <div class="row">
+                <div class="col-6 info">
+                    <h2 style='margin-top:50px'>{{$profile->user->name}}</h2>
+                    <div class="row">
+                        <img src="{{asset('image/location.png')}}" class="age" alt="">
+                        <span class="detail">
+                            @if(!$profile->home)
+                                Not Available
+                            @else
+                                {{$profile->home}}
+                            @endif
+                        </span>
                     </div>
-				</div>
-			</div>
-			<div class="col-6">
-				@if($profile->image == null)
-					<div class="row"> <img style='border-radius:50%' src="{{$profile->online_image}}" class="avatar-profile" alt=""></div>
-				@else
-                    <div class="row"> <img src="{{asset('image/user/'.Auth::user().id.'/'.$profile->image)}}" class="avatar-profile" alt=""></div>
-                @endif
-			</div>
-		</div>
-		<div class="row descrip">
-			<span>
-				{!!$profile->intro!!}
-			</span>
-		</div>
-		<div class="row">
-			<div class="col-1"></div>
-			<div class="col-5">
-				<span class="amount-follower">31</span> Follower
-			</div>
+                    <div class="row">
+                        <img src="{{asset('image/Age.png')}}" class="age" alt="">
+                        <span class="detail">
+                            @if(!$profile->dob)
+                                Not Available
+                            @else
+                                {{$profile->dob}}
+                            @endif
+                        </span>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <a href='{{ route('profile.edit', $profile)}}' class="btn btnEdit">Edit</a>
+                        </div>
+                        <div class="col-4">
+                            <a class="btn btnEdit" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-			<div class="col-5">
-				<span class="amount-following">125</span> Following
-			</div>
-		</div>
-		<hr>
-		<div class="row learn">
-			<div class="row score">
-				<img src="{{asset('image/score.png')}}" id="score" alt="">
-				<span class="score-detail">IELTS Band Scores: </span>
-				<span class="current-score">{{$profile->band_score}}</span>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    @if($profile->image == null)
+                        <div class="row"> <img style='border-radius:50%' src="{{$profile->online_image}}" class="avatar-profile" alt=""></div>
+                    @else
+                        <div class="row"> <img src="{{asset('image/user/'.Auth::user().id.'/'.$profile->image)}}" class="avatar-profile" alt=""></div>
+                    @endif
+                </div>
             </div>
-            <div class="row evalution">
-                <div id="chart-container"></div>
+            <div class="row descrip">
+                <span>
+                    {!!$profile->intro!!}
+                </span>
             </div>
-		</div>
-	</div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <span class="amount-follower">31</span> Follower
+                </div>
+
+                <div class="col-5">
+                    <span class="amount-following">125</span> Following
+                </div>
+            </div>
+            <hr>
+            <div class="row learn">
+                <div class="row score">
+                    <img src="{{asset('image/score.png')}}" id="score" alt="">
+                    <span class="score-detail">IELTS Band Scores: </span>
+                    <span class="current-score">{{$profile->band_score}}</span>
+                </div>
+                <div class="row evalution">
+                    <div id="chart-container"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="icon">
+            <div class="row align-items-center">
+                <div class="col">
+                    <a href="{{route('feeds.index')}}"> <img id="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
+                </div>
+                <div class="col">
+                    <a href="{{route('search')}}"> <img id="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
+                </div>
+                <div class="col">
+                    <div class="backgroundRound">
+                        <a href="{{route('room.index')}}"> <img class="icon_Room" src="{{asset('image/iconRoom.png')}}"></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="{{route('notify.index')}}"> <img id="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
+                </div>
+                <div class="col">
+                    <a href="{{route('profile.show', Auth::user()->id)}}"> <img id="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="backgroundBar"></div>
+    </div>
 
 @endsection
 

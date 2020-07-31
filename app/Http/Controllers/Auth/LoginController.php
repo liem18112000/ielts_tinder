@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
+use App\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -83,6 +84,11 @@ class LoginController extends Controller
                 'email'         => $providerUser->email,
                 'password'      => Hash::make($providerUser->id),
                 'provider'      => $provider,
+            ]);
+
+            $profile = Profile::create([
+                'user_id'       => $user->id,
+                'intro'         => 'Tell us your story'
             ]);
 
         } else {

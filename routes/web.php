@@ -125,3 +125,13 @@ Route::get('room', 'VideoRoomController@index')->name('room.index');
 Route::get('room/join/{room}', 'VideoRoomController@join')->name('room.join');
 
 Route::post('room/create', 'VideoRoomController@create')->name('room.create');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Record Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('record', 'RecordController@index')->name('record.index');

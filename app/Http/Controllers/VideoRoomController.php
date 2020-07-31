@@ -41,7 +41,8 @@ class VideoRoomController extends Controller
 
         return view('room.room',[
             'accessToken'   => $token->toJWT(),
-            'room'          => $room
+            'room'          => $room,
+            'identity'      => $identity,
         ]);
     }
 
@@ -60,7 +61,7 @@ class VideoRoomController extends Controller
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
         }
-        return view('room.index', ['rooms' => $allRooms]);
+        return view('room.index', ['rooms' => $allRooms, 'newRoomName' => 'IELTS_TINDER_' . rand(1000, 9999)]);
     }
 
     /**
@@ -77,7 +78,7 @@ class VideoRoomController extends Controller
         if (empty($exists)) {
             $client->video->rooms->create([
                 'uniqueName'                    => $request->room,
-                'type'                          => 'peer-to-peer',
+                'type'                          => $request->type,
                 'recordParticipantsOnConnect'   => true
             ]);
 
