@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/user', 'UserController@index')->name('user.index');
+
 /*
 |--------------------------------------------------------------------------
 | Home Routes
