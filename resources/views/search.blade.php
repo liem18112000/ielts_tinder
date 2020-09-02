@@ -63,7 +63,7 @@
         <div class="icon">
             <div class="row align-items-center">
                 <div class="col">
-                    <a href="#"> <img class="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
+                    <a href="{{route('feeds.index')}}"> <img class="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
                 </div>
                 <div class="col">
                     <a href="{{route('search')}}"> <img class="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
