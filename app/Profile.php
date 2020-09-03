@@ -10,8 +10,9 @@ class Profile extends Model
 {
     protected $guarded = [];
 
+    //Show a user having this profile.
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

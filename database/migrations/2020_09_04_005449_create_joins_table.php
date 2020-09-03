@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfilesTable extends Migration
+class CreateJoinsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('joins', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('name');
-            $table->text('hometown');
-            $table->date('dob');
-            $table->text('profile_image')->default('https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png');
-            $table->float('bandscore')->default(0.0);
-            $table->tinyInteger('achieve_time')->default(1);
+            $table->integer('room_id')->unsigned();
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->timestamp('open_stamp')->nullable();;
+            $table->timestamp('close_stamp')->nullable();;
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('joins');
     }
 }
