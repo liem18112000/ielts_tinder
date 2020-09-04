@@ -22,6 +22,7 @@ p
     border-radius: 90px 0 0 0;
     background-color: white;
     margin-top: 40px;
+    min-height: 100vh;
 }
 .backgroundBar
 {
@@ -173,6 +174,12 @@ a,a:hover,a:visited
 }
 
 
+
+@media only screen and (max-width: 768px) {
+    .desktop-view{
+        display: none;
+    }
+}
 
 @media only screen and (min-width: 768px) {
 
