@@ -9,13 +9,18 @@
 
     <div class="content">
         <div class='container'>
-            <div class="row">
-                <i class="fas fa-info-circle info-icon"></i>
-            </div>
+            <div class="chamthan_menu">
+
             <div class="menu">
                 <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
                 <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Moments</a></span>
             </div>
+
+            <div class="chamthan">
+                     <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
+         </div>
+         
+        </div>
 
             @for($i = 0; $i < 5; $i++)
                 <div class="row status-1">
@@ -89,10 +94,10 @@
         <div class="icon">
             <div class="row align-items-center">
                 <div class="col">
-                    <a href="{{route('feeds.index')}}"> <img id="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
+                    <a href="{{route('feeds.index')}}"> <img class="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>    
                 </div>
                 <div class="col">
-                    <a href="{{route('search')}}"> <img id="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
+                    <a href="{{route('search')}}"> <img class="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
                 </div>
                 <div class="col">
                     <div class="backgroundRound">
@@ -100,10 +105,10 @@
                     </div>
                 </div>
                 <div class="col">
-                    <a href="{{route('notify.index')}}"> <img id="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
+                    <a href="{{route('notify.index')}}"> <img class="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
                 </div>
                 <div class="col">
-                    <a href="{{route('profile.show', Auth::user()->id)}}"> <img id="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
+                    <a href="{{route('profile.show', Auth::user()->id)}}"> <img class="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
