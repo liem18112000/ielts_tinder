@@ -52,6 +52,24 @@ a,a:hover,a:visited
 .menu
 {
     padding : 25px 0px 25px 40px;
+    text-align: center;
+}
+
+.chamthan_menu
+{
+    display: flex;
+    justify-content: center;
+}
+.chamthan
+{
+    position:relative;
+    left:30px;
+    background-size: 100px;
+}
+.chamthanicon
+{
+    height:60px;
+    padding-top:20px;
 }
 
 .username,.status
@@ -80,7 +98,7 @@ a,a:hover,a:visited
     top: 88%;
     background-image: url(/image/iconRoom.png);
     height: 80px;
-    width: 80px;
+    width:65px;
     z-index: 4;
 }
 
@@ -92,7 +110,7 @@ a,a:hover,a:visited
     z-index: 5;
     margin-top: 10px;
 }
-#iconNewsfeed,#iconSearch,#iconNoti,#iconProfile
+.iconNewsfeed,.iconSearch,.iconNoti,.iconProfile
 {
     position: relative;;
     height: 4.5vh;
@@ -167,3 +185,35 @@ i.far
         padding-right: 10%;
     }
 }
+/* 1 */
+/* .iconNewsfeed {
+    opacity: 0.5;
+  }
+  
+  .iconNewsfeed:hover {
+    opacity: 1.0;
+  } */
+  /* 2 */
+  .iconSearch {
+    opacity: 0.5;
+  }
+  
+  .iconSearch:hover {
+    opacity: 1.0;
+  }
+/* 3 */
+  .iconNoti {
+    opacity: 0.5;
+  }
+  
+  .iconNoti:hover {
+    opacity: 1.0;
+  }
+  /* 4 */
+  .iconProfile {
+    opacity: 0.5;
+  }
+  
+  .iconProfile:hover {
+    opacity: 1.0;
+  }

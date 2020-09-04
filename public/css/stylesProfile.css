@@ -57,11 +57,8 @@ p {
     z-index: 5;
     margin-top: 10px;
 }
-
-#iconNewsfeed,
-#iconSearch,
-#iconNoti,
-#iconProfile {
+.iconNewsfeed,.iconSearch,.iconNoti,.iconProfile
+{
     position: relative;
     height: 4.5vh;
     width: 4.5vh;
@@ -226,3 +223,35 @@ h1 {
         padding-right: 15%;
     }
 }
+/* 1 */
+.iconNewsfeed {
+    opacity: 0.5;
+  }
+  
+  .iconNewsfeed:hover {
+    opacity: 1.0;
+  }
+  /* 2 */
+  .iconSearch {
+    opacity: 0.5;
+  }
+  
+  .iconSearch:hover {
+    opacity: 1.0;
+  }
+/* 3 */
+  .iconNoti {
+    opacity: 0.5;
+  }
+  
+  .iconNoti:hover {
+    opacity: 1.0;
+  }
+  /* 4 */
+  /* .iconProfile {
+    opacity: 0.5;
+  }
+  
+  .iconProfile:hover {
+    opacity: 1.0;
+  } */
