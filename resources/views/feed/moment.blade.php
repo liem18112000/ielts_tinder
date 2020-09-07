@@ -12,7 +12,7 @@
 
             <div class="menu">
                 <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
-                <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Moments</a></span>
+                <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Hot</a></span>
             </div>
 
             <div class="chamthan">
