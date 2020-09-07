@@ -40,6 +40,13 @@ class VideoRoomController extends Controller
 
         $token->addGrant($videoGrant);
 
+        \DB::table('joins')->insert([
+            'user_id' => Auth::user()->id,
+            'room_id' => Room::where('name', $room)->firstOrFail()->id,
+            'open_stamp' => Room::where('name', $room)->firstOrFail()->created_at,
+            'created_at' => now(),
+        ]);
+
         return view('room.room',[
             'accessToken'   => $token->toJWT(),
             'room'          => $room,
@@ -89,13 +96,6 @@ class VideoRoomController extends Controller
                 'name' => $request->room,
                 'created_at'=> now(),
                 'status' => 1, 
-            ]);
-
-            \DB::table('joins')->insert([
-                'user_id' => Auth::user()->id,
-                'room_id' => Room::where('name', $request->room)->firstOrFail()->id,
-                'open_stamp' => Room::where('name', $request->room)->firstOrFail()->created_at,
-                'created_at' => now(),
             ]);
         }
 

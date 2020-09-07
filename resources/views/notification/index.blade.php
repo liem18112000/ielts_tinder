@@ -27,7 +27,7 @@
                 @foreach ($notifications as $notification)
                 <div class="noti-1 row">
                     <div class="col-3">
-                        <img src="{{$notification->sender->profile->online_image}}" class="avatar" alt="">
+                        <img src="{{$notification->sender->profile->profile_image}}" class="avatar" alt="">
                     </div>
                     <div class="col-9 notiMess">
                         <div class="row messNoti">
