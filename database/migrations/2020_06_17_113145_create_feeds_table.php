@@ -20,6 +20,7 @@ class CreateFeedsTable extends Migration
             $table->text('title');
             $table->longText('content')->nullable();
             $table->text('media');
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }

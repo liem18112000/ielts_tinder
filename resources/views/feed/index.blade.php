@@ -9,8 +9,7 @@
     <div class="content">
         <div class='container' style='min-height:90vh'>
             <div class="chamthan_menu">
-
-                <div class="menu">
+            <div class="menu">
                     <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
                     <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Moments</a></span>
                 </div>

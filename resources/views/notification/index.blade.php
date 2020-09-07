@@ -24,46 +24,23 @@
                     <div class="col-4"></div>
                     <div class="col-4"><span><a href=""> View all</span></a></div>
                 </div>
+                @foreach ($notifications as $notification)
                 <div class="noti-1 row">
                     <div class="col-3">
-                        <img src="image/avatar2.png" class="avatar" alt="">
+                        <img src="{{$notification->sender->profile->online_image}}" class="avatar" alt="">
                     </div>
                     <div class="col-9 notiMess">
                         <div class="row messNoti">
-                            <span><a href="">Khả Hân</a> </span>
-                            <span>appreciated your audio</span>
+                            <span><a href="">{{$notification->sender->name}}</a> </span>
+                            <span>{{$notification->content}}</span>
                         </div>
-                        <div class="row timeNoti"><span>3m ago</span></div>
+                        @php
+                        $result = $notification->created_at->toDateTimeString();
+                        @endphp
+                        <div class="row timeNoti"><span>{{$result}}</span></div>
                     </div>
                 </div>
-                <div class="noti-1 row">
-                    <div class="col-3">
-                        <img src="{{asset('image/avatar2.png')}}" class="avatar" alt="">
-                    </div>
-                    <div class="col-9 notiMess">
-                        <div class="row messNoti">
-                            <span><a href="">Khả Hân</a> </span>
-                            <span>followed your profile</span>
-                        </div>
-                        <div class="row timeNoti"><span>3m ago</span></div>
-                    </div>
-                </div>
-                <div class="noti-1 row">
-                    <div class="col-3">
-                        <img src="{{asset('image/avatar2.png')}}" class="avatar" alt="">
-                    </div>
-                    <div class="col-9 notiMess">
-                        <div class="row messNoti">
-                            <span><a href="">Khả Hân</a> </span>
-                            <span>sent you a friend request</span>
-                        </div>
-                        <div class="row timeNoti"><span>3m ago</span></div>
-                        <div class="row">
-                            <button type="button" class="btn btnFollow">Accept</button>
-                            <button type="button" class="btn btnFollow ig">Ignore</button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
         </div>
