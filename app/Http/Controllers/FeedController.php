@@ -56,7 +56,7 @@ class FeedController extends Controller
         $feeds = Feed::orderBy('updated_at', 'DESC')->get();
 
         return view('feed.index', [
-            'feeds' => $this->mediaAnalyze($feeds),
+          'feeds' => $this->mediaAnalyze($feeds),
         ]);
     }
 
