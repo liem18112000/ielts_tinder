@@ -21,7 +21,7 @@ class FeedController extends Controller
     public function index()
     {
         return view('feed.index', [
-            'feeds' => Feed::all(),
+            'feeds' => Feed::all()->sortByDesc('created_at'),
         ]);
     }
 
