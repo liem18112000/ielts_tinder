@@ -88,7 +88,7 @@ class LoginController extends Controller
 
             $profile = Profile::create([
                 'user_id'       => $user->id,
-                'intro'         => 'Tell us your story'
+                'name'          => $user->name
             ]);
 
         } else {

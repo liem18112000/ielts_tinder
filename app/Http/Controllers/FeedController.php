@@ -3,14 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Feed;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class FeedController extends Controller
 {
 
+    protected $AUDIO_EXT = [
+        'mp3',
+        'wav',
+        'ogg'
+    ];
+
+    protected $VIDEO_EXT = [
+        'mp4',
+        'webm',
+        'ogg'
+    ];
+
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    protected function mediaAnalyze($feeds){
+        for ($i = 0; $i < count($feeds); $i++) {
+            $tmp = explode(".", $feeds[$i]->media);
+            $media_ext = end($tmp);
+            $feeds[$i]->media_ext = $media_ext;
+            if (in_array($media_ext, $this->AUDIO_EXT)) {
+                $feeds[$i]->media_type = 'audio';
+            } else if (in_array($media_ext, $this->VIDEO_EXT)) {
+                $feeds[$i]->media_type = 'video';
+            } else {
+                $feeds[$i]->media_type = 'image';
+            }
+        }
+
+        return $feeds;
     }
 
     /**
@@ -20,9 +53,28 @@ class FeedController extends Controller
      */
     public function index()
     {
+        $feeds = Feed::orderBy('updated_at', 'DESC')->get();
+
         return view('feed.index', [
-            'feeds' => Feed::all()->sortByDesc('created_at'),
+          'feeds' => $this->mediaAnalyze($feeds),
         ]);
+    }
+
+    public function getMedia(Feed $feed)
+    {
+        $path = storage_path($feed->media);
+
+        if (!File::exists($path)) abort(404, "Media not found...");
+
+        $file = File::get($path);
+
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 
     /**
@@ -33,7 +85,7 @@ class FeedController extends Controller
     public function moment()
     {
         return view('feed.moment', [
-            'feeds' => Feed::all(),
+            'feeds' => $this->mediaAnalyze(Feed::orderBy('updated_at', 'DESC')->get()),
         ]);
     }
 
@@ -55,8 +107,16 @@ class FeedController extends Controller
      */
     public function store(Request $request)
     {
-        Feed::create($request->all());
-        return redirect();
+        $media = $this->storeMedia($request, 'media', 'public/media');
+
+        Feed::create([
+            'media' => $media,
+            'title' => $request->title,
+            'content' => $request->content,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return redirect(route('feeds.index'));
     }
 
     /**
@@ -78,9 +138,22 @@ class FeedController extends Controller
      * @param  \App\Feed  $feed
      * @return \Illuminate\Http\Response
      */
-    public function edit(Feed $feed)
+    public function editContent(Feed $feed)
     {
-        return view('feed.edit', [
+        return view('feed.edit-content', [
+            'feed' => $feed
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Feed  $feed
+     * @return \Illuminate\Http\Response
+     */
+    public function editMedia(Feed $feed)
+    {
+        return view('feed.edit-media', [
             'feed' => $feed
         ]);
     }
@@ -92,10 +165,45 @@ class FeedController extends Controller
      * @param  \App\Feed  $feed
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Feed $feed)
+    public function updatMedia(Request $request, Feed $feed)
     {
-        $feed->update($request->all());
-        return redirect();
+
+        $media = $this->storeMedia($request, 'media', 'public/media');
+
+        $feed->update([
+            'media'     => $media,
+        ]);
+
+        Session::flash(
+            'message',
+                "Swal.fire(
+                'Update failed!',
+                'Please try again!',
+                'warning'
+            )"
+        );
+
+        return redirect(route('feeds.index'));
+    }
+
+    public function updateContent(Request $request, Feed $feed)
+    {
+
+        $feed->update([
+            'title'     => $request->title,
+            'content'   => $request->content
+        ]);
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Update sucess!',
+                'It's look great!',
+                'success'
+            )"
+        );
+
+        return redirect(route('feeds.index'));
     }
 
     /**

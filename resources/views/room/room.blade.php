@@ -11,7 +11,9 @@
 
 @section('head')
 
-<script src="http://media.twiliocdn.com/sdk/js/video/releases/1.20.1/twilio-video.min.js"></script>
+{{-- <script src="http://media.twiliocdn.com/sdk/js/video/releases/1.20.1/twilio-video.min.js"></script> --}}
+
+<script src="http://media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
 
 <script>
     function trackAdded(div, track) {

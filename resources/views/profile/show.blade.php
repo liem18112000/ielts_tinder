@@ -334,11 +334,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    @if($profile->image == null)
-                        <div class="row"> <img style='border-radius:50%' src="{{$profile->online_image}}" class="avatar-profile" alt=""></div>
-                    @else
-                        <div class="row"> <img src="{{asset('image/user/'.Auth::user().id.'/'.$profile->image)}}" class="avatar-profile" alt=""></div>
-                    @endif
+                    <div class="row"> <img style='border-radius:50%' src="{{$profile->profile_image}}" class="avatar-profile" alt=""></div>
                 </div>
             </div>
             <div class="row descrip">

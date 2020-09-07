@@ -13,11 +13,12 @@
 
             <h2 class='text-center' style='padding-top: 8%'>Feed Upload</h2>
 
-            <form action = '{{route('feeds.store')}}' method='post' enctype="multipart/form-data">
+            <form action = '{{route('feeds.update-content', $feed)}}' method='post'>
                 @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="title">Feeds Title</label>
-                    <input type="text" name="title" id="title" class="form-control"
+                    <input type="text" name="title" id="title" class="form-control" value='{{ $feed->title }}'
                         placeholder="Enter feed title" aria-describedby="helpId" required="required">
                 </div>
 
@@ -26,12 +27,8 @@
                 <div class="form-group">
                     <label for="">What you want to tell?</label>
                     <textarea class="form-control" name='content' id="content" rows="15" cols="80" placeholder='Please tell us your story...'>
+                        {!!$feed->content!!}
                     </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Upload your media</label>
-                    <input type="file" class="form-control-file" name="media" id="media" placeholder="Choose a file to upload">
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Done</button>
@@ -62,8 +59,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="backgroundBar"></div>
 
