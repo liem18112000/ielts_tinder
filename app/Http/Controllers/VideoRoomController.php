@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Room;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
@@ -38,6 +39,13 @@ class VideoRoomController extends Controller
         $videoGrant->setRoom($room);
 
         $token->addGrant($videoGrant);
+
+        \DB::table('joins')->insert([
+            'user_id' => Auth::user()->id,
+            'room_id' => Room::where('name', $room)->firstOrFail()->id,
+            'open_stamp' => Room::where('name', $room)->firstOrFail()->created_at,
+            'created_at' => now(),
+        ]);
 
         return view('room.room',[
             'accessToken'   => $token->toJWT(),
@@ -83,6 +91,12 @@ class VideoRoomController extends Controller
             ]);
 
             Log::debug("created new room: " . $request->room);
+            
+            Room::create([
+                'name' => $request->room,
+                'created_at'=> now(),
+                'status' => 1, 
+            ]);
         }
 
         return redirect()->action('VideoRoomController@join', [

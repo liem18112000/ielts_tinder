@@ -165,7 +165,7 @@ class FeedController extends Controller
      * @param  \App\Feed  $feed
      * @return \Illuminate\Http\Response
      */
-    public function updatMedia(Request $request, Feed $feed)
+    public function updateMedia(Request $request, Feed $feed)
     {
 
         $media = $this->storeMedia($request, 'media', 'public/media');
