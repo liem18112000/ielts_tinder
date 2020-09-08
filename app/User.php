@@ -52,7 +52,7 @@ class User extends Authenticatable
     //Show list of rooms containing a user.
     public function rooms()
     {
-        return $this->belongsToMany(Room::class, 'joins');
+        return $this->belongsToMany(VideoRoom::class, 'joins');
     }
 
     //Show list of notifications sent by a user.

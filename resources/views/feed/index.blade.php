@@ -26,7 +26,7 @@
                     <a class="btn btn-info btn-block"
                         style="background: linear-gradient(90deg,#9a75f0,#FFA4B6); font-weight:bold; color:white;"
                         href="{{ route('feeds.create')}}" role="button"> <i class="fa fa-plus" aria-hidden="true">
-                            Post somethings now!</i></a>
+                            Post something now!</i></a>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
             </div>
 
             <div class="row interact px-4 mt-2">
-                <i class="fas fa-headphones-alt"><span> 341</span></i>
+                <i class="fas fa-headphones-alt"><span> {{$feed->view_count}}</span></i>
             </div>
             <hr>
             @endforeach
