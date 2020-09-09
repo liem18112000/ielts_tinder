@@ -150,6 +150,19 @@
         <div class='row' id="media-div">
 
         </div>
+
+        <div class='topic'>
+            <a class="btn btn-info btn-block"
+            style="background: linear-gradient(90deg,#9a75f0,#FFA4B6); font-weight:bold; color:white;"
+            role="button"> <i class="fa fa-eye" aria-hidden="true"
+            onclick="
+                Swal.fire(
+                    'Here your topic!',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+                )
+            ">
+                View topic</i></a>
+        </div>
     </div>
 </div>
 
