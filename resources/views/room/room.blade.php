@@ -11,7 +11,9 @@
 
 @section('head')
 
-<script src="http://media.twiliocdn.com/sdk/js/video/releases/1.20.1/twilio-video.min.js"></script>
+{{-- <script src="http://media.twiliocdn.com/sdk/js/video/releases/1.20.1/twilio-video.min.js"></script> --}}
+
+<script src="http://media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
 
 <script>
     function trackAdded(div, track) {
@@ -147,6 +149,19 @@
 
         <div class='row' id="media-div">
 
+        </div>
+
+        <div class='topic'>
+            <a class="btn btn-info btn-block"
+            style="background: linear-gradient(90deg,#9a75f0,#FFA4B6); font-weight:bold; color:white;"
+            role="button"> <i class="fa fa-eye" aria-hidden="true"
+            onclick="
+                Swal.fire(
+                    'Here your topic!',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+                )
+            ">
+                View topic</i></a>
         </div>
     </div>
 </div>
