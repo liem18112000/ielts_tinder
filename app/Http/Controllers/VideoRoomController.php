@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Room;
+use App\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class VideoRoomController extends Controller
 {
@@ -40,11 +44,12 @@ class VideoRoomController extends Controller
 
         $token->addGrant($videoGrant);
 
-        \DB::table('joins')->insert([
+        DB::table('joins')->insert([
             'user_id' => Auth::user()->id,
             'room_id' => Room::where('name', $room)->firstOrFail()->id,
             'open_stamp' => Room::where('name', $room)->firstOrFail()->created_at,
             'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return view('room.room',[
@@ -66,6 +71,7 @@ class VideoRoomController extends Controller
         try {
             $client = new Client($this->sid, $this->token);
             $allRooms = $client->video->rooms->read([]);
+            $this->updateRoomStatus($allRooms);
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -96,6 +102,11 @@ class VideoRoomController extends Controller
                 'name' => $request->room,
                 'created_at'=> now(),
                 'status' => 1, 
+                'topic' => isset($request->topic) ? $request->topic : 'Not Available',
+                'duration' => '0',
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
@@ -104,4 +115,45 @@ class VideoRoomController extends Controller
         ]);
     }
 
+    public function topic()
+    {
+        return view('room.topic');
+    }
+    
+    protected function updateRoomStatus($allRoomNames)
+    {
+        foreach(Room::where('status', '1')->get() as $room)
+        {
+            $isMatch = false;
+
+            foreach($allRoomNames as $roomName)
+            {
+                if($room->name == $roomName->uniqueName){
+                    $isMatch = true;
+                    break;
+                }
+            }
+
+            if(!$isMatch){
+                $room->update([
+                    'status'        => 0,
+                    'duration'      => Carbon::now()->diffInSeconds(Carbon::parse($room->created_at))
+                ]);
+            }
+        }
+    }
+
+    public function matching()
+    {
+        $users = User::all();
+
+        $onlineUsers = [];
+
+        foreach ($users as $user) {
+            if (Cache::has('user-is-online-' . $user->id))
+               $onlineUsers[] = $user;
+        }
+
+        return view('room.matching', ['onlineUsers' => $onlineUsers]);
+    }
 }

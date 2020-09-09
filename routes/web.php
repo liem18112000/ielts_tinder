@@ -80,7 +80,6 @@ Route::put('/feeds/{feed}/update-media', 'FeedController@updateMedia')->name('fe
 
 Route::delete('/feeds/{feed}', 'FeedController@delete')->name('feeds.delete');
 
-// Route::get('storage/media/{feed}', 'FeedController@getMedia')->name('feeds.getMedia');
 
 
 
@@ -133,6 +132,10 @@ Route::get('room', 'VideoRoomController@index')->name('room.index');
 Route::get('room/join/{room}', 'VideoRoomController@join')->name('room.join');
 
 Route::post('room/create', 'VideoRoomController@create')->name('room.create');
+
+Route::get('room/topic', 'VideoRoomController@topic')->name('room.topic');
+
+Route::get('room/matching', 'VideoRoomController@matching')->name('room.matching');
 
 
 

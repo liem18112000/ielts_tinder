@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2020 at 07:31 PM
+-- Generation Time: Sep 09, 2020 at 05:00 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test_db_ielts_tinder`
+-- Database: `ielts_tinder`
 --
 
 -- --------------------------------------------------------
@@ -48,6 +48,9 @@ CREATE TABLE `feeds` (
   `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `media` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `view_count` int(11) NOT NULL DEFAULT 0,
+  `tag` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -64,6 +67,7 @@ CREATE TABLE `joins` (
   `room_id` int(10) UNSIGNED NOT NULL,
   `open_stamp` timestamp NULL DEFAULT NULL,
   `close_stamp` timestamp NULL DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -88,12 +92,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2020_09_03_055303_create_profiles_table', 1),
-(5, '2020_09_03_055728_create_feeds_table', 1),
-(6, '2020_09_03_055936_create_rooms_table', 1),
-(7, '2020_09_03_063817_create_notifications_table', 1),
-(8, '2020_09_03_163641_create_tests_table', 1),
-(9, '2020_09_03_170630_create_joins_table', 1);
+(4, '2020_06_17_113145_create_feeds_table', 1),
+(5, '2020_06_18_140740_create_profiles_table', 1),
+(6, '2020_06_23_135934_create_notifications_table', 1),
+(7, '2020_09_04_005234_create_rooms_table', 1),
+(8, '2020_09_04_005425_create_tests_table', 1),
+(9, '2020_09_04_005449_create_joins_table', 1),
+(10, '2020_09_08_231159_create_topics_table', 1),
+(11, '2020_09_08_231715_create_questions_table', 1);
 
 -- --------------------------------------------------------
 
@@ -133,12 +139,27 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `profiles` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hometown` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dob` date NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `home` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dob` date DEFAULT NULL,
   `profile_image` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
-  `bandscore` double(8,2) NOT NULL DEFAULT 0.00,
+  `band_score` double(8,2) NOT NULL DEFAULT 0.00,
   `achieve_time` tinyint(4) NOT NULL DEFAULT 1,
+  `intro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `topic_id` int(10) UNSIGNED NOT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -153,8 +174,8 @@ CREATE TABLE `rooms` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
-  `topic` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `duration` time NOT NULL,
+  `topic` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `duration` time NOT NULL DEFAULT '00:00:00',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -180,15 +201,33 @@ CREATE TABLE `tests` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `topics`
+--
+
+CREATE TABLE `topics` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `difficulty` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_seen` timestamp NULL DEFAULT NULL,
   `provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -247,6 +286,13 @@ ALTER TABLE `profiles`
   ADD KEY `profiles_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `questions_topic_id_foreign` (`topic_id`);
+
+--
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -260,6 +306,12 @@ ALTER TABLE `tests`
   ADD KEY `tests_user_id_foreign` (`user_id`),
   ADD KEY `tests_room_id_foreign` (`room_id`),
   ADD KEY `tests_examiner_foreign` (`examiner`);
+
+--
+-- Indexes for table `topics`
+--
+ALTER TABLE `topics`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -293,7 +345,7 @@ ALTER TABLE `joins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -305,6 +357,12 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -320,10 +378,16 @@ ALTER TABLE `tests`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `topics`
+--
+ALTER TABLE `topics`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -354,6 +418,12 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `profiles`
   ADD CONSTRAINT `profiles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `questions`
+--
+ALTER TABLE `questions`
+  ADD CONSTRAINT `questions_topic_id_foreign` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tests`
