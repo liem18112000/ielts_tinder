@@ -77,29 +77,6 @@
 
             @endif
         </div>
-
-
-    </div>
-    <div class="icon">
-        <div class="row align-items-center">
-            <div class="col">
-                <a href="{{route('feeds.index')}}"> <img class="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
-            </div>
-            <div class="col">
-                <a href="{{route('search')}}"> <img class="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
-            </div>
-            <div class="col">
-                <div class="backgroundRound">
-                    <a href="{{route('room.index')}}"> <img class="icon_Room" src="{{asset('image/iconRoom.png')}}"></a>
-                </div>
-            </div>
-            <div class="col">
-                <a href="{{route('notify.index')}}"> <img class="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
-            </div>
-            <div class="col">
-                <a href="{{route('profile.show', Auth::user()->id)}}"> <img class="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
-            </div>
-        </div>
     </div>
 
 </div>
