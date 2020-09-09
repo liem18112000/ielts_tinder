@@ -11,31 +11,7 @@
 
         <div class='container' style="padding-bottom: 8%">
 
-            <h2 class='text-center' style='padding-top: 8%'>Feed Upload</h2>
-
-            <form action = '{{route('feeds.store')}}' method='post' enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="title">Feeds Title</label>
-                    <input type="text" name="title" id="title" class="form-control"
-                        placeholder="Enter feed title" aria-describedby="helpId" required="required">
-                </div>
-
-                <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-                <script>tinymce.init({selector:'textarea'});</script>
-                <div class="form-group">
-                    <label for="">What you want to tell?</label>
-                    <textarea class="form-control" name='content' id="content" rows="15" cols="80" placeholder='Please tell us your story...'>
-                    </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Upload your media</label>
-                    <input type="file" class="form-control-file" name="media" id="media" placeholder="Choose a file to upload">
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block">Done</button>
-            </form>
+            
 
         </div>
 

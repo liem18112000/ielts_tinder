@@ -8,57 +8,6 @@
 @section('content')
     <div class="content">
         <div class='container' style='min-height:90vh'>
-            <div class="chamthan_menu">
-
-                <div class="menu">
-                    <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
-                    <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Moments</a></span>
-                </div>
-
-                <div class="chamthan">
-                    <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
-                </div>
-
-            </div>
-
-            @foreach($feeds as $feed)
-            <div class="row status-1">
-                <div class="col-2">
-                    <img style='border-radius: 50%' src="{{$feed->user->profile->profile_image}}" alt="avatar" class="avatar">
-                </div>
-                <div class="col-10">
-                    <div class="row username">
-                        <a href="">{{$feed->user->name}}</a>
-                    </div>
-                    <div class="row status">
-                        <p>{{$feed->content}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row multimedia mt-4">
-
-                @if($feed->media_type == "video")
-                    <video width="100%" height="100%" controls>
-                        <source src="../{{"storage/media/" . $feed->media}}" type="video/{{$feed->media_ext}}">
-                        Your browser does not support the video tag.
-                    </video>
-                @elseif($feed->media_type == "audio")
-                    <audio style='width:100%' controls>
-                        <source src="../{{"storage/media/" . $feed->media}}" type="audio/{{$feed->media_ext}}">
-                        Your browser does not support the video tag.
-                    </audio>
-                @else
-                    <img width="100%" height="100%" src="../{{$feed->user->profile->profile_image}}" alt="media">
-                @endif
-            </div>
-            <div class="row interact px-4 mt-4">
-                <i class="fas fa-headphones-alt"></i><span> 341</span>
-                <i class="far fa-comments"></i> <span>43</span>
-                <i class="far fa-thumbs-up"></i> <span>612</span>
-            </div>
-            <hr>
-            @endforeach
-
         </div>
     </div>
 
