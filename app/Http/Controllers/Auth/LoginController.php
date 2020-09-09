@@ -62,7 +62,7 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        $providerUser = Socialite::driver($provider)->user();
+        $providerUser = Socialite::driver($provider)->stateless()->user();
 
         $user = null;
 
@@ -88,7 +88,7 @@ class LoginController extends Controller
 
             $profile = Profile::create([
                 'user_id'       => $user->id,
-                'intro'         => 'Tell us your story'
+                'name'          => $user->name
             ]);
 
         } else {
