@@ -29,7 +29,9 @@
 
     <!-- Tinymce -->
 	<script src="https://cdn.tiny.cloud/1/rmdclr9q9pr72tgrpg0w7x3r0kqnglgojdaxfqsij86e4bp0/tinymce/5/tinymce.min.js"
-		referrerpolicy="origin"></script>
+        referrerpolicy="origin"></script>
+
+    @laravelPWA
 
 </head>
 <body>

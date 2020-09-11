@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    @laravelPWA
+
     @yield('head')
 
     <!-- Scripts -->
