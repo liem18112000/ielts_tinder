@@ -25,7 +25,6 @@
                 <div class="textcurved1">
             <span><a href="{{route('feeds.index')}}" >Speech</a></span> 
             </div>
-
             </div>
             <div class= "boxcurved2">
                  <div class="textcurved2">

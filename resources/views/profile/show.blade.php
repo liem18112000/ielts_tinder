@@ -307,9 +307,10 @@
                         </span>
                     </div>
                     <div class="row">
-                        <img src="{{asset('image/Age.png')}}" class="age" alt="">
+                        
                         <span class="detail">
                             @if(!$profile->dob)
+                                Not Available  Not Available  Not Available  Not Available  Not Available
                                 Not Available
                             @else
                                 {{$profile->dob}}
@@ -317,9 +318,12 @@
                         </span>
                     </div>
                     <div class="row">
+                    <div class="testne">
+
                         <div class="col-4">
                             <a href='{{ route('profile.edit', $profile)}}' class="btn btnEdit">Edit</a>
                         </div>
+
                         <div class="col-4">
                             <a class="btn btnEdit" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -331,6 +335,7 @@
                                 @csrf
                             </form>
                         </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -341,11 +346,11 @@
                     @endif
                 </div>
             </div>
-            <div class="row descrip">
+            <!-- <div class="row descrip">
                 <span>
-                    {!!$profile->intro!!}
+                    {!!$profile->intro!!}Text
                 </span>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5">
@@ -356,13 +361,50 @@
                     <span class="amount-following">125</span> Following
                 </div>
             </div>
+
             <hr>
+            <div class="row descrip">
+                <input type="button" class="button" value="Update New Audio">
+            </div>
             <div class="row learn">
+            <div class="grid_type">
                 <div class="row score">
                     <img src="{{asset('image/score.png')}}" id="score" alt="">
                     <span class="score-detail">IELTS Band Scores: </span>
                     <span class="current-score">{{$profile->band_score}}</span>
                 </div>
+
+                <div class="row score1">
+                    <img src="{{asset('image/playaudio.png')}}" id="score1" alt="">
+                    <span class="score-detail"> My Audio: </span>
+
+                </div>
+                <div class="displayvideo">
+                <iframe width="180" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe>
+                <iframe width="180" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe>
+                </div>
+
+                <div class="row score1">
+                    <img src="{{asset('image/birthday.png')}}" id="score1" alt="">
+                    <span class="score-detail"> Birthday: </span>
+                     <span class="current-score">{{$profile->band_score}}</span>   <!--profile-> đi qua đâu? -->
+                </div>
+
+                <div class="row score1">
+                    <img src="{{asset('image/like.png')}}" id="score1" alt="">
+                    <span class="score-detail"> Liked: </span>
+                    <span class="current-score">{{$profile->band_score}}</span>   <!--profile-> đi qua đâu? -->
+                </div>
+        </div>
+        <div class="row score1">
+                    <span class="score-detail"> About me </span>
+        </div>
+        <div class="textne">
+            <p> I am interested in talking about American TV series , books , travel , daily life events and street food.</p>
+            <p>Wants to practice languages with: patient since I am still learning. Has interest in teaching the languages. </p>
+         </div>
                 <div class="row evalution">
                     <div id="chart-container"></div>
                 </div>

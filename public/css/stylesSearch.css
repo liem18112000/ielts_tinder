@@ -68,7 +68,6 @@ body
 {
     height: 7.5vh;
     width: 7.5vh;
-    border-radius: 50%;
     transform: translate(20%,10%);
 }
 .multimedia
@@ -167,4 +166,56 @@ a,a:hover,a:visited
   
   .iconProfile:hover {
     opacity: 1.0;
+  }
+
+  .dropbtn {
+    color: black;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(74, 78, 77,0.4);
+    border-radius: 15px;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: rgba(44, 46, 45, 0.4);
+  }
+  button.dropbtn {
+    margin: 7px;
+    width: 67px;
+    height: 47px;
+    vertical-align: middle;
+    }
+
+  .centered {
+    justify-content: center;
+    display: flex;
   }

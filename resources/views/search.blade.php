@@ -22,6 +22,40 @@
                     <input type="text" placeholder="Searching">
                 </div>
             </span>
+    <div class="centered">
+            <div class="dropdown">
+        <button class="dropbtn">Accent</button>
+        <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        </div>
+        </div>
+        <div class="dropdown">
+        <button class="dropbtn">Sex</button>
+        <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        </div>
+        </div>
+        <div class="dropdown">
+        <button class="dropbtn">Age</button>
+        <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        </div>
+        </div>
+        <div class="dropdown">
+        <button class="dropbtn">Time</button>
+        <div class="dropdown-content">
+        <a href="#">Newest </a>
+        <a href="#">Oldest</a>
+
+        </div>
+        </div>
+    </div>
 
             @for($i = 0; $i < 10; $i++)
             <div class="category row">
