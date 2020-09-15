@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Room;
 use App\User;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -150,7 +150,7 @@ class VideoRoomController extends Controller
         $onlineUsers = [];
 
         foreach ($users as $user) {
-            if (Cache::has('user-is-online-' . $user->id))
+            if (Cache::has('user-is-online-' . $user->id) && $user->status == 1)
                $onlineUsers[] = $user;
         }
 
