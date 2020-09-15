@@ -49,6 +49,31 @@ p {
     z-index: 4;
 }
 
+.button {
+    background-image:linear-gradient(90deg,#9a75f0,#FFA4B6);;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+  }
+  input.button {
+    width: 230px;
+    display: block;
+    position: relative;
+    margin-top: 6px;
+    margin-left: 19%;
+    text-align: center;
+    height: auto;
+    border-radius: 20px 0px 0px 0px;
+}
+
+
 .icon {
     position: fixed;
     height: 8vh;
@@ -74,7 +99,6 @@ p {
 .icon_Room {
     height: 7.5vh;
     width: 7.5vh;
-    border-radius: 50%;
     transform: translate(20%, 10%);
 }
 
@@ -102,6 +126,8 @@ p {
 .row {
     margin-left: 0;
     margin-right: 0;
+    position: relative;
+
 }
 
 a,
@@ -174,14 +200,22 @@ h1 {
 #score {
     width: 8%;
 }
-
+#score1
+{
+    width: 10%;
+}
 .score {
     font-family: 'Oswald', sans-serif;
     margin-left: 10px;
 }
 
+.score1 {
+    font-family: 'Oswald', sans-serif;
+    margin-left: 10px;
+}
+
 .score-detail {
-    font-weight: 700;
+    font-weight: 800;
     margin-left: 10px;
     line-height: 2.5rem;
 }
@@ -255,3 +289,32 @@ h1 {
   .iconProfile:hover {
     opacity: 1.0;
   } */
+
+  .testne
+  {
+    align-items: center;
+    display: flex;
+    position: relative;
+    left: 120%;
+    bottom: 65px;
+  }
+
+  .avatar-profile {
+    width: 85%;
+    height: auto;
+    margin-top: -30px;
+    position: relative;
+    left: 30px;
+    top: 48px;
+}
+.testne {
+    display: flex;
+    position: relative;
+    left: 105%;
+    bottom: 30px;
+}
+
+.grid_type {
+    display: grid;
+    grid-gap: 15px;
+}
