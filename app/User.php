@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'provider'
+        'name', 'email', 'password', 'provider', 'status'
     ];
 
     /**
@@ -37,13 +37,45 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Show profile of a user.
     public function profile()
     {
-        return $this->hasOne('App\Profile');
+        return $this->hasOne(Profile::class);
     }
 
-    public function notification()
+    //Show feeds of a user.
+    public function feeds()
     {
-        return $this->hasMany('App\Notification');
+        return $this->hasMany(Feed::class);
+    }
+
+    //Show list of rooms containing a user.
+    public function rooms()
+    {
+        return $this->belongsToMany(VideoRoom::class, 'joins');
+    }
+
+    //Show list of notifications sent by a user.
+    public function sentNotifications()
+    {
+        return $this->hasMany(Notification::class, 'sender_id');
+    }
+
+    //Show list of notifications received by a user.
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'receiver_id');
+    }
+
+    //Show list of tests done by a user.
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
+    
+    //Show list of tests to mark for an examiner.
+    public function testsToMark()
+    {
+        return $this->hasMany(Test::class, 'examiner');
     }
 }

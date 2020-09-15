@@ -74,6 +74,7 @@ p
 {
     height: 7.5vh;
     width: 7.5vh;
+    border-radius: 50%;
     transform: translate(20%,10%);
 }
 
@@ -84,8 +85,6 @@ p
     border-radius: 20px;
     margin: 20px;
 }
-
-
 
 
 .btnFollow
@@ -113,7 +112,8 @@ p
 h3
 {
     font-family: 'Oswald', sans-serif;
-    margin-left: 5%;
+    margin-left: 15%;
+    font-weight: bold;
 }
 .avatar
 {
@@ -151,10 +151,9 @@ h3
 }
 .noti
 {
-    margin: 15px;
-    border: 2px grey solid;
+    margin: 10px 10px 10px 10px;
+    border: 1px grey solid;
     border-radius: 20px;
-    margin: 20px;
 }
 span
 {
@@ -227,3 +226,51 @@ a,a:hover,a:visited
   .iconProfile:hover {
     opacity: 1.0;
   }
+
+  .score {
+    width: 15%;
+    height: 15%;
+  }
+
+  .avatar-profile {
+    width: 100%;
+    margin-top: 10px;
+}
+
+  .descrip {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-left: 25px;
+    padding-right: 15px;
+    font-weight: semi-bold;
+}
+
+.btnMore{
+    padding: 0px 20px 0px 20px; 
+    margin-top: 0;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;   
+    color:black;
+}
+
+.btnMatch{
+    padding: 0px 20px 0px 20px; 
+    margin-top: 0;
+    margin-bottom: 0px;
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;   
+    color: white;
+}
+
+.detail {
+    font-weight: 600;
+    line-height: 1.5rem;
+}

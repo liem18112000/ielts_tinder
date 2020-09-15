@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Profile;
 
+use App\User;
+
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -46,6 +48,17 @@ class ProfileController extends Controller
      */
     public function show($user_id)
     {
+        if(!Profile::where('user_id', $user_id)->exists()){
+
+            $user = User::find($user_id);
+
+            $profile = Profile::create([
+                'user_id'       => $user->id,
+                'name'          => $user->name
+            ]);
+
+        }
+
         return view('profile.show', [
             'profile' => Profile::where('user_id', $user_id)->firstOrFail(),
         ]);

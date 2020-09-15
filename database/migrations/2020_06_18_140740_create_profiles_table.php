@@ -14,15 +14,16 @@ class CreateProfilesTable extends Migration
     public function up()
     {
         Schema::create('profiles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->text('intro')->nullable();
-            $table->float('band_score')->default(0.0);
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('name');
             $table->text('home')->nullable();
             $table->date('dob')->nullable();
-            $table->tinyInteger('achieveTime')->default(1);
-            $table->text('image')->nullable();
-            $table->text('online_image')->default('https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png');
+            $table->text('profile_image')->default("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png");
+            $table->float('band_score')->default(0.0);
+            $table->tinyInteger('achieve_time')->default(1);
+            $table->string('intro')->nullable();
             $table->timestamps();
         });
     }
