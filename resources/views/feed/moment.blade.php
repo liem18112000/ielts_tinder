@@ -19,19 +19,6 @@
          </div>
          
         </div>
-        
-            @for($i = 0; $i < 5; $i++)
-
-            <div class="row status-1">
-                <div class="col-2">
-                    <img src="{{asset('image/avatar1.png')}}" alt="avatar" class="avatar">
-                </div>
-
-                <div class="chamthan">
-                    <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
-                </div>
-
-            </div>
 
             @foreach($feeds as $feed)
             <div class="row status-1">

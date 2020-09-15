@@ -310,7 +310,6 @@
                         
                         <span class="detail">
                             @if(!$profile->dob)
-                                Not Available  Not Available  Not Available  Not Available  Not Available
                                 Not Available
                             @else
                                 {{$profile->dob}}
