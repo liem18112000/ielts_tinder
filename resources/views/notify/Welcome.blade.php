@@ -9,4 +9,5 @@ Home
 
 Thanks,<br>
 {{ config('app.name') }}
+
 @endcomponent

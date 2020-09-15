@@ -14,6 +14,7 @@
             background-repeat: no-repeat;
             background-image: url('https://www.wallpaperup.com/uploads/wallpapers/2014/08/27/430129/1091441c84e9d3da00990c6fdc42e89d-700.jpg')
         }
+
         .topic-card{
             margin: 10%;
         }
