@@ -52,6 +52,7 @@ Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name(
 
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.provider.callback');
 
+Route::get('logout', 'Auth\LoginController@lougout')->name('logout');
 /*
 |--------------------------------------------------------------------------
 | Feed Routes

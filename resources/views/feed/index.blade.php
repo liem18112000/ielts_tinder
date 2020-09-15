@@ -10,25 +10,9 @@
         <div class='container' style='min-height:90vh'>
             <div class="chamthan_menu">
             <div class="menu">
-            <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
-            <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Hot</a></span>
-            </div>
-
-            <div class="chamthan">
-                  <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
-            </div>
-            </div>
-            <div class= "boxcurved1">
-
-                <div class="textcurved1">
-            <span><a href="{{route('feeds.index')}}" >Speech</a></span> 
-            </div>
-            </div>
-            <div class= "boxcurved2">
-                 <div class="textcurved2">
-                 <span><a href="{{route('feeds.index')}}" >Sharings</a></span> 
-            </div>
-            </div>
+                    <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
+                    <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Moments</a></span>
+                </div>
 
                 <div class="chamthan">
                     <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
@@ -64,17 +48,17 @@
             <div class="row multimedia mt-2">
                 @if($feed->media_type == "video")
                     <video width="100%" height="100%" controls>
-                        <source src="{{"storage/media/" . $feed->media}}" type="video/{{$feed->media_ext}}">
+                        <source src="{{$feed->media}}" type="video/{{$feed->media_ext}}">
                         Your browser does not support the video tag.
                     </video>
                 @elseif($feed->media_type == "audio")
                     <img style='object-fit:contain;' width="100%" height="80%" src="{{$feed->user->profile->profile_image}}" alt="media">
                     <audio style='width:100%' height="100%" controls>
-                        <source src="{{"storage/media/" . $feed->media}}" type="audio/{{$feed->media_ext}}">
+                        <source src="{{$feed->media}}" type="audio/{{$feed->media_ext}}">
                         Your browser does not support the video tag.
                     </audio>
                 @else
-                    <img width="100%" height="100%" src="{{"storage/media/" . $feed->media}}" alt="media">
+                    <img width="100%" height="100%" src="{{$feed->media}}" alt="media">
                 @endif
             </div>
 
