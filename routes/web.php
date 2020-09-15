@@ -52,8 +52,6 @@ Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name(
 
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.provider.callback');
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Feed Routes
@@ -134,6 +132,8 @@ Route::get('room/join/{room}', 'VideoRoomController@join')->name('room.join');
 Route::post('room/create', 'VideoRoomController@create')->name('room.create');
 
 Route::get('room/topic', 'VideoRoomController@topic')->name('room.topic');
+
+Route::get('room/matching', 'VideoRoomController@matching')->name('room.matching');
 
 
 /*

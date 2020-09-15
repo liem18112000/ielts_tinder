@@ -23,20 +23,15 @@
             video.setAttribute("style", "width: 100%;");
         }
     }
-
     function trackRemoved(track) {
         track.detach().forEach( function(element) { element.remove() });
     }
-
     function participantConnected(participant) {
         console.log('Participant "%s" connected', participant.identity);
-
         const div = document.createElement('div');
         div.id = participant.sid;
         div.classList.add("col-lg-6", 'col-md-6', 'col-sm-12');
-
         content =  "<div class='card-header' style='display:flex; justify-content: space-around; ;clear:both; padding:6px'>";
-
         if(participant.identity == '{{$identity}}'){
             localParticipant = participant;
             content += "<button class='btn btn-dark btn-block'> You </button>" +
@@ -46,31 +41,22 @@
         }else{
             content += "<button class='btn btn-dark btn-block'> Partner : " + participant.identity + " </button>" + "</div>";
         }
-
         div.innerHTML = content;
-
         participant.tracks.forEach(function(track) {
             trackAdded(div, track)
         });
-
         participant.on('trackAdded', function(track) {
             trackAdded(div, track)
         });
-
         participant.on('trackRemoved', trackRemoved);
-
         document.getElementById('media-div').appendChild(div);
     }
-
     function participantDisconnected(participant) {
         console.log('Participant "%s" disconnected', participant.identity);
-
         participant.tracks.forEach(trackRemoved);
         document.getElementById(participant.sid).remove();
     }
-
     var localParticipant = null;
-
     Twilio.Video.createLocalTracks({
        audio: true,
        video: { width: 800 }
@@ -82,19 +68,15 @@
         });
     }).then(function(room) {
         console.log('Successfully joined a Room: ', room.name);
-
         room.participants.forEach(participantConnected);
-
         var previewContainer = document.getElementById(room.localParticipant.sid);
         if (!previewContainer || !previewContainer.querySelector('video')) {
             participantConnected(room.localParticipant);
         }
-
         room.on('participantConnected', function(participant) {
             console.log("Joining: '" +  participant.identity + "'");
             participantConnected(participant);
         });
-
         document.getElementById(localParticipant.identity + 'video').addEventListener("click", function(){
             if(document.getElementById(localParticipant.identity + 'video').innerText == 'On'){
                 localParticipant.videoTracks.forEach(function(videoTrack) {
@@ -110,7 +92,6 @@
                 document.getElementById(localParticipant.identity + 'video').innerText = "On";
             }
         });
-
         document.getElementById(localParticipant.identity + 'sound').addEventListener("click", function(){
             if(document.getElementById(localParticipant.identity+ 'sound').innerText == 'Mute'){
                 localParticipant.audioTracks.forEach(function(audioTrack) {
@@ -126,14 +107,11 @@
                 document.getElementById(localParticipant.identity + 'sound').innerText = "Mute";
             }
         });
-
-
         room.on('participantDisconnected', function(participant) {
             console.log("Disconnected: '" + participant.identity + "'");
             participantDisconnected(participant);
         });
     });
-
 </script>
 
 @endsection

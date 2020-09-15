@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
+<img src="{{asset('image/logo.png')}}" alt="logo">
 <div class="content">
+    
     <div class="container">
     <form method="POST" action="{{ route('register') }}">
         @csrf

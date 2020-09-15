@@ -46,6 +46,19 @@ class FeedController extends Controller
         return $feeds;
     }
 
+    public function getResources()
+    {
+        $resources = [];
+        foreach(Feed::all() as $feed)
+        {
+            $resources[] = "storage/media/" . $feed->media;
+        }
+
+        return response()->json([
+            'resources' => $resources
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -58,23 +71,6 @@ class FeedController extends Controller
         return view('feed.index', [
           'feeds' => $this->mediaAnalyze($feeds),
         ]);
-    }
-
-    public function getMedia(Feed $feed)
-    {
-        $path = storage_path($feed->media);
-
-        if (!File::exists($path)) abort(404, "Media not found...");
-
-        $file = File::get($path);
-
-        $type = File::mimeType($path);
-
-        $response = Response::make($file, 200);
-
-        $response->header("Content-Type", $type);
-
-        return $response;
     }
 
     /**

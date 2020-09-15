@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Room;
+use App\User;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
@@ -98,6 +101,8 @@ class VideoRoomController extends Controller
 
             Room::create([
                 'name' => $request->room,
+                'created_at'=> now(),
+                'status' => 1, 
                 'topic' => isset($request->topic) ? $request->topic : 'Not Available',
                 'duration' => '0',
                 'status' => 1,
@@ -128,7 +133,6 @@ class VideoRoomController extends Controller
                     $isMatch = true;
                     break;
                 }
-
             }
 
             if(!$isMatch){
@@ -140,4 +144,17 @@ class VideoRoomController extends Controller
         }
     }
 
+    public function matching()
+    {
+        $users = User::all();
+
+        $onlineUsers = [];
+
+        foreach ($users as $user) {
+            if (Cache::has('user-is-online-' . $user->id) && $user->status == 1)
+               $onlineUsers[] = $user;
+        }
+
+        return view('room.matching', ['onlineUsers' => $onlineUsers]);
+    }
 }

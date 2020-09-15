@@ -9,16 +9,27 @@
     <div class="content">
         <div class='container' style='min-height:90vh'>
             <div class="chamthan_menu">
-            <div class="menu">
+                <div class="menu">
                     <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
-                    <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Moments</a></span>
+                    <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Hot</a></span>
                 </div>
 
                 <div class="chamthan">
                     <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
                 </div>
-
             </div>
+            <div class= "boxcurved1">
+                <div class="textcurved1">
+                    <span><a href="{{route('feeds.index')}}" >Speech</a></span>
+                </div>
+            </div>
+            <div class= "boxcurved2">
+                <div class="textcurved2">
+                    <span><a href="{{route('feeds.index')}}" >Sharings</a></span>
+                </div>
+            </div>
+
+            <hr/>
 
             <div class="row">
                 <div class="col-12" style='padding:0'>

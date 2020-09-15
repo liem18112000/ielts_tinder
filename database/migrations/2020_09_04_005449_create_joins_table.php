@@ -21,6 +21,7 @@ class CreateJoinsTable extends Migration
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamp('open_stamp')->nullable();;
             $table->timestamp('close_stamp')->nullable();;
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

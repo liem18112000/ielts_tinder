@@ -98,6 +98,9 @@ class LoginController extends Controller
             }
         }
 
+        $user->status = 1;
+        $user->save();
+
         Session::flash(
             'message',
             "Swal.fire(
@@ -105,10 +108,26 @@ class LoginController extends Controller
                 'Welcome to Ielts Tinder!',
                 'success'
             )"
-        );
+        );      
 
         Auth::login($user, true);
 
         return redirect($this->redirectTo);
+    }
+
+    public function authenticated()
+    {
+        $user = auth()->user();
+        $user->status = 1;
+        $user->save();
+    }
+
+    public function logout() 
+    {
+        $user = auth()->user();
+        $user->status = 0;
+        $user->save();
+        Auth::logout();    
+        return redirect('index');
     }
 }
