@@ -46,19 +46,6 @@ class FeedController extends Controller
         return $feeds;
     }
 
-    public function getResources()
-    {
-        $resources = [];
-        foreach(Feed::all() as $feed)
-        {
-            $resources[] = "storage/media/" . $feed->media;
-        }
-
-        return response()->json([
-            'resources' => $resources
-        ]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -71,6 +58,23 @@ class FeedController extends Controller
         return view('feed.index', [
           'feeds' => $this->mediaAnalyze($feeds),
         ]);
+    }
+
+    public function getMedia(Feed $feed)
+    {
+        $path = storage_path($feed->media);
+
+        if (!File::exists($path)) abort(404, "Media not found...");
+
+        $file = File::get($path);
+
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 
     /**
@@ -103,7 +107,7 @@ class FeedController extends Controller
      */
     public function store(Request $request)
     {
-        $media = $this->storeMedia($request, 'media', 'public/media');
+        $media = $this->storeMediaCloudinary($request, 'media');
 
         Feed::create([
             'media' => $media,
@@ -111,6 +115,15 @@ class FeedController extends Controller
             'content' => $request->content,
             'user_id' => Auth::user()->id
         ]);
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Upload sucess!',
+                'It look nice!',
+                'success'
+            )"
+        );
 
         return redirect(route('feeds.index'));
     }
@@ -164,7 +177,7 @@ class FeedController extends Controller
     public function updateMedia(Request $request, Feed $feed)
     {
 
-        $media = $this->storeMedia($request, 'media', 'public/media');
+        $media = $this->storeMediaCloudinary($request, 'media');
 
         $feed->update([
             'media'     => $media,
@@ -173,9 +186,9 @@ class FeedController extends Controller
         Session::flash(
             'message',
                 "Swal.fire(
-                'Update failed!',
-                'Please try again!',
-                'warning'
+                'Update sucess!',
+                'It look nice!',
+                'success'
             )"
         );
 

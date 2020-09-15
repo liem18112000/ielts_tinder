@@ -64,21 +64,21 @@ Route::get('/feeds', 'FeedController@index')->name('feeds.index');
 
 Route::get('/feeds/moment', 'FeedController@moment')->name('feeds.moment');
 
-Route::get('/feeds/create', 'FeedController@create')->name('feeds.create')->middleware('auth');
+Route::get('/feeds/create', 'FeedController@create')->name('feeds.create');
 
-Route::get('/feeds/resources', 'FeedController@getResources')->name('feeds.resources');
+Route::get('/feeds/{feed}', 'FeedController@show')->name('feeds.show');
 
-Route::get('/feeds/{feed}/edit-content', 'FeedController@editContent')->name('feeds.edit-content')->middleware('auth');
+Route::get('/feeds/{feed}/edit-content', 'FeedController@editContent')->name('feeds.edit-content');
 
-Route::get('/feeds/{feed}/edit-media', 'FeedController@editMedia')->name('feeds.edit-media')->middleware('auth');
+Route::get('/feeds/{feed}/edit-media', 'FeedController@editMedia')->name('feeds.edit-media');
 
-Route::post('/feeds', 'FeedController@store')->name('feeds.store')->middleware('auth');
+Route::post('/feeds', 'FeedController@store')->name('feeds.store');
 
-Route::put('/feeds/{feed}/update-content', 'FeedController@updateContent')->name('feeds.update-content')->middleware('auth');
+Route::put('/feeds/{feed}/update-content', 'FeedController@updateContent')->name('feeds.update-content');
 
-Route::put('/feeds/{feed}/update-media', 'FeedController@updateMedia')->name('feeds.update-media')->middleware('auth');
+Route::put('/feeds/{feed}/update-media', 'FeedController@updateMedia')->name('feeds.update-media');
 
-Route::delete('/feeds/{feed}', 'FeedController@delete')->name('feeds.delete')->middleware('auth');
+Route::delete('/feeds/{feed}', 'FeedController@delete')->name('feeds.delete');
 
 
 
