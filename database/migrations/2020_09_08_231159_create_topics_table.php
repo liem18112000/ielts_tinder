@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVideoRoomsTable extends Migration
+class CreateTopicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateVideoRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('video_rooms', function (Blueprint $table) {
-            $table->id();
+        Schema::create('topics', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('name')->nullable();
+            $table->longText('description')->nullable();
+            $table->integer('difficulty')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateVideoRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('video_rooms');
+        Schema::dropIfExists('topics');
     }
 }
