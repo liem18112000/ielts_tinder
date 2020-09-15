@@ -103,7 +103,7 @@ class FeedController extends Controller
      */
     public function store(Request $request)
     {
-        $media = $this->storeMedia($request, 'media', 'public/media');
+        $media = $this->storeMediaCloudinary($request, 'media');
 
         Feed::create([
             'media' => $media,
@@ -111,6 +111,15 @@ class FeedController extends Controller
             'content' => $request->content,
             'user_id' => Auth::user()->id
         ]);
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Upload sucess!',
+                'It look nice!',
+                'success'
+            )"
+        );
 
         return redirect(route('feeds.index'));
     }
@@ -164,7 +173,7 @@ class FeedController extends Controller
     public function updateMedia(Request $request, Feed $feed)
     {
 
-        $media = $this->storeMedia($request, 'media', 'public/media');
+        $media = $this->storeMediaCloudinary($request, 'media');
 
         $feed->update([
             'media'     => $media,
@@ -173,9 +182,9 @@ class FeedController extends Controller
         Session::flash(
             'message',
                 "Swal.fire(
-                'Update failed!',
-                'Please try again!',
-                'warning'
+                'Update sucess!',
+                'It look nice!',
+                'success'
             )"
         );
 

@@ -55,4 +55,5 @@ class Welcome extends Notification
             //
         ];
     }
+
 }
