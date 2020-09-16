@@ -299,10 +299,10 @@
                     <div class="row">
                         <img src="{{asset('image/location.png')}}" class="age" alt="">
                         <span class="detail">
-                            @if(!$profile->home)
+                            @if(!$profile->hometown)
                                 Not Available
                             @else
-                                {{$profile->home}}
+                                {{$profile->hometown}}
                             @endif
                         </span>
                     </div>

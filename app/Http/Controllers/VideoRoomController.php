@@ -11,6 +11,7 @@ use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -49,7 +50,7 @@ class VideoRoomController extends Controller
             'room_id' => Room::where('name', $room)->firstOrFail()->id,
             'open_stamp' => Room::where('name', $room)->firstOrFail()->created_at,
             'created_at' => now(),
-            'updated_at' => now(),
+            'updated_at' => now()
         ]);
 
         return view('room.room',[
@@ -97,7 +98,7 @@ class VideoRoomController extends Controller
             ]);
 
             Log::debug("created new room: " . $request->room);
-            
+
             Room::create([
                 'name' => $request->room,
                 'created_at'=> now(),
@@ -119,7 +120,7 @@ class VideoRoomController extends Controller
     {
         return view('room.topic');
     }
-    
+
     protected function updateRoomStatus($allRoomNames)
     {
         foreach(Room::where('status', '1')->get() as $room)
