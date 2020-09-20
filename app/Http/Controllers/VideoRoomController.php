@@ -11,7 +11,6 @@ use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -102,7 +101,7 @@ class VideoRoomController extends Controller
             Room::create([
                 'name' => $request->room,
                 'created_at'=> now(),
-                'status' => 1, 
+                'status' => 1,
                 'topic' => isset($request->topic) ? $request->topic : 'Not Available',
                 'duration' => '0',
                 'status' => 1,
