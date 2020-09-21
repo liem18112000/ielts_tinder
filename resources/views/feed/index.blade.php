@@ -18,8 +18,8 @@
 
             <div class="chamthan">
                      <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
-         </div>
-</div>
+             </div>
+        </div>
             <div class= "boxcurved1">
 
                 <div class="textcurved1">
