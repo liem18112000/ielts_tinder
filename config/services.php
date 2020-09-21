@@ -37,16 +37,16 @@ return [
     ],
 
     'google' => [
-        'client_id' => '534466436933-7t0cml9j9lfpgbf7s48uijqb99p4vp2f.apps.googleusercontent.com',
+        'client_id' => '229526496579-scg72cboaqjlplasg7fbfaouce4853da.apps.googleusercontent.com',
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_URL'),
     ],
 
     'twilio' => [
         'sid' => 'AC62aae91ce54957c4be10dcd347a77a00',
-        'token' => '4f036071e608e4c7497f284421572762',
-        'key' => 'SK30875e6b838142be1ce09df6ad9c75b3',
-        'secret' => 'Wfc12NdHJqMrZPRQNfiLXONkvsgwVXan'
+        'token' => env('TWILIO_TOKEN'),
+        'key' => env('TWILIO_KEY_ID'),
+        'secret' => env('TWILIO_KEY_SECRET'),
     ]
 
 ];

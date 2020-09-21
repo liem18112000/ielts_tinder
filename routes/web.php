@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/user', 'UserController@index')->name('user.index');
+
 /*
 |--------------------------------------------------------------------------
 | Home Routes
@@ -50,8 +52,6 @@ Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name(
 
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.provider.callback');
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Feed Routes
@@ -62,17 +62,22 @@ Route::get('/feeds', 'FeedController@index')->name('feeds.index');
 
 Route::get('/feeds/moment', 'FeedController@moment')->name('feeds.moment');
 
-Route::get('/feeds/{feed}', 'FeedController@show')->name('feeds.show');
-
 Route::get('/feeds/create', 'FeedController@create')->name('feeds.create');
 
-Route::get('/feeds/{feed}/edit', 'FeedController@edit')->name('feeds.edit');
+Route::get('/feeds/{feed}', 'FeedController@show')->name('feeds.show');
+
+Route::get('/feeds/{feed}/edit-content', 'FeedController@editContent')->name('feeds.edit-content');
+
+Route::get('/feeds/{feed}/edit-media', 'FeedController@editMedia')->name('feeds.edit-media');
 
 Route::post('/feeds', 'FeedController@store')->name('feeds.store');
 
-Route::put('/feeds', 'FeedController@update')->name('feeds.update');
+Route::put('/feeds/{feed}/update-content', 'FeedController@updateContent')->name('feeds.update-content');
+
+Route::put('/feeds/{feed}/update-media', 'FeedController@updateMedia')->name('feeds.update-media');
 
 Route::delete('/feeds/{feed}', 'FeedController@delete')->name('feeds.delete');
+
 
 
 
@@ -106,7 +111,7 @@ Route::get('/notify', 'NotificationController@index')->name('notify.index');
 
 Route::get('/notify/create', 'NotificationController@create')->name('notify.create');
 
-Route::get('/notify/{notification}/edit', 'NotificationController@edit')->name('feeds.edit');
+Route::get('/notify/{notification}/edit', 'NotificationController@edit')->name('notify.edit');
 
 Route::post('/notify', 'NotificationController@store')->name('notify.store');
 
@@ -126,6 +131,9 @@ Route::get('room/join/{room}', 'VideoRoomController@join')->name('room.join');
 
 Route::post('room/create', 'VideoRoomController@create')->name('room.create');
 
+Route::get('room/topic', 'VideoRoomController@topic')->name('room.topic');
+
+Route::get('room/matching', 'VideoRoomController@matching')->name('room.matching');
 
 
 /*

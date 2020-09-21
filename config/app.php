@@ -183,7 +183,12 @@ return [
         /**
          * Zoom Intergration
          */
-        MacsiDigital\Zoom\Providers\ZoomServiceProvider::class
+        MacsiDigital\Zoom\Providers\ZoomServiceProvider::class,
+
+        /**
+         * Cloudinary
+         */
+        JD\Cloudder\CloudderServiceProvider::class,
 
     ],
 
@@ -243,6 +248,9 @@ return [
         //Zoom
         'Zoom'  => MacsiDigital\Zoom\Facades\Zoom::class,
         'ZoomClient'    => MacsiDigital\Zoom\Facades\Client::class,
+
+        // Cloudinary
+        'Cloudder' => JD\Cloudder\Facades\Cloudder::class,
     ],
 
 ];

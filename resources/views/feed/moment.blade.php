@@ -7,90 +7,55 @@
 
 @section('content')
     <div class="content">
-        <div class='container'>
-        <div class="chamthan_menu">
+        <div class='container' style='min-height:90vh'>
+            <div class="chamthan_menu">
+                <div class="menu">
+                    <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
+                    <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Hot</a></span>
+                </div>
 
-            <div class="menu">
-                <span><a href="{{route('feeds.index')}}" class="linkNewsfeed navlink following">Following</a></span> |
-                <span><a href="{{route('feeds.moment')}}" class="linkNewsfeed navlink moments">Hot</a></span>
+                <div class="chamthan">
+                    <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
+                </div>
             </div>
 
-            <div class="chamthan">
-                     <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
-         </div>
-         
-        </div>
-        
-            @for($i = 0; $i < 5; $i++)
-
+            @foreach($feeds as $feed)
             <div class="row status-1">
                 <div class="col-2">
-                    <img src="{{asset('image/avatar1.png')}}" alt="avatar" class="avatar">
+                    <img style='border-radius: 50%' src="{{$feed->user->profile->profile_image}}" alt="avatar" class="avatar">
                 </div>
                 <div class="col-10">
                     <div class="row username">
-                        <div class="col-4">
-                            <a href="" class="texxt">Hồ Điệp</a>
-                        </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" id="btn1" class="btnFollow btn-expand-lg">+ FOLLOW</button>
-                        </div>
-                        <div class="col-1"></div>
+                        <a href="">{{$feed->user->name}}</a>
                     </div>
                     <div class="row status">
-                        <p>Today I'll talk about my hometown life</p>
-                    </div>
-                    <div class="multimedia">
-                        <iframe src="https://www.youtube.com/embed/wzzOowpCryw" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="interact">
-                        <i class="fas fa-headphones-alt"></i><span> 341</span>
-                        <i class="far fa-comments"></i> <span>43</span>
-                        <i class="far fa-thumbs-up"></i> <span>612</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <hr>
-
-            <div class="row status-2">
-                <div class="col-2">
-                    <img src="{{asset('image/avatar2.png')}}" alt="avatar" class="avatar">
-                </div>
-                <div class="col-10">
-                    <div class="row username">
-                        <div class="col-4">
-                            <a href="" class="texxt">Khả Hân</a>
-                        </div>
-                        <div class="col-2"></div>
-                        <div class="col-5">
-                            <button type="button" id="btn2" class="btnFollow btn-expand-lg">+ FOLLOW</button>
-                        </div>
-                        <div class="col-1"></div>
-                    </div>
-                    <div class="row status">
-                        <p>What is love ?</p>
-                    </div>
-                    <div class="multimedia">
-                        <iframe width="250" height="200" src="https://www.youtube.com/embed/m-M1AtrxztU" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="interact">
-                        <i class="fas fa-headphones-alt"></i><span> 753</span>
-                        <i class="far fa-comments"></i> <span>43</span>
-                        <i class="far fa-thumbs-up"></i> <span>612</span>
+                        <p>{{$feed->content}}</p>
                     </div>
                 </div>
             </div>
+            <div class="row multimedia mt-4">
 
+                @if($feed->media_type == "video")
+                    <video width="100%" height="100%" controls>
+                        <source src="{{$feed->media}}" type="video/{{$feed->media_ext}}">
+                        Your browser does not support the video tag.
+                    </video>
+                @elseif($feed->media_type == "audio")
+                    <audio style='width:100%' controls>
+                        <source src="{{$feed->media}}" type="audio/{{$feed->media_ext}}">
+                        Your browser does not support the video tag.
+                    </audio>
+                @else
+                    <img width="100%" height="100%" src="{{$feed->user->profile->profile_image}}" alt="media">
+                @endif
+            </div>
+            <div class="row interact px-4 mt-4">
+                <i class="fas fa-headphones-alt"></i><span> 341</span>
+                <i class="far fa-comments"></i> <span>43</span>
+                <i class="far fa-thumbs-up"></i> <span>612</span>
+            </div>
             <hr>
-
-            @endfor
+            @endforeach
 
         </div>
     </div>

@@ -14,11 +14,15 @@ class CreateFeedsTable extends Migration
     public function up()
     {
         Schema::create('feeds', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('title');
-            $table->longText('content');
-            $table->foreignId('author');
-            $table->text('audio');
+            $table->longText('content')->nullable();
+            $table->text('media');
+            $table->integer('view_count')->default(0);
+            $table->text('tag')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

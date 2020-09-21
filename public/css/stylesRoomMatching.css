@@ -1,0 +1,276 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+html,body,.content
+{
+    height: fit-content;
+}
+body
+{
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+}
+p
+{
+    font-weight: 500;
+    padding-left: 20px;
+}
+
+.content
+{
+    border-radius: 90px 0 0 0;
+    background-color: white;
+    margin-top: 40px;
+    min-height: 100vh;
+}
+.backgroundBar
+{
+    border-radius: 5% 5% 0 0;
+    margin-right: 100px;
+    position: fixed;
+    border-top: 2px solid rgb(114, 114, 114,0.6);
+    top: 90%;
+    background-image: linear-gradient(90deg,#fff,#fff);
+    height: 80px;
+    width: 100%;
+    z-index: 3;
+}
+.backgroundRound
+{
+    position: fixed;
+    left: calc(50% - 40px);
+    border-top: 2px solid rgb(114, 114, 114,0.6);
+    border-radius: 50%;
+    top: 88%;
+    background-image: url(/image/iconRoom.png);
+    height: 80px;
+    width: 80px;
+    z-index: 4;
+}
+
+.icon{
+    position: fixed;
+    height: 8vh;
+    width: 100%;
+    top: 89%;
+    z-index: 5;
+    margin-top: 10px;
+}
+.iconNewsfeed,.iconSearch,.iconNoti,.iconProfile
+{
+    position: relative;
+    height: 4.5vh;
+    width: 4.5vh;
+    top: 10px;
+}
+#iconRoom
+{
+    height: 6vh;
+    width: 6vh;
+    top: 0px;
+}
+.icon_Room
+{
+    height: 7.5vh;
+    width: 7.5vh;
+    border-radius: 50%;
+    transform: translate(20%,10%);
+}
+
+.user-1
+{
+    margin: 15px;
+    border: 2px grey solid;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+
+.btnFollow
+{
+    padding: 0px 10px 0px 10px;
+    margin-top: 0;
+    margin-bottom: 0px;
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+    border-radius: 50px;
+    font-weight: 700;
+    border: none;
+    font-size: 90%;
+}
+
+.row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+.mess
+{
+    width: 50px;
+    margin-left: 80%;
+}
+h3
+{
+    font-family: 'Oswald', sans-serif;
+    margin-left: 15%;
+    font-weight: bold;
+}
+.avatar
+{
+    width: 100%;
+}
+.noti
+{
+    margin-top: 20px;
+}
+.messNoti
+{
+    line-height: 2rem;
+}
+.timeNoti
+{
+    font-size: 80%;
+    color: rgba(0,0,0,0.5);
+}
+.notiMess
+{
+    padding-left: 0;
+}
+.noti-1
+{
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+.col-9
+{
+    padding-right: 0;
+}
+.ig
+{
+    margin-left: 10px;
+}
+.noti
+{
+    margin: 10px 10px 10px 10px;
+    border: 1px grey solid;
+    border-radius: 20px;
+}
+span
+{
+    margin-left: 5px;
+}
+#notifi
+{
+    font-weight: 500;
+    font-weight: bold;
+}
+a,a:hover,a:visited
+{
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .desktop-view{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+    /* For desktop: */
+    .multimedia {
+        height: 60vh;
+        width: 100%;
+    }
+
+    .container {
+        padding-left: 15%;
+        padding-right: 15%;
+        padding-bottom: 15%
+    }
+}
+
+/* 1 */
+.iconNewsfeed {
+    opacity: 0.5;
+  }
+  
+  .iconNewsfeed:hover {
+    opacity: 1.0;
+  }
+  /* 2 */
+  .iconSearch {
+    opacity: 0.5;
+  }
+  
+  .iconSearch:hover {
+    opacity: 1.0;
+  }
+/* 3 */
+  /* .iconNoti {
+    opacity: 0.5;
+  }
+  
+  .iconNoti:hover {
+    opacity: 1.0;
+  } */
+  /* 4 */
+  .iconProfile {
+    opacity: 0.5;
+  }
+  
+  .iconProfile:hover {
+    opacity: 1.0;
+  }
+
+  .score {
+    width: 15%;
+    height: 15%;
+  }
+
+  .avatar-profile {
+    width: 100%;
+    margin-top: 10px;
+}
+
+  .descrip {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-left: 25px;
+    padding-right: 15px;
+    font-weight: semi-bold;
+}
+
+.btnMore{
+    padding: 0px 20px 0px 20px; 
+    margin-top: 0;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;   
+    color:black;
+}
+
+.btnMatch{
+    padding: 0px 20px 0px 20px; 
+    margin-top: 0;
+    margin-bottom: 0px;
+    background-image: linear-gradient(90deg,#9a75f0,#FFA4B6);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;   
+    color: white;
+}
+
+.detail {
+    font-weight: 600;
+    line-height: 1.5rem;
+}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
@@ -15,7 +16,7 @@ class NotificationController extends Controller
     public function index()
     {
         return view('notification.index', [
-            'notifications' => Notification::all()
+            'notifications' => Notification::where('receiver_id', Auth::user()->id)->get()->sortByDesc('created_at'),
         ]);
     }
 
