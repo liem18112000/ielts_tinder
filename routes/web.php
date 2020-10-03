@@ -77,7 +77,7 @@ Route::put('/feeds/{feed}/update-content', 'FeedController@updateContent')->name
 
 Route::put('/feeds/{feed}/update-media', 'FeedController@updateMedia')->name('feeds.update-media');
 
-Route::delete('/feeds/{feed}', 'FeedController@delete')->name('feeds.delete');
+Route::get('/feeds/{feed}/delete', 'FeedController@delete')->name('feeds.delete');
 
 
 
@@ -96,7 +96,7 @@ Route::get('/profile/{profile}/edit', 'ProfileController@edit')->name('profile.e
 
 Route::post('/profile', 'ProfileController@store')->name('profile.store');
 
-Route::put('/profile', 'ProfileController@update')->name('profile.update')->middleware('profile.exist');
+Route::put('/profile/{profile}/update', 'ProfileController@update')->name('profile.update')->middleware('profile.exist');
 
 Route::delete('/profile/{profile}', 'ProfileController@delete')->name('profile.delete')->middleware('profile.exist');
 

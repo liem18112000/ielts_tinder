@@ -299,10 +299,10 @@
                     <div class="row">
                         <img src="{{asset('image/location.png')}}" class="age" alt="">
                         <span class="detail">
-                            @if(!$profile->hometown)
+                            @if(!$profile->home)
                                 Not Available
                             @else
-                                {{$profile->hometown}}
+                                {{$profile->home}}
                             @endif
                         </span>
                     </div>
@@ -317,12 +317,9 @@
                         </span>
                     </div>
                     <div class="row">
-                    <div class="testne">
-
                         <div class="col-4">
                             <a href='{{ route('profile.edit', $profile)}}' class="btn btnEdit">Edit</a>
                         </div>
-
                         <div class="col-4">
                             <a class="btn btnEdit" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -334,18 +331,17 @@
                                 @csrf
                             </form>
                         </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="row"> <img style='border-radius:50%' src="{{$profile->profile_image}}" class="avatar-profile" alt=""></div>
                 </div>
             </div>
-            <!-- <div class="row descrip">
+            <div class="row descrip">
                 <span>
-                    {!!$profile->intro!!}Text
+                    {!!$profile->intro!!}
                 </span>
-            </div> -->
+            </div>
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5">
@@ -384,7 +380,7 @@
                 <div class="row score1">
                     <img src="{{asset('image/birthday.png')}}" id="score1" alt="">
                     <span class="score-detail"> Birthday: </span>
-                     <span class="current-score">{{$profile->band_score}}</span>   <!--profile-> đi qua đâu? -->
+                     <span class="current-score">{{$profile->dob}}</span>   <!--profile-> đi qua đâu? -->
                 </div>
 
                 <div class="row score1">
