@@ -10,6 +10,10 @@ use App\User;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Session;
+
+use Illuminate\Support\Facades\File;
+
 class ProfileController extends Controller
 {
 
@@ -86,7 +90,27 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        $profile->update($request->all());
-        return redirect();
+        $profile_image = $this->storeMediaCloudinary($request, 'profile_image');
+
+        $profile->update([
+            'name' => $request->name,
+            'home' => $request->home,
+            'dob' => $request->dob,
+            'profile_image' => $profile_image,
+            'band_score' => $request->band_score,
+            'achieve_time' => $request->achieve_time,
+            'intro' => $request->intro
+        ]);
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Update sucess!',
+                'It is look great!',
+                'success'
+            )"
+        );
+
+        return redirect(route('profile.show', Auth::user()->profile->id));
     }
 }

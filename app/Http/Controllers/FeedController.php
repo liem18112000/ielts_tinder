@@ -109,7 +109,8 @@ class FeedController extends Controller
             'media' => $media,
             'title' => $request->title,
             'content' => $request->content,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'status' => 1,
         ]);
 
         Session::flash(
@@ -217,8 +218,11 @@ class FeedController extends Controller
      * @param  \App\Feed  $feed
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Feed $feed)
+    public function delete(Feed $feed)
     {
-        //
+        $feed->update([
+            'status' => 0,
+        ]);
+        return redirect(route('feeds.index'));
     }
 }

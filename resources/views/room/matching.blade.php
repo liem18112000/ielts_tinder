@@ -21,7 +21,7 @@
                         <div class="row" style="margin-bottom:5px">
                             <img src="{{asset('image/score.png')}}" class="score" alt="">
                             <span class="detail">
-                                @if(!$user->profile->band_score)
+                                @if(!$user->profile->band_score || $user->profile->band_score == 0.0)
                                     Not Available
                                 @else
                                     {{$user->profile->band_score}}
