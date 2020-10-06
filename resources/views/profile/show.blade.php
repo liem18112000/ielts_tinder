@@ -307,7 +307,7 @@
                         </span>
                     </div>
                     <div class="row">
-                        
+
                         <span class="detail">
                             @if(!$profile->dob)
                                 Not Available
@@ -371,10 +371,10 @@
 
                 </div>
                 <div class="displayvideo">
-                <iframe width="180" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                </iframe>
-                <iframe width="180" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                </iframe>
+                    <iframe width="180" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                    </iframe>
+                    <iframe width="180" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                    </iframe>
                 </div>
 
                 <div class="row score1">
