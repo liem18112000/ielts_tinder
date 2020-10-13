@@ -101,7 +101,7 @@ class VideoRoomController extends Controller
             Room::create([
                 'name' => $request->room,
                 'created_at'=> now(),
-                'status' => 1, 
+                'status' => 1,
                 'topic' => isset($request->topic) ? $request->topic : 'Not Available',
                 'duration' => '0',
                 'status' => 1,
