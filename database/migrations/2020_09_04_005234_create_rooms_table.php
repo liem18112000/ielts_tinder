@@ -18,7 +18,7 @@ class CreateRoomsTable extends Migration
             $table->text('name');
             $table->tinyInteger('status')->nullable();
             $table->text('topic')->nullable();
-            $table->time('duration')->nullable();
+            $table->bigInteger('duration')->default(0);
             $table->timestamps();
         });
     }

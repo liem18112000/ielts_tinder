@@ -20,7 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('name');
             $table->text('home')->nullable();
             $table->date('dob')->nullable();
-            $table->text('profile_image')->default("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png");
+            $table->text('profile_image')->nullable();
             $table->float('band_score')->default(0.0);
             $table->tinyInteger('achieve_time')->default(1);
             $table->string('intro')->nullable();
