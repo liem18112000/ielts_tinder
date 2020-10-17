@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-sm-5"></div>
             <div class="col-sm-2">
-                <a href="{{route('about-yourself')}}"><button type="button" class="btn btn-lg btnLink1 btn-block">Sign Up</button></a>
+                <a href="{{route('register')}}"><button type="button" class="btn btn-lg btnLink1 btn-block">Sign Up</button></a>
             </div>
         </div>
         <div class="row mt-4">
