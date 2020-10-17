@@ -11,6 +11,7 @@
     <h2>IELTS TINDER</h2>
     <h6>GET CLOSER - GET HIGHER</h6>
     <div class="signin">
+    
         <div class="row">
             <div class="col-sm-5"></div>
             <div class="col-sm-2">
@@ -24,9 +25,9 @@
             </div>
         </div>
         <div class="sign-in-width">
-            <span>Sign in with </span>
-            <a href="{{route('login.provider', 'google')}}"><img src="{{asset('image/logo-GG.png')}}" class="logo-signin" alt="logo-google"></a>
-            <a href="{{route('login.provider', 'facebook')}}"><img src="{{asset('image/logo-FB.png')}}" class="logo-signin" alt="logo-facebook"></a>
+                <span>Sign in with </span>
+                <a href="{{route('login.provider', 'google')}}"><img src="{{asset('image/logo-GG.png')}}" class="logo-signin" alt="logo-google"></a>
+                <a href="{{route('login.provider', 'facebook')}}"><img src="{{asset('image/logo-FB.png')}}" class="logo-signin" alt="logo-facebook"></a>
         </div>
     </div>
 </div>

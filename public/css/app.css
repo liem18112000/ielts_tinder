@@ -7,6 +7,37 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+/* Mobile: width <740px */
+@media  screen and (max-width:739px)
+{
+ 
+  h1 {
+    font-weight: 300;
+    font-size: 200%;
+    margin-bottom: 30px;
+    position: relative;
+    bottom: 0px;
+  }
+}
+
+/*Tablet: width >= 740pxand width < 1024px */
+@media  screen and (min-width:740px) and (max-width:1023px)
+{
+  h1 {
+    font-weight: 300;
+    font-size: 200%;
+    margin-bottom: 30px;
+  }
+}
+
+/* PC: width >=1024px */
+@media  screen and (min-width:1024px)
+{
+
+}
+
+
+
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;
@@ -212,7 +243,53 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+  position: relative;
+  bottom: 25px;
 }
+/* Khai báo lẻ từng img trong các layouts ( trừ img của logo trong sign in */
+img.chamthanicon {
+  vertical-align: middle;
+  border-style: none;
+  position: relative;
+  bottom: 0px;
+}
+
+img.icon_Room {
+  vertical-align: middle;
+  border-style: none;
+  position: relative;
+  bottom: 0px;
+}
+
+img.mess {
+  vertical-align: middle;
+  border-style: none;
+  position: relative;
+  bottom: 0px;
+}
+
+img.age {
+  vertical-align: middle;
+  border-style: none;
+  position: relative;
+  bottom: 0px;
+}
+
+img#score {
+  vertical-align: middle;
+  border-style: none;
+  position: relative;
+  bottom: 0px;
+}
+
+img#score1 {
+  vertical-align: middle;
+  border-style: none;
+  position: relative;
+  bottom: 0px;
+}
+/* Done */
+
 
 svg {
   overflow: hidden;
@@ -576,7 +653,7 @@ pre code {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
-  padding-bottom: 55%;
+  /* padding-bottom: 55%; */
   margin-right: auto;
   margin-left: auto;
 }
