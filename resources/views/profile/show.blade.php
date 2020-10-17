@@ -338,7 +338,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="row"> <img style='border-radius:50%' src="{{$profile->profile_image}}" class="avatar-profile" alt=""></div>
+                    <div class="row d-flex justify-content-center"> <img style='border-radius:50%' src="{{$profile->profile_image}}" class="avatar-profile" alt=""></div>
                 </div>
             </div>
             <!-- <div class="row descrip">
