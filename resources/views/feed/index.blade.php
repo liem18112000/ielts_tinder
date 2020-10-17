@@ -18,14 +18,6 @@
                     <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
                 </div>
             </div>
-<<<<<<< HEAD
-
-            <div class="chamthan">
-                     <img class="chamthanicon" src="{{asset('image/icon_chamthan.png')}}" alt=""></a>
-             </div>
-        </div>
-=======
->>>>>>> 89450465e26cb47be1bbc66b2cd98055c1747ada
             <div class= "boxcurved1">
                 <div class="textcurved1">
                     <span><a href="{{route('feeds.index')}}" >Speech</a></span>
