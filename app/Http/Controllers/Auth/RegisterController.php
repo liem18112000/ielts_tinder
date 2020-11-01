@@ -73,10 +73,20 @@ class RegisterController extends Controller
             'status' => 1,
         ]);
 
+        activity()
+            ->performedOn($user)
+            ->causedBy($user)
+            ->log('New user created');
+
         $profile = Profile::create([
             'user_id'       => $user->id,
             'name'          => $user->name
         ]);
+
+        activity()
+            ->performedOn($profile)
+            ->causedBy($user)
+            ->log('New profile created');
 
         Session::flash(
             'message',

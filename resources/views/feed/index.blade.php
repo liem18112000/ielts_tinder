@@ -53,24 +53,24 @@
                         <div class="row username">
                             <a href="">{{$feed->user->name}}</a>
                         </div>
-                        <b><h5>{{$feed->title}}</h5></b>
+                        <b><h5>{{$feed->decrypt($feed->title)}}</h5></b>
                     </div>
                 </div>
 
-                <div class="row multimedia mt-2">
+                <div class="row multimedia mt-4">
                     @if($feed->media_type == "video")
                         <video width="100%" height="100%" controls>
-                            <source src="{{$feed->media}}" type="video/{{$feed->media_ext}}">
+                            <source src="{{$feed->decrypt($feed->media)}}" type="video/{{$feed->media_ext}}">
                             Your browser does not support the video tag.
                         </video>
                     @elseif($feed->media_type == "audio")
                         <img style='object-fit:contain;' width="100%" height="80%" src="{{$feed->user->profile->profile_image}}" alt="media">
                         <audio style='width:100%' height="100%" controls>
-                            <source src="{{$feed->media}}" type="audio/{{$feed->media_ext}}">
+                            <source src="{{$feed->decrypt($feed->media)}}" type="audio/{{$feed->media_ext}}">
                             Your browser does not support the video tag.
                         </audio>
                     @else
-                        <img width="100%" height="100%" src="{{$feed->media}}" alt="media">
+                        <img style='object-fit:contain' width="100%" height="100%" src="{{$feed->decrypt($feed->media)}}" alt="media">
                     @endif
                 </div>
 
@@ -100,7 +100,7 @@
                 @endif
 
                 <div class='row mt-2'>
-                    {!!$feed->content!!}
+                    {!!$feed->decrypt($feed->content)!!}
                 </div>
 
                 <div class="row interact px-4 mt-2">

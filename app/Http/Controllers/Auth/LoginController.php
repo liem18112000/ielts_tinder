@@ -86,15 +86,34 @@ class LoginController extends Controller
                 'provider'      => $provider,
             ]);
 
+            activity()
+            ->performedOn($user)
+            ->causedBy($user)
+            ->log('New user created with third-party provider : ' . $provider);
+
             $profile = Profile::create([
                 'user_id'       => $user->id,
                 'name'          => $user->name
             ]);
 
+            activity()
+            ->performedOn($profile)
+            ->causedBy($user)
+            ->log('New profile created with third-party provider : ' . $provider);
+
         } else {
 
             if (!Hash::check($providerUser->id, $user->password)) {
+                activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('Login failed with third-party provider : ' . $provider);
                 abort(403);
+            }else{
+                activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('Login success with third-party provider : ' . $provider);
             }
         }
 
@@ -108,7 +127,7 @@ class LoginController extends Controller
                 'Welcome to Ielts Tinder!',
                 'success'
             )"
-        );      
+        );
 
         Auth::login($user, true);
 
@@ -122,12 +141,12 @@ class LoginController extends Controller
         $user->save();
     }
 
-    public function logout() 
+    public function logout()
     {
         $user = auth()->user();
         $user->status = 0;
         $user->save();
-        Auth::logout();    
+        Auth::logout();
         return redirect('index');
     }
 }

@@ -105,13 +105,18 @@ class FeedController extends Controller
     {
         $media = $this->storeMediaCloudinary($request, 'media');
 
-        Feed::create([
-            'media' => $media,
-            'title' => $request->title,
-            'content' => $request->content,
-            'user_id' => Auth::user()->id,
-            'status' => 1,
+        $feed = Feed::create([
+            'media'     => $this->encrypt($media),
+            'title'     => $this->encrypt($request->title),
+            'content'   => $this->encrypt($request->content),
+            'user_id'   => Auth::user()->id,
+            'status'    => 1,
         ]);
+
+        activity()
+            ->performedOn($feed)
+            ->causedBy(Auth::user())
+            ->log('Create new feed');
 
         Session::flash(
             'message',
@@ -177,8 +182,13 @@ class FeedController extends Controller
         $media = $this->storeMediaCloudinary($request, 'media');
 
         $feed->update([
-            'media'     => $media,
+            'media'     => $this->encrypt($media),
         ]);
+
+        activity()
+            ->performedOn($feed)
+            ->causedBy(Auth::user())
+            ->log('Update new feed media');
 
         Session::flash(
             'message',
@@ -196,9 +206,14 @@ class FeedController extends Controller
     {
 
         $feed->update([
-            'title'     => $request->title,
-            'content'   => $request->content
+            'title'     => $this->encrypt($request->title),
+            'content'   => $this->encrypt($request->content)
         ]);
+
+        activity()
+            ->performedOn($feed)
+            ->causedBy(Auth::user())
+            ->log('Update new feed content');
 
         Session::flash(
             'message',

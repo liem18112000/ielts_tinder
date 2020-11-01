@@ -21,8 +21,13 @@
                         placeholder="Enter feed title" aria-describedby="helpId" required="required">
                 </div>
 
-                <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-                <script>tinymce.init({selector:'textarea'});</script>
+                <script>
+                    tinymce.init({
+                    selector: 'textarea',
+                    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                    toolbar_mode: 'floating',
+                    });
+                </script>
                 <div class="form-group">
                     <label for="">What you want to tell?</label>
                     <textarea class="form-control" name='content' id="content" rows="15" cols="80" placeholder='Please tell us your story...'>
@@ -31,8 +36,25 @@
 
                 <div class="form-group">
                     <label for="">Upload your media</label>
-                    <input type="file" class="form-control-file" name="media" id="media" placeholder="Choose a file to upload">
+                    <input type="file" onchange="PreviewImage();" class="form-control-file" name="media" id="media" placeholder="Choose a file to upload">
                 </div>
+
+                <div class="form-group mt-4">
+                    <div class="row">
+                        <img style='object-fit:contain; width: 100%; height: 100%;' id="reviewImage"class="avatar-profile" alt="">
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function PreviewImage() {
+                        var fileReader = new FileReader();
+                        fileReader.readAsDataURL(document.getElementById("media").files[0]);
+
+                        fileReader.onload = function (fileEvent) {
+                            document.getElementById("reviewImage").src = fileEvent.target.result;
+                        };
+                    };
+                </script>
 
                 <button type="submit" class="btn btn-primary btn-block">Done</button>
             </form>

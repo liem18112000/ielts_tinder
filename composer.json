@@ -21,6 +21,7 @@
         "macsidigital/laravel-zoom": "^4.0",
         "realrashid/sweet-alert": "^3.1",
         "silviolleite/laravelpwa": "^2.0",
+        "spatie/laravel-activitylog": "^3.16",
         "twilio/sdk": "^6.9"
     },
     "require-dev": {
