@@ -136,6 +136,8 @@ Route::get('room/topic', 'VideoRoomController@topic')->name('room.topic');
 
 Route::get('room/matching', 'VideoRoomController@matching')->name('room.matching');
 
+Route::get('room/end/{room}', 'VideoRoomController@endRoom')->name('room.end');
+
 
 /*
 |--------------------------------------------------------------------------

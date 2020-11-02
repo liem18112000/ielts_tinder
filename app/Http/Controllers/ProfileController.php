@@ -90,29 +90,35 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
+<<<<<<< HEAD
         if ($request->image != "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png")
         {
-            $profile_image = $this->storeMediaCloudinary($request, 'image');
+            $profile_image = $this->storeMediaCloudinary($request, 'profile_image');
             $profile->update([
                 'profile_image' => $profile_image,
             ]);
         }
         
+=======
+        $profile_image = $this->storeMediaCloudinary($request, 'profile_image');
+>>>>>>> 413329ebe477e7b90c4afcc272be2e20ba6b56f0
 
         $profile->update([
             'name' => $request->name,
             'home' => $request->home,
             'dob' => $request->dob,
+            'profile_image' => $profile_image,
             'band_score' => $request->band_score,
             'achieve_time' => $request->achieve_time,
-            'intro' => $request->intro
+            'intro' => $request->intro,
+            'profile_image' => $profile_image  
         ]);
 
         Session::flash(
             'message',
             "Swal.fire(
                 'Update sucess!',
-                'It's look great!',
+                'It is look great!',
                 'success'
             )"
         );

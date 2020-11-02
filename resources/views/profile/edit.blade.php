@@ -13,7 +13,7 @@
 
             <h2 class='text-center' style='padding-top: 8%'>Edit Profile</h2>
 
-            <form action = '{{route('profile.update', $profile)}}' method='post'>
+            <form action = '{{route('profile.update', $profile)}}' method='post' enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -32,12 +32,12 @@
                         placeholder="Enter your date of birth" aria-describedby="helpId" required="required">
                 </div>
                 <div class="form-group">
-                    <label for="image">Profile image</label>
-                    <input type="file" class="form-control-file" name="image" id="image"
+                    <label for="profile_image">Profile image</label>
+                    <input type="file" class="form-control-file" name="profile_image" id="image"
                         onchange="PreviewImage();" placeholder="Choose a file to upload">
                 </div>
                 <div style="margin-left: auto; margin-right: auto; display: block" class="col-6">
-                    <div class="row"> <img id="reviewImage" style='border-radius:50%; width: 100%;' 
+                    <div class="row"> <img id="reviewImage" style='border-radius:50%; width: 100%;'
                     src="{{$profile->profile_image}}" class="avatar-profile" alt=""></div>
                 </div>
                 <script type="text/javascript">
