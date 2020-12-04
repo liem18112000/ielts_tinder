@@ -10,7 +10,6 @@
 
 
 @section('head')
-
 {{-- <script src="http://media.twiliocdn.com/sdk/js/video/releases/1.20.1/twilio-video.min.js"></script> --}}
 
 <script src="http://media.twiliocdn.com/sdk/js/video/v1/twilio-video.min.js"></script>
@@ -112,8 +111,25 @@
             participantDisconnected(participant);
         });
     });
-</script>
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
 
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "Time remaining: " + minutes + ":" + seconds;
+
+            if (--timer < 0) { 
+                timer = duration;
+                window.location.href = "{{ route('room.end', $room) }}";
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+</script>
 @endsection
 
 
@@ -124,6 +140,13 @@
         <br/>
 
         <h3>{{$room}}</h3>
+
+        
+        <h3 id = "time">00:00</h3>
+        <script type="text/javascript">
+             display = document.querySelector('#time');
+             startTimer({{$remainingTime}}, display);
+        </script>
 
         <div class='row' id="media-div">
 

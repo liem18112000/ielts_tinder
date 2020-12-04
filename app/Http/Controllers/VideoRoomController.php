@@ -16,6 +16,7 @@ use Twilio\Jwt\Grants\VideoGrant;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Jobs\CloseRoomJob;
 
 class VideoRoomController extends Controller
 {
@@ -59,9 +60,33 @@ class VideoRoomController extends Controller
             'accessToken'   => $token->toJWT(),
             'room'          => $room,
             'identity'      => $identity,
+            'remainingTime' => 60 * 60 - (now()->diffInSeconds(Room::where('name', $room)->firstOrFail()->created_at)),
         ]);
     }
 
+    public function endRoom($roomName)
+    {
+        $client = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+        $rooms = $client->video->rooms->read([]);
+        foreach ($rooms as $room) {
+            if ($room->uniqueName == $roomName) {
+                $room->update("completed");
+                $ps = $room->participants->read(array("status" => "connected"));;
+                foreach ($ps as $participant) {
+                    $participant->update(array("status" => "disconnected"));
+                }
+            }
+        }
+        foreach(Room::where('name', $roomName)->get() as $room)
+        {
+            $room->update([
+                'status'        => 0,
+                'topic'         => "Hahaha"
+            ]);
+        }
+        $allRooms = $client->video->rooms->read([]);
+        return redirect()->route('room.index', ['rooms' => $allRooms, 'newRoomName' => 'IELTS_TINDER_' . rand(1000, 9999)]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -118,9 +143,10 @@ class VideoRoomController extends Controller
                 'updated_at' => now(),
             ]);
         }
-
+        
         return redirect()->action('VideoRoomController@join', [
-            'room' => $request->room
+            'room' => $request->room,
+            'remainingTime' => 60 * 60 - (now()->diffInSeconds(Room::where('name', $request->room)->firstOrFail()->created_at)),
         ]);
     }
 
