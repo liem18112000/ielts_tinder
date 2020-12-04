@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\Welcome;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 
 use Laravel\Socialite\Facades\Socialite;
@@ -12,6 +14,7 @@ use App\User;
 use App\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -48,7 +51,8 @@ class LoginController extends Controller
     /**
      * Redirect the user to the GitHub authentication page.
      *
-     * @return \Illuminate\Http\Response
+     * @param $provider
+     * @return RedirectResponse
      */
     public function redirectToProvider($provider)
     {
@@ -58,7 +62,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from GitHub.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function handleProviderCallback($provider)
     {
@@ -130,6 +134,8 @@ class LoginController extends Controller
         );
 
         Auth::login($user, true);
+
+        $user->notify(new Welcome);
 
         return redirect($this->redirectTo);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\Welcome;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -51,21 +52,42 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        $validator = Validator::make($data, [
+            'name' => ['required', 'string', 'max:255', 'min:8'],
+            'email' => ['required', 'string', 'email','min:8', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
+
+        if($validator->fails()){
+            $errors = $validator->errors();
+            $allMessages = '';
+            foreach($errors->getMessages() as $messages){
+                foreach($messages as $message){
+                    $allMessages .= $message . '\n';
+                }
+            }
+            Session::flash(
+                'message',
+                "Swal.fire(
+                    'Register failed!',
+                    '$allMessages',
+                    'warning'
+                )"
+            );
+        }
+
+        return $validator;
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return User
      */
     protected function create(array $data)
     {
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -91,11 +113,13 @@ class RegisterController extends Controller
         Session::flash(
             'message',
             "Swal.fire(
-                'Register sucess!',
+                'Register success!',
                 'Welcome to Ielts Tinder!',
                 'success'
             )"
         );
+
+        $user->notify(new Welcome);
 
         return $user;
     }

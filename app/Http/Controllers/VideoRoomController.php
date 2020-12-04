@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Room;
 use App\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Twilio\Exceptions\ConfigurationException;
+use Twilio\Exceptions\TwilioException;
 use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
@@ -63,7 +66,7 @@ class VideoRoomController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -75,13 +78,19 @@ class VideoRoomController extends Controller
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
         }
-        return view('room.index', ['rooms' => $allRooms, 'newRoomName' => 'IELTS_TINDER_' . rand(1000, 9999)]);
+        return view('room.index', [
+            'rooms' => $allRooms,
+            'newRoomName' => 'IELTS_TINDER_' . rand(1000, 9999)
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
+     * @throws ConfigurationException
+     * @throws TwilioException
      */
     public function create(Request $request)
     {
@@ -133,7 +142,6 @@ class VideoRoomController extends Controller
                     break;
                 }
             }
- 
 
             if(!$isMatch){
                 $room->update([

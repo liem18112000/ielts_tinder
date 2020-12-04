@@ -20,26 +20,29 @@
 
             <div class="noti">
                 <div class="row">
-                    <div class="col-4"><span id="notifi">Notifications</span></div>
+                    <div class="col-4 text-center"><span id="notifi">Notifications</span></div>
                     <div class="col-4"></div>
-                    <div class="col-4"><span><a href=""> View all</span></a></div>
+                    <div class="col-4 text-center"><span><a href="#"> View all</span></a></div>
                 </div>
+            </div>
+
+            <div class="noti" style="height: 60vh; overflow-y:scroll">
                 @foreach ($notifications as $notification)
-                <div class="noti-1 row">
-                    <div class="col-3">
-                        <img src="{{$notification->sender->profile->profile_image}}" class="avatar" alt="">
-                    </div>
-                    <div class="col-9 notiMess">
-                        <div class="row messNoti">
-                            <span><a href="">{{$notification->sender->name}}</a> </span>
-                            <span>{{$notification->content}}</span>
+                    <div class="noti-1 row">
+                        <div class="col-4 col-lg-2">
+                            <img src="{{asset('image/iconRoom.png')}}" style="width:100%; bottom:0" alt="">
                         </div>
-                        @php
-                        $result = $notification->created_at->toDateTimeString();
-                        @endphp
-                        <div class="row timeNoti"><span>{{$result}}</span></div>
+                        <div class="col-5 col-lg-7  notiMess text-center">
+                            <div class="row messNoti">
+                                <span><a href="">System</a> </span>
+                                <span>{{str_replace("App\Notifications\\", '', $notification->type)}}</span>
+                            </div>
+                            <div class="row timeNoti"><span>{{$notification->created_at->toDateTimeString()}}</span></div>
+                        </div>
+                        <div class="col-3" style="padding:0 5px 0 0; margin: 0;">
+                            <a class="btn btn-outline-dark btn-block" href="#">View</a>
+                        </div>
                     </div>
-                </div>
                 @endforeach
             </div>
 
