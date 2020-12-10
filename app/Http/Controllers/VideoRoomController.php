@@ -48,13 +48,16 @@ class VideoRoomController extends Controller
 
         $token->addGrant($videoGrant);
 
-        DB::table('joins')->insert([
-            'user_id' => Auth::user()->id,
-            'room_id' => Room::where('name', $room)->firstOrFail()->id,
-            'open_stamp' => Room::where('name', $room)->firstOrFail()->created_at,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        if(!DB::table('joins')->where('status', 1)->where('user_id', Auth::user()->id)->first()){
+            DB::table('joins')->insert([
+                'user_id' => Auth::user()->id,
+                'room_id' => Room::where('name', $room)->firstOrFail()->id,
+                'open_stamp' => Room::where('name', $room)->firstOrFail()->created_at,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'status'    => '1',
+            ]);
+        }
 
         return view('room.room',[
             'accessToken'   => $token->toJWT(),
@@ -67,7 +70,9 @@ class VideoRoomController extends Controller
     public function endRoom($roomName)
     {
         $client = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+
         $rooms = $client->video->rooms->read([]);
+        
         foreach ($rooms as $room) {
             if ($room->uniqueName == $roomName) {
                 $room->update("completed");
@@ -77,6 +82,11 @@ class VideoRoomController extends Controller
                 }
             }
         }
+        DB::table('joins')->where('user_id', Auth::user()->id)->where('room_id', Room::where('name', $roomName)->first()->id)->update([
+            'status' => '0',
+            'close_stamp' => Carbon::now(),
+        ]);
+
         foreach(Room::where('name', $roomName)->get() as $room)
         {
             $room->update([
@@ -84,8 +94,7 @@ class VideoRoomController extends Controller
                 'topic'         => "Hahaha"
             ]);
         }
-        $allRooms = $client->video->rooms->read([]);
-        return redirect()->route('room.index', ['rooms' => $allRooms, 'newRoomName' => 'IELTS_TINDER_' . rand(1000, 9999)]);
+        return redirect()->route('room.index');
     }
 
     /**
@@ -143,7 +152,7 @@ class VideoRoomController extends Controller
                 'updated_at' => now(),
             ]);
         }
-        
+
         return redirect()->action('VideoRoomController@join', [
             'room' => $request->room,
             'remainingTime' => 60 * 60 - (now()->diffInSeconds(Room::where('name', $request->room)->firstOrFail()->created_at)),

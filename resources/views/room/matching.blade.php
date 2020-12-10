@@ -8,7 +8,7 @@
 @section('content')
      <div class="content">
         <div class="container">
-        <h3>MATCHING</h3>
+
         @foreach($onlineUsers as $user)
             @if($user->id != Auth::user()->id)
                 <div class="noti">

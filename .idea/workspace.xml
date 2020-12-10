@@ -25,20 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="305cacc6-adf7-4ec7-8d32-73e3abc0b5b4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CriteriaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CriteriaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FeedController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FeedController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoRoomController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoRoomController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notification.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/Welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Welcome.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_23_135934_create_notifications_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/notification/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/notification/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/notify/Welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/notify/Welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/room/matching.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/room/matching.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -216,7 +203,7 @@
       <workItem from="1606608894406" duration="2824000" />
       <workItem from="1606616976079" duration="4280000" />
       <workItem from="1606967036796" duration="385000" />
-      <workItem from="1607041327960" duration="13338000" />
+      <workItem from="1607041327960" duration="14735000" />
     </task>
     <servers />
   </component>
