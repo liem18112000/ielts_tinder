@@ -290,31 +290,104 @@ h1 {
     opacity: 1.0;
   } */
 
-  .testne
+  /* .testne
   {
     align-items: center;
     display: flex;
     position: relative;
     left: 120%;
     bottom: 65px;
-  }
+  } */
 
-  .avatar-profile {
-    width: 85%;
+  .avatar-profile 
+  {
+    width: 46%;
     height: auto;
-    margin-top: -30px;
+    margin-top: 5px;
     position: relative;
-    left: 30px;
-    top: 48px;
+    left: 13px;
+    top: 40px;
 }
+
 .testne {
     display: flex;
     position: relative;
-    left: 105%;
-    bottom: 30px;
+    left: 132%;
+    bottom: -25px;
 }
 
 .grid_type {
     display: grid;
     grid-gap: 15px;
+}
+
+/* Phone: width < 740px */
+@media  screen and (max-width:739px)
+{
+    .avatar-profile 
+     {
+        width: 80%;
+        height: auto;
+        margin-top: 5px;
+        position: relative;
+        left: 10px;
+        top: 48px;
+     } 
+
+    .testne
+    {
+        display: flex;
+        position: relative;
+        left: 105%;
+        bottom: 50px;
+    }
+}
+/* Iphone 6 7 8 plus */
+@media only screen 
+    and (device-width : 414px) 
+    and (device-height : 736px) 
+ 
+    { 
+        .testne {
+            display: flex;
+            position: relative;
+            left: 105%;
+            bottom: 5px;
+        }
+    }
+
+/*Tablet: width >= 740pxand width < 1024px */
+@media  screen and (min-width:740px) and (max-width:1023px)
+{
+    .avatar-profile 
+    {
+        width: 65%;
+        height: auto;
+        margin-top: 5px;
+        position: relative;
+        left: 46px;
+        top: 40px;
+    }
+
+    .testne 
+    {
+        display: flex;
+        position: relative;
+        left: 135%;
+        bottom: 0px;
+    }
+}
+
+/* PC: width >=1024px */
+@media only screen and (min-width:1024px)
+{
+    .avatar-profile 
+    {
+        width: 60%;
+        height: auto;
+        margin-top: -30px;
+        position: relative;
+        left: 30px;
+        top: 48px;
+    }
 }

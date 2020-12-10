@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
@@ -11,33 +11,22 @@ class NotificationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         return view('notification.index', [
-            'notifications' => Notification::where('receiver_id', Auth::user()->id)->get()->sortByDesc('created_at'),
+            'notifications' => Auth::user()->notifications
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show($notification_id)
     {
-        return view('notification.create');
-    }
+        $notification = null;
+        if (isset(Auth::user()->notifications)) {
+            $notification = Auth::user()->notifications->find($notification_id);
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return $notification->toMail();
     }
 }

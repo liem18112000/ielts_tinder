@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Session;
 
-use Illuminate\Support\Facades\File;
-
 class ProfileController extends Controller
 {
 
@@ -52,6 +50,7 @@ class ProfileController extends Controller
      */
     public function show($user_id)
     {
+
         if(!Profile::where('user_id', $user_id)->exists()){
 
             $user = User::find($user_id);
@@ -63,9 +62,21 @@ class ProfileController extends Controller
 
         }
 
-        return view('profile.show', [
+        // Check profile belogn to user or not
+        if(Auth::user()->id == $user_id){
+
+            // Return private profile
+            return view('profile.show', [
+                'profile' => Profile::where('user_id', $user_id)->firstOrFail(),
+            ]);
+        }
+
+        // Return public profile
+        return view('profile.public', [
             'profile' => Profile::where('user_id', $user_id)->firstOrFail(),
         ]);
+
+
     }
 
     /**

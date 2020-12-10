@@ -8,16 +8,16 @@
 @section('content')
      <div class="content">
         <div class="container">
-        <h3>MATCHING</h3>
+
         @foreach($onlineUsers as $user)
             @if($user->id != Auth::user()->id)
                 <div class="noti">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-6">
-                        <div class="row"> <img style='border-radius:10%' src="{{$user->profile->profile_image}}" class="avatar-profile" alt=""></div>
+                        <div class="row"> <img style='border-radius:10%;bottom:0;top:20px;' src="{{$user->profile->profile_image}}" class="avatar-profile" alt=""></div>
                     </div>
                     <div class="col-6" style="margin-left:-15px; margin-right:-15px;">
-                        <h5 style='margin-top:10px; font-size:16px; font-weight:bold;'>{{$user->name}}</h5>
+                        <span><h5 style='margin-top:10px; font-size:16px; font-weight:bold;'>{{$user->name}}</h5></span>
                         <div class="row" style="margin-bottom:5px">
                             <img src="{{asset('image/score.png')}}" class="score" alt="">
                             <span class="detail">
@@ -43,7 +43,7 @@
                                     {{$user->profile->dob}}
                                 @endif
                             </span>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <div class="row descrip">

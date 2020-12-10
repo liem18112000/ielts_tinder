@@ -57,6 +57,17 @@ input[type=checkbox]:checked
     text-align: left;
 
 }
+
+img {
+    
+    border-style: none;
+    position: relative;
+    top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 .cor-password
 {
     margin-bottom: 50px;
@@ -94,4 +105,16 @@ input[type=checkbox]:checked
         padding-left: 15%;
         padding-right: 15%;
     }
+}
+
+/* PC: width >=1024px */
+@media only screen and (min-width:1024px)
+{
+    .content 
+        {
+            background-color: rgba(0,0,0,0.4);
+            padding: 130px 30px 66px 30px;
+            border-radius: 90px 0px 0px 0px;
+            transform: translate(0,40%);
+        }
 }

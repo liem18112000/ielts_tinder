@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 use JD\Cloudder\Facades\Cloudder;
 
 class Controller extends BaseController
@@ -84,5 +86,21 @@ class Controller extends BaseController
         }
 
         return $fileNameToStore;
+    }
+
+    public function encrypt($data)
+    {
+        return Crypt::encryptString($data);
+    }
+
+    public function decrypt($encryptString)
+    {
+        try
+        {
+            return Crypt::decryptString($encryptString);
+
+        } catch (DecryptException $e) {
+            //
+        }
     }
 }
