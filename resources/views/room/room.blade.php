@@ -5,6 +5,24 @@
 @section('styles')
     <link rel="stylesheet" href="{{asset('css/stylesNotifications.css')}}">
     <script src="https://kit.fontawesome.com/1918a957af.js" crossorigin="anonymous"></script>
+    <style>
+        .bottom-img{
+            width: 40px;
+            height:40px;
+            border-radius:50%;
+            bottom:0!important;
+            object-fit: scale-down;
+        }
+
+        .bottom-btn{
+            width: 60px;
+            height:60px;
+            border-radius:50%;
+            background-color:white;
+            padding: 5px;
+            border: 2px solid green;
+        }
+    </style>
 @endsection
 
 
@@ -34,8 +52,8 @@ function participantConnected(participant) {
     if (participant.identity == '{{$identity}}') {
         localParticipant = participant;
         content += "<button class='btn btn-dark btn-block'> You </button>" +
-            "&nbsp <button id='" + participant.identity + "sound' class='btn btn-primary'>Mute</button>" +
-            "&nbsp <button id='" + participant.identity + "video' class='btn btn-success'>On</button>"
+            // "&nbsp <button id='" + participant.identity + "sound' class='btn btn-primary'>Mute</button>" +
+            // "&nbsp <button id='" + participant.identity + "video' class='btn btn-success'>On</button>" +
         "</div>";
     } else {
         content += "<button class='btn btn-dark btn-block'> Partner : " + participant.identity + " </button>" + "</div>";
@@ -76,36 +94,37 @@ Twilio.Video.createLocalTracks({
         console.log("Joining: '" + participant.identity + "'");
         participantConnected(participant);
     });
-    document.getElementById(localParticipant.identity + 'video').addEventListener("click", function () {
-        if (document.getElementById(localParticipant.identity + 'video').innerText == 'On') {
-            localParticipant.videoTracks.forEach(function (videoTrack) {
-                console.log('+++++ videoTrack ' + localParticipant.identity + ' Disable :  ' + videoTrack + ' +++++');
-                videoTrack.disable();
-            });
-            document.getElementById(localParticipant.identity + 'video').innerText = "Off";
-        } else {
-            localParticipant.videoTracks.forEach(function (videoTrack) {
-                console.log('+++++ videoTrack ' + localParticipant.identity + ' Enable ' + videoTrack + ' +++++');
-                videoTrack.enable();
-            });
-            document.getElementById(localParticipant.identity + 'video').innerText = "On";
-        }
-    });
-    document.getElementById(localParticipant.identity + 'sound').addEventListener("click", function () {
-        if (document.getElementById(localParticipant.identity + 'sound').innerText == 'Mute') {
-            localParticipant.audioTracks.forEach(function (audioTrack) {
-                console.log('+++++ audioTrack ' + localParticipant.identity + ' Disable :  ' + audioTrack + ' +++++');
-                audioTrack.disable();
-            });
-            document.getElementById(localParticipant.identity + 'sound').innerText = "Unmute";
-        } else {
-            localParticipant.audioTracks.forEach(function (audioTrack) {
-                console.log('+++++ audioTrack ' + localParticipant.identity + ' Enable ' + audioTrack + ' +++++');
-                audioTrack.enable();
-            });
-            document.getElementById(localParticipant.identity + 'sound').innerText = "Mute";
-        }
-    });
+
+    // document.getElementById(localParticipant.identity + 'video').addEventListener("click", function () {
+    //     if (document.getElementById(localParticipant.identity + 'video').innerText == 'On') {
+    //         localParticipant.videoTracks.forEach(function (videoTrack) {
+    //             console.log('+++++ videoTrack ' + localParticipant.identity + ' Disable :  ' + videoTrack + ' +++++');
+    //             videoTrack.disable();
+    //         });
+    //         document.getElementById(localParticipant.identity + 'video').innerText = "Off";
+    //     } else {
+    //         localParticipant.videoTracks.forEach(function (videoTrack) {
+    //             console.log('+++++ videoTrack ' + localParticipant.identity + ' Enable ' + videoTrack + ' +++++');
+    //             videoTrack.enable();
+    //         });
+    //         document.getElementById(localParticipant.identity + 'video').innerText = "On";
+    //     }
+    // });
+    // document.getElementById(localParticipant.identity + 'sound').addEventListener("click", function () {
+    //     if (document.getElementById(localParticipant.identity + 'sound').innerText == 'Mute') {
+    //         localParticipant.audioTracks.forEach(function (audioTrack) {
+    //             console.log('+++++ audioTrack ' + localParticipant.identity + ' Disable :  ' + audioTrack + ' +++++');
+    //             audioTrack.disable();
+    //         });
+    //         document.getElementById(localParticipant.identity + 'sound').innerText = "Unmute";
+    //     } else {
+    //         localParticipant.audioTracks.forEach(function (audioTrack) {
+    //             console.log('+++++ audioTrack ' + localParticipant.identity + ' Enable ' + audioTrack + ' +++++');
+    //             audioTrack.enable();
+    //         });
+    //         document.getElementById(localParticipant.identity + 'sound').innerText = "Mute";
+    //     }
+    // });
     room.on('participantDisconnected', function (participant) {
         console.log("Disconnected: '" + participant.identity + "'");
         participantDisconnected(participant);
@@ -136,15 +155,12 @@ function startTimer(duration, display) {
 
 
 @section('content')
-<div class="content">
+<div class="content" style='background-color:black'>
     <div class='container-fluid text-center'>
 
-        <br/>
+        <br/><br/>
 
-        <h3>{{$room}}</h3>
-
-
-
+        {{-- <h3>{{$room}}</h3> --}}
 
         <div class='row' id="media-div">
 
@@ -165,7 +181,7 @@ function startTimer(duration, display) {
             </div>
         </div>
 
-        <div class='row mt-1'>
+        {{-- <div class='row mt-1'>
             <div class='col-6'>
                 <a class="btn btn-outline-dark btn-block"
                  href='javascript:void(0)' id="time"></a>
@@ -179,35 +195,103 @@ function startTimer(duration, display) {
                 href='{{route('room.end', $room)}}'
                 role="button"> Close Room</a>
             </div>
+        </div> --}}
+
+        <div class='row mt-1'>
+            <div class='col-4'>
+                <a href='javascript:void(0)' style='margin:auto;' id='sound'>
+                    <div style='margin:0; padding:0; width:100%'>
+                        <div class='bottom-btn' style='margin-left:auto;'>
+                            <img src='{{ asset('images/icons/Asset 32@2x.png')}}' id='imgSound' class='bottom-img'/>
+                        </div>
+                    </div>
+                    Unmute
+                </a>
+            </div>
+
+            <div class='col-4'>
+                <a href='{{route('room.end', $room)}}' style='margin:auto;'>
+                    <div style='margin:0; padding:0; width:100%'>
+                        <div class='bottom-btn' style='margin:auto;'>
+                            <img src='{{ asset('images/icons/phone-call-end@2x.png')}}' class='bottom-img'>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class='col-4'>
+                <a href='javascript:void(0)' style='margin:auto;' id='video'>
+                    <div style='margin:0; padding:0; width:100%'>
+                        <div class='bottom-btn' style='margin-right:auto;'>
+                            <img src='{{ asset('images/icons/Asset 4@2x.png')}}' id='imgVideo' class='bottom-img' />
+                        </div>
+                    </div>
+                    On
+                </a>
+            </div>
         </div>
+
 
     </div>
 </div>
 
-{{-- <div class="icon">
-    <div class="row align-items-center">
-        <div class="col">
-            <a href="{{route('feeds.index')}}"> <img class="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
-        </div>
-        <div class="col">
-            <a href="{{route('search')}}"> <img class="iconSearch" src="{{asset('image/icon_search.png')}}" alt=""></a>
-        </div>
-        <div class="col">
-            <div class="backgroundRound">
-                <a href="{{route('room.index')}}"> <img class="icon_Room" src="{{asset('image/iconRoom.png')}}"></a>
-            </div>
-        </div>
-        <div class="col">
-            <a href="{{route('notify.index')}}"> <img class="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
-        </div>
-        <div class="col">
-            <a href="{{route('profile.show', Auth::user()->id)}}"> <img class="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
-        </div>
-    </div>
-</div> --}}
 
-{{-- <div class="backgroundBar"></div>
-</div> --}}
+@endsection
 
+
+
+@section('scripts')
+
+document.getElementById('sound').addEventListener("click", function () {
+    if (document.getElementById('sound').innerText == 'Unmute') {
+        localParticipant.audioTracks.forEach(function (audioTrack) {
+            console.log('+++++ audioTrack ' + localParticipant.identity + ' Disable :  ' + audioTrack + ' +++++');
+            audioTrack.disable();
+        });
+        document.getElementById('sound').innerHTML =  "<div style='margin:0; padding:0; width:100%'>"+
+                       "<div class='bottom-btn' style='margin-left:auto;'>" +
+                           "<img src='{{ asset('images/icons/Asset 7@2x.png')}}' class='bottom-img'>" +
+                        "</div>" +
+                    "</div>" +
+                    "Mute";
+    } else {
+        localParticipant.audioTracks.forEach(function (audioTrack) {
+            console.log('+++++ audioTrack ' + localParticipant.identity + ' Enable ' + audioTrack + ' +++++');
+            audioTrack.enable();
+        });
+        document.getElementById('sound').innerHTML = "<div style='margin:0; padding:0; width:100%'>"+
+                       "<div class='bottom-btn' style='margin-left:auto;'>" +
+                           "<img src='{{ asset('images/icons/Asset 32@2x.png')}}' class='bottom-img'>" +
+                        "</div>" +
+                    "</div>" +
+                    "Unmute";
+    }
+});
+
+document.getElementById('video').addEventListener("click", function () {
+    if (document.getElementById('video').innerText == 'On') {
+        localParticipant.videoTracks.forEach(function (videoTrack) {
+            console.log('+++++ videoTrack ' + localParticipant.identity + ' Disable :  ' + videoTrack + ' +++++');
+            videoTrack.disable();
+        });
+        document.getElementById('video').innerHTML = "<div style='margin:0; padding:0; width:100%'>"+
+                       "<div class='bottom-btn' style='margin-right:auto;'>" +
+                           "<img src='{{ asset('images/icons/Asset 6@2x.png')}}' class='bottom-img'>" +
+                        "</div>" +
+                    "</div>" +
+                    "Off";
+    } else {
+        localParticipant.videoTracks.forEach(function (videoTrack) {
+            console.log('+++++ videoTrack ' + localParticipant.identity + ' Enable ' + videoTrack + ' +++++');
+            videoTrack.enable();
+        });
+        document.getElementById('video').innerHTML = "<div style='margin:0; padding:0; width:100%'>"+
+                       "<div class='bottom-btn' style='margin-right:auto;'>" +
+                           "<img src='{{ asset('images/icons/Asset 4@2x.png')}}' class='bottom-img'>" +
+                        "</div>" +
+                    "</div>" +
+                    "On";
+    }
+});
 
 @endsection
