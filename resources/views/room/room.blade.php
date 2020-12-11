@@ -3,7 +3,7 @@
 
 
 @section('styles')
-    <link rel="stylesheet" href="{{asset('css/stylesNotifications.css')}}">
+    <link rel="stylesheet" href="{{asset('css/stylesRoom.css')}}">
     <script src="https://kit.fontawesome.com/1918a957af.js" crossorigin="anonymous"></script>
 @endsection
 
@@ -131,6 +131,45 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
+function topicChoose(id)
+{
+    console.log(id);
+    SweetAlert.close();
+    document.getElementById('words').style.visibility = 'visible'
+    document.getElementById('questions').style.visibility = 'visible'
+}
+
+function topicClicked()
+{
+    document.getElementById('words').style.visibility = 'hidden'
+    document.getElementById('questions').style.visibility = 'hidden'
+    let topics = ['PET', 'FAMILY', 'DREAM', 'JOB', 'HEALTH', 'SPORT']
+    let imageNames = ["{{asset('images/icons/Thiết kế không tên.png')}}",
+    "{{asset('images/icons/Thiết kế không tên (1).png')}}",
+    "{{asset('images/icons/Thiết kế không tên (2).png')}}",
+    "{{asset('images/icons/Thiết kế không tên (3).png')}}",
+    "{{asset('images/icons/Thiết kế không tên (5).png')}}",
+    "{{asset('images/icons/Thiết kế không tên (6).png')}}"]
+    
+    var htmlContent = '<div class="col-md-4" style="margin-left: -10px; margin-right: -10px">';
+
+    for (let i = 0; i < topics.length; i += 2)
+    {
+        htmlContent += '<div class="row" style="margin-bottom: 10px; margin-top: 10px">'
+                    + '<div class="col" onClick="topicChoose(' + i.toString() + ')"' + '>' 
+                    + '<div class="topicName"><h2 style="font-family:\'UVNHaiBaTrung\'">' + topics[i] + '</h3></div>'
+                    + '<img class="topicIcon" src="' + imageNames[i] + '"></div>'
+                    + '<div class="col" onClick="topicChoose(' + (i + 1).toString() + ')"' + '>'
+                    + '<div class="topicName"><h2 style="font-family:\'UVNHaiBaTrung\'">' + topics[i + 1] + '</h3></div>'
+                    + '<img class="topicIcon" src="' + imageNames[i + 1] + '"></div></div>'
+    }
+
+    Swal.fire({
+                showConfirmButton: false,
+                html: '<h2 style="font-size: 25px; font-weight: bold">SOME TOPICS FOR YOU</h2>' + htmlContent
+            })
+}
+
 </script>
 @endsection
 
@@ -141,28 +180,26 @@ function startTimer(duration, display) {
 
         <br/>
 
-        <h3>{{$room}}</h3>
-
-
-
+        <div style = "display: flex; flex-direction: row; margin-left: 15px;">
+        <div>
+            <a onClick = "topicClicked()"> 
+        <img style="width: 50px; height: 50px" 
+                src="{{asset('images/icons/Asset 33@2x.png')}}" alt=""></a>
+        </div>
+        <div id="words" style="visibility: hidden; margin-left: 5px">
+            <a href=""> 
+            <img style="width: 48px; height: 48px;" 
+                src="{{asset('images/icons/Group 71@2x.png')}}" alt=""></a>
+        </div>
+        <div id="questions" style="visibility: hidden; margin-left: 5px">
+            <a href=""> 
+            <img style="width: 48px; height: 48px;"
+                src="{{asset('images/icons/Group 70@2x.png')}}" alt=""></a>
+        </div>
+        </div>
 
         <div class='row' id="media-div">
 
-        </div>
-
-        <div class='topic row'>
-            <div class='col-12'>
-                <a class="btn btn-info btn-block"
-                style="background: linear-gradient(90deg,#9a75f0,#FFA4B6); font-weight:bold; color:white;"
-                role="button"> <i class="fa fa-eye" aria-hidden="true"
-                onclick="
-                    Swal.fire(
-                        'Here your topic!',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-                    )
-                ">
-                    View topic</i></a>
-            </div>
         </div>
 
         <div class='row mt-1'>
