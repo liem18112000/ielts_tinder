@@ -119,7 +119,7 @@ class RegisterController extends Controller
             )"
         );
 
-        $user->notify(new Welcome);
+        //$user->notify(new Welcome);
 
         return $user;
     }

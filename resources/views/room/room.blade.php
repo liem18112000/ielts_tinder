@@ -3,9 +3,13 @@
 
 
 @section('styles')
-    <link rel="stylesheet" href="{{asset('css/stylesNotifications.css')}}">
+    <link rel="stylesheet" href="{{asset('css/stylesRoom.css')}}">
     <script src="https://kit.fontawesome.com/1918a957af.js" crossorigin="anonymous"></script>
     <style>
+
+        img{
+            bottom: 0!important;
+        }
         .bottom-img{
             width: 40px;
             height:40px;
@@ -95,36 +99,6 @@ Twilio.Video.createLocalTracks({
         participantConnected(participant);
     });
 
-    // document.getElementById(localParticipant.identity + 'video').addEventListener("click", function () {
-    //     if (document.getElementById(localParticipant.identity + 'video').innerText == 'On') {
-    //         localParticipant.videoTracks.forEach(function (videoTrack) {
-    //             console.log('+++++ videoTrack ' + localParticipant.identity + ' Disable :  ' + videoTrack + ' +++++');
-    //             videoTrack.disable();
-    //         });
-    //         document.getElementById(localParticipant.identity + 'video').innerText = "Off";
-    //     } else {
-    //         localParticipant.videoTracks.forEach(function (videoTrack) {
-    //             console.log('+++++ videoTrack ' + localParticipant.identity + ' Enable ' + videoTrack + ' +++++');
-    //             videoTrack.enable();
-    //         });
-    //         document.getElementById(localParticipant.identity + 'video').innerText = "On";
-    //     }
-    // });
-    // document.getElementById(localParticipant.identity + 'sound').addEventListener("click", function () {
-    //     if (document.getElementById(localParticipant.identity + 'sound').innerText == 'Mute') {
-    //         localParticipant.audioTracks.forEach(function (audioTrack) {
-    //             console.log('+++++ audioTrack ' + localParticipant.identity + ' Disable :  ' + audioTrack + ' +++++');
-    //             audioTrack.disable();
-    //         });
-    //         document.getElementById(localParticipant.identity + 'sound').innerText = "Unmute";
-    //     } else {
-    //         localParticipant.audioTracks.forEach(function (audioTrack) {
-    //             console.log('+++++ audioTrack ' + localParticipant.identity + ' Enable ' + audioTrack + ' +++++');
-    //             audioTrack.enable();
-    //         });
-    //         document.getElementById(localParticipant.identity + 'sound').innerText = "Mute";
-    //     }
-    // });
     room.on('participantDisconnected', function (participant) {
         console.log("Disconnected: '" + participant.identity + "'");
         participantDisconnected(participant);
@@ -140,7 +114,7 @@ function startTimer(duration, display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.innerHTML = '<i class="fa fa-clock-o" aria-hidden="true"> Clock ' + minutes + ":" + seconds +' </i>';
+        display.innerText = minutes + ":" + seconds;
 
         if (--timer < 0) {
             timer = duration;
@@ -148,6 +122,50 @@ function startTimer(duration, display) {
             clearInterval(interval);
         }
     }, 1000);
+}
+
+function topicChoose(id)
+{
+    console.log(id);
+    SweetAlert.close();
+    document.getElementById('words').style.visibility = 'visible'
+    document.getElementById('questions').style.visibility = 'visible'
+}
+
+function topicClicked()
+{
+    document.getElementById('words').style.visibility = 'hidden'
+    document.getElementById('questions').style.visibility = 'hidden'
+    let topics = ['PET', 'FAMILY', 'DREAM', 'JOB', 'HEALTH', 'SPORT']
+    let imageNames = [
+        "{{asset('images/icons/Thiết kế không tên.png')}}",
+        "{{asset('images/icons/Thiết kế không tên (1).png')}}",
+        "{{asset('images/icons/Thiết kế không tên (2).png')}}",
+        "{{asset('images/icons/Thiết kế không tên (3).png')}}",
+        "{{asset('images/icons/Thiết kế không tên (5).png')}}",
+        "{{asset('images/icons/Thiết kế không tên (6).png')}}"
+    ];
+
+    var htmlContent = '<div style="margin-left: -10px; margin-right: -10px">';
+
+    htmlContent += '<div class="row" style="margin:0;">';
+
+    for (let i = 0; i < topics.length; i += 2)
+    {
+        htmlContent += '<div class="col-lg-4 col-md-4 col-6 mb-4" onClick="topicChoose(' + i.toString() + ')"' + '>'
+                    + '<div class="topicName"><h2 style="font-family:\'UVNHaiBaTrung\'">' + topics[i] + '</h3></div>'
+                    + '<img class="topicIcon" src="' + imageNames[i] + '"></div>'
+                    + '<div class="col-lg-4 col-md-4 col-6 mb-4" onClick="topicChoose(' + (i + 1).toString() + ')"' + '>'
+                    + '<div class="topicName"><h2 style="font-family:\'UVNHaiBaTrung\'">' + topics[i + 1] + '</h3></div>'
+                    + '<img class="topicIcon" src="' + imageNames[i + 1] + '"></div>'
+    }
+
+    htmlContent += "</div>";
+
+    Swal.fire({
+        showConfirmButton: false,
+        html: '<h2 style="font-size: 25px; font-weight: bold">SOME TOPICS FOR YOU</h2>' + htmlContent
+    })
 }
 
 </script>
@@ -158,46 +176,42 @@ function startTimer(duration, display) {
 <div class="content" style='background-color:black'>
     <div class='container-fluid text-center'>
 
-        <br/><br/>
+        <br/>
 
-        {{-- <h3>{{$room}}</h3> --}}
-
-        <div class='row' id="media-div">
-
-        </div>
-
-        <div class='topic row'>
-            <div class='col-12'>
-                <a class="btn btn-info btn-block"
-                style="background: linear-gradient(90deg,#9a75f0,#FFA4B6); font-weight:bold; color:white;"
-                role="button"> <i class="fa fa-eye" aria-hidden="true"
-                onclick="
-                    Swal.fire(
-                        'Here your topic!',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-                    )
-                ">
-                    View topic</i></a>
+        <div style = "display: flex; flex-direction: row; margin-left: 15px;">
+            <div>
+                <a onClick = "topicClicked()">
+            <img style="width: 50px; height: 50px;"
+                    src="{{asset('images/icons/Asset 33@2x.png')}}" alt=""></a>
             </div>
-        </div>
+            <div id="words" style="visibility: hidden; margin-left: 5px">
+                <a href="javascript:void(0)">
+                <img style="width: 48px; height: 48px;"
+                    src="{{asset('images/icons/Group 71@2x.png')}}" alt=""></a>
+            </div>
+            <div id="questions" style="visibility: hidden; margin-left: 5px">
+                <a href="javascript:void(0)">
+                <img style="width: 48px; height: 48px;"
+                    src="{{asset('images/icons/Group 70@2x.png')}}" alt=""></a>
+            </div>
 
-        {{-- <div class='row mt-1'>
-            <div class='col-6'>
-                <a class="btn btn-outline-dark btn-block"
+            <div style='margin-left:auto'>
+                <a class="btn btn-outline-light" style='width: 60px; border-radius:20px; font-size:1.5em; background:white; color:black; font-family:"UVNHaiBaTrung"; font-weight:bold; text-decoration:none'
                  href='javascript:void(0)' id="time"></a>
             </div>
             <script type="text/javascript">
                 display = document.querySelector('#time');
                 startTimer({{$remainingTime}}, display);
             </script>
-            <div class='col-6'>
-                <a name="" id="" class="btn btn-outline-danger btn-block"
-                href='{{route('room.end', $room)}}'
-                role="button"> Close Room</a>
-            </div>
-        </div> --}}
+
+        </div>
+
+        <div class='row' id="media-div">
+
+        </div>
 
         <div class='row mt-1'>
+
             <div class='col-4'>
                 <a href='javascript:void(0)' style='margin:auto;' id='sound'>
                     <div style='margin:0; padding:0; width:100%'>
@@ -229,9 +243,8 @@ function startTimer(duration, display) {
                     On
                 </a>
             </div>
+
         </div>
-
-
     </div>
 </div>
 
@@ -254,6 +267,13 @@ document.getElementById('sound').addEventListener("click", function () {
                         "</div>" +
                     "</div>" +
                     "Mute";
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Media Player is currently muted',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         localParticipant.audioTracks.forEach(function (audioTrack) {
             console.log('+++++ audioTrack ' + localParticipant.identity + ' Enable ' + audioTrack + ' +++++');
@@ -265,6 +285,13 @@ document.getElementById('sound').addEventListener("click", function () {
                         "</div>" +
                     "</div>" +
                     "Unmute";
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Media Player is currently unmuted',
+            showConfirmButton: false,
+            timer: 3000
+        });
     }
 });
 
@@ -280,6 +307,13 @@ document.getElementById('video').addEventListener("click", function () {
                         "</div>" +
                     "</div>" +
                     "Off";
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Camera is currently off',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         localParticipant.videoTracks.forEach(function (videoTrack) {
             console.log('+++++ videoTrack ' + localParticipant.identity + ' Enable ' + videoTrack + ' +++++');
@@ -291,6 +325,13 @@ document.getElementById('video').addEventListener("click", function () {
                         "</div>" +
                     "</div>" +
                     "On";
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Camera is currently on',
+            showConfirmButton: false,
+            timer: 1500
+        });
     }
 });
 

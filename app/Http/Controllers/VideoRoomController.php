@@ -67,12 +67,12 @@ class VideoRoomController extends Controller
         ]);
     }
 
-    public function endRoom($roomName)
+    public function endRoom($roomName, $topics = [])
     {
         $client = new Client(config('services.twilio.sid'), config('services.twilio.token'));
 
         $rooms = $client->video->rooms->read([]);
-        
+
         foreach ($rooms as $room) {
             if ($room->uniqueName == $roomName) {
                 $room->update("completed");
@@ -91,7 +91,7 @@ class VideoRoomController extends Controller
         {
             $room->update([
                 'status'        => 0,
-                'topic'         => "Hahaha"
+                'topic'         => json_encode($topics)
             ]);
         }
         return redirect()->route('room.index');
@@ -199,5 +199,12 @@ class VideoRoomController extends Controller
         }
 
         return view('room.matching', ['onlineUsers' => $onlineUsers]);
+    }
+
+    public function ask(User $invite)
+    {
+        $user = Auth::user();
+
+        
     }
 }
