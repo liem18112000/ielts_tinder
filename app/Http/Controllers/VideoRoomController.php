@@ -8,6 +8,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Twilio\Exceptions\ConfigurationException;
 use Twilio\Exceptions\TwilioException;
 use Twilio\Rest\Client;
@@ -16,6 +18,7 @@ use Twilio\Jwt\Grants\VideoGrant;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Notifications\MatchRequest;
 use App\Jobs\CloseRoomJob;
 
 class VideoRoomController extends Controller
@@ -198,13 +201,82 @@ class VideoRoomController extends Controller
                $onlineUsers[] = $user;
         }
 
-        return view('room.matching', ['onlineUsers' => $onlineUsers]);
+        return view('room.matching', [
+            'onlineUsers' => $onlineUsers,
+            'token' => Str::random(20)
+        ]);
     }
 
-    public function ask(User $invite)
+    public function lounge(User $invite, string $token)
     {
-        $user = Auth::user();
+        $invite->notify(new MatchRequest(Auth::user(), $invite, $token));
 
-        
+        activity()
+        ->performedOn($invite)
+        ->causedBy(Auth::user())
+        ->log('Send a match request');
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Invitation sent',
+                'Be patient and your speak-mate will arrive in next few seconds!',
+                'success'
+            )"
+        );
+
+        $client = new Client($this->sid, $this->token);
+
+        $exists = $client->video->rooms->read(['uniqueName' => $token]);
+
+        if (empty($exists)) {
+            $client->video->rooms->create([
+                'uniqueName'                    => $token,
+                'type'                          => 'peer-to-peer',
+                'recordParticipantsOnConnect'   => true
+            ]);
+
+            $room = Room::create([
+                'name' => $token,
+                'created_at' => now(),
+                'status' => 1,
+                'topic' => 'Not Available',
+                'duration' => '0',
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            activity()
+            ->performedOn($room)
+            ->causedBy(Auth::user())
+            ->log('Create new room : '.$token);
+        }
+
+        return redirect()->action('VideoRoomController@join', [
+            'room' => $token,
+            'remainingTime' => 60 * 60 - (now()->diffInSeconds(Room::where('name', $token)->firstOrFail()->created_at)),
+        ]);
+    }
+
+    public function getMatchingRequest(){
+
+        $notifications = Auth()->user()->unreadNotifications->where('type', 'App\Notifications\MatchRequest')->all();
+
+        if(count($notifications) == 0){
+            return response()->json([
+                'message' => null
+            ]);
+        }
+
+        foreach ($notifications as $notification) {
+            $notification->markAsRead();
+        }
+
+        return response()->json([
+            'message' => 'Get all matching request',
+            'notifications' => $notifications
+        ]);
+
     }
 }

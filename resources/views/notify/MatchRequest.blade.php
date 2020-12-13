@@ -1,17 +1,17 @@
 @component('mail::message')
 # Matching requests
 
-Hello {{$toUser->name}}!
+Hello {{$to->name}}!
 
-{{$fromUser->name}}, a dear friend, want to practice with you in matching room!
+{{$from->name}}, a dear friend, want to practice with you in matching room!
 
 Would you like to come with us?
 
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => '', 'color' => 'green'])
     Yes, of course
 @endcomponent
 
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => '', 'color' => 'red'])
     Nope, may later
 @endcomponent
 

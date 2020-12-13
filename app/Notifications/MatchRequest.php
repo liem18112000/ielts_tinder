@@ -7,23 +7,25 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
+use App\User;
+
 class MatchRequest extends Notification
 {
     use Queueable;
 
 
-    protected $room, $fromUser, $toUser;
+    protected $fromUser, $toUser, $token;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($room, $fromUser, $toUser)
+    public function __construct(User $fromUser, User $toUser, string $token)
     {
-        $this->room = $room;
         $this->fromUser = $fromUser;
         $this->toUser = $toUser;
+        $this->token = $token;
     }
 
     /**
@@ -34,7 +36,7 @@ class MatchRequest extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['database'];
     }
 
     /**
@@ -46,7 +48,7 @@ class MatchRequest extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)->markdown('notify/MatchRequest', [
-            'room'  => $this->room,
+            'token' => $this->token,
             'from'  => $this->fromUser,
             'to'    => $this->toUser
         ]);
@@ -61,7 +63,7 @@ class MatchRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            'room'  => $this->room,
+            'token' => $this->token,
             'from'  => $this->fromUser,
             'to'    => $this->toUser,
         ];

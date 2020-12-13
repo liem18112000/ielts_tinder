@@ -126,7 +126,7 @@ Route::put('/notify', 'NotificationController@update')->name('notify.update');
 |--------------------------------------------------------------------------
 */
 
-Route::get('room', 'VideoRoomController@index')->name('room.index');
+Route::get('room', 'VideoRoomController@matching')->name('room.index');
 
 Route::get('room/join/{room}', 'VideoRoomController@join')->name('room.join');
 
@@ -134,10 +134,13 @@ Route::post('room/create', 'VideoRoomController@create')->name('room.create');
 
 Route::get('room/topic', 'VideoRoomController@topic')->name('room.topic');
 
-Route::get('room/matching', 'VideoRoomController@matching')->name('room.matching');
+Route::get('room/panel', 'VideoRoomController@index')->name('room.panel');
+
+Route::get('room/lounge/{invite}/{token}', 'VideoRoomController@lounge')->name('room.lounge');
 
 Route::get('room/end/{room}', 'VideoRoomController@endRoom')->name('room.end');
 
+Route::post('room/matching/request', 'VideoRoomController@getMatchingRequest')->name('room.request');
 
 /*
 |--------------------------------------------------------------------------

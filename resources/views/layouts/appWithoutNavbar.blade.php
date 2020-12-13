@@ -47,6 +47,61 @@
 
     <script>
         @yield('scripts')
+
+        @auth
+        function getPendingRequest(){
+            // Notification for practice
+            console.log('notify pending request');
+            var xhttp = new XMLHttpRequest();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            $.ajax({
+                method: 'POST',
+
+                url: "{{route('room.request')}}",
+
+                success: function (data) {
+
+                    if(data.message != null){
+
+                        var notifications = data.notifications;
+
+                        notifications.forEach(function(notification){
+
+                            var data = notification.data;
+
+                            Swal.fire({
+                                title: 'New matching request',
+                                text: 'Would you like to match with ' + data.from.name,
+                                position: 'top-end',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes',
+                                timer: 10000
+                            }).then((result) => {
+                                if (result.value) {
+                                    window.location.replace("http://localhost/ielts_tinder/public/room/join/" + data.token);
+                                }
+                            })
+                        });
+
+                    }
+                },
+            });
+
+        }
+
+        getPendingRequest();
+
+        @endauth
+
+
+
         {!!
             Session::get('message');
         !!}

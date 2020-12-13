@@ -9,7 +9,8 @@
      <div class="content">
         <div class="container">
 
-        <br/><br/>
+        <br/>
+        <h1 class='text-center'>Matching Results</h1>
 
         @foreach($onlineUsers as $user)
             @if($user->id != Auth::user()->id)
@@ -55,10 +56,12 @@
 
                     <div class="row mb-2">
                         <div class="col-6">
-                            <a class="btn btnMore btn-block" style="color:white;" href="" role="button">More</a>
+                            <a class="btn btnMore btn-block" style="color:white;"
+                            href="{{ route('profile.show', $user->profile)}}" role="button">More</a>
                         </div>
                         <div class="col-6">
-                            <a class="btn btnMatch btn-block" style="color:white;" href="" role="button">Match</a>
+                            <a class="btn btnMatch btn-block" style="color:white;"
+                            href="{{ route('room.lounge', ['invite' => $user, 'token' => $token])}}" role="button">Match</a>
                         </div>
                     </div>
                 </div>
@@ -88,8 +91,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="backgroundBar"></div>
     </div>
