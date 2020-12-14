@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\Welcome;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use App\Profile;
+use App\UserStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -48,7 +52,8 @@ class LoginController extends Controller
     /**
      * Redirect the user to the GitHub authentication page.
      *
-     * @return \Illuminate\Http\Response
+     * @param $provider
+     * @return RedirectResponse
      */
     public function redirectToProvider($provider)
     {
@@ -58,7 +63,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from GitHub.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function handleProviderCallback($provider)
     {
@@ -86,17 +91,48 @@ class LoginController extends Controller
                 'provider'      => $provider,
             ]);
 
+            activity()
+            ->performedOn($user)
+            ->causedBy($user)
+            ->log('New user created with third-party provider : ' . $provider);
+
             $profile = Profile::create([
                 'user_id'       => $user->id,
                 'name'          => $user->name
             ]);
 
+            activity()
+            ->performedOn($profile)
+            ->causedBy($user)
+            ->log('New profile created with third-party provider : ' . $provider);
+
         } else {
 
             if (!Hash::check($providerUser->id, $user->password)) {
+                activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('Login failed with third-party provider : ' . $provider);
                 abort(403);
+            }else{
+                activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('Login success with third-party provider : ' . $provider);
             }
         }
+
+        $user->status = 1;
+        $user->save();
+
+        $user_status = UserStatus::create([
+            'user_id'   => $user->id,
+        ]);
+
+        activity()
+            ->performedOn($user_status)
+            ->causedBy($user)
+            ->log('New user status created');
 
         Session::flash(
             'message',
@@ -109,6 +145,24 @@ class LoginController extends Controller
 
         Auth::login($user, true);
 
+        $user->notify(new Welcome);
+
         return redirect($this->redirectTo);
+    }
+
+    public function authenticated()
+    {
+        $user = auth()->user();
+        $user->status = 1;
+        $user->save();
+    }
+
+    public function logout()
+    {
+        $user = auth()->user();
+        $user->status = 0;
+        $user->save();
+        Auth::logout();
+        return redirect('index');
     }
 }

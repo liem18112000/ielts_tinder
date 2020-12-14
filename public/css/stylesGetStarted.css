@@ -1,4 +1,7 @@
 *
+
+
+
 {
     margin: 0px;
     padding: 0px;
@@ -23,6 +26,9 @@ h1
     font-weight: 300;
     font-size: 200%;
     margin-bottom: 30px;
+    position: relative;
+    bottom: 50px;
+}
 }
 h2
 {
@@ -31,7 +37,7 @@ h2
 }
 h6
 {
-    font-size: 50%;
+    font-size: 100%;
     font-weight: 700;
     margin-bottom: 50px;
 }
@@ -57,3 +63,13 @@ img
 {
     color: white;
 }
+/* Mobile: width <740px */
+@media only screen and (max-width:739px)
+{
+  h1 {
+    font-weight: 300;
+    font-size: 200%;
+    margin-bottom: 30px;
+    position: relative;
+    bottom: 0px;
+  }

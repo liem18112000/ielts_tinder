@@ -25,7 +25,7 @@ h2
 }
 h6
 {
-    font-size: 50%;
+    font-size: 100%;
     font-weight: 700;
     margin-bottom: 30px;
 }
@@ -37,7 +37,7 @@ span
 {
     color:white;
     display: inline;
-    font-weight: 200;
+    font-weight: 600;
 }
 .content
 {
@@ -66,9 +66,11 @@ span
 
 .logo-signin
 {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: 10px;
+    position: relative;
+    top: 0px;
 }
 .sign-in-width
 {
@@ -79,4 +81,49 @@ span
     background-color: rgba(0,0,0,0.4);
     padding: 90px 20px 50px 20px;
     border-radius: 90px 0px 0px 0px;
+}
+
+/* Mobile: width <740px */
+@media only screen and (max-width:739px)
+{
+    
+        .signin {
+            background-color: rgba(0,0,0,0.4);
+            padding: 90px 20px 18px 20px;
+            border-radius: 90px 0px 0px 0px;
+        }
+
+}
+
+/*Tablet: width >= 740pxand width < 1024px */
+@media screen and (min-width:740px) and (max-width:1023px)
+{
+    
+        .signin {
+            background-color: rgba(0,0,0,0.4);
+            padding: 90px 20px 180px 20px;
+            border-radius: 90px 0px 0px 0px;
+        }
+}
+
+/* PC: width >=1024px */
+@media only screen and (min-width:1024px)
+{
+    .signin {
+        background-color: rgba(0,0,0,0.4);
+        padding: 90px 20px 80px 20px;
+        border-radius: 90px 0px 0px 0px;
+    }
+    .logo-signin {
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+        position: relative;
+        top: 0px;
+    }
+
+    .sign-in-width
+    {
+    margin-top:90px;
+    }   
 }

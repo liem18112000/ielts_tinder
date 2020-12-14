@@ -52,8 +52,7 @@ Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name(
 
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.provider.callback');
 
-
-
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 /*
 |--------------------------------------------------------------------------
 | Feed Routes
@@ -78,7 +77,7 @@ Route::put('/feeds/{feed}/update-content', 'FeedController@updateContent')->name
 
 Route::put('/feeds/{feed}/update-media', 'FeedController@updateMedia')->name('feeds.update-media');
 
-Route::delete('/feeds/{feed}', 'FeedController@delete')->name('feeds.delete');
+Route::get('/feeds/{feed}/delete', 'FeedController@delete')->name('feeds.delete');
 
 
 
@@ -97,7 +96,7 @@ Route::get('/profile/{profile}/edit', 'ProfileController@edit')->name('profile.e
 
 Route::post('/profile', 'ProfileController@store')->name('profile.store');
 
-Route::put('/profile', 'ProfileController@update')->name('profile.update')->middleware('profile.exist');
+Route::put('/profile/{profile}/update', 'ProfileController@update')->name('profile.update')->middleware('profile.exist');
 
 Route::delete('/profile/{profile}', 'ProfileController@delete')->name('profile.delete')->middleware('profile.exist');
 
@@ -127,13 +126,28 @@ Route::put('/notify', 'NotificationController@update')->name('notify.update');
 |--------------------------------------------------------------------------
 */
 
-Route::get('room', 'VideoRoomController@index')->name('room.index');
+Route::get('room', 'VideoRoomController@matching')->name('room.index');
 
 Route::get('room/join/{room}', 'VideoRoomController@join')->name('room.join');
 
 Route::post('room/create', 'VideoRoomController@create')->name('room.create');
 
 Route::get('room/topic', 'VideoRoomController@topic')->name('room.topic');
+
+Route::get('room/panel', 'VideoRoomController@index')->name('room.panel');
+
+Route::get('room/lounge/{invite}/{token}', 'VideoRoomController@lounge')->name('room.lounge');
+
+Route::get('room/end/{room}', 'VideoRoomController@endRoom')->name('room.end');
+
+Route::post('room/matching/request', 'VideoRoomController@getMatchingRequest')->name('room.request');
+
+Route::post('room/matching/refuse/{invitor}/{token}', 'VideoRoomController@refuse')->name('room.refuse');
+
+Route::get('room/matching/on-refuse/{token}', 'VideoRoomController@onRefuse')->name('room.on-refuse');
+
+Route::post('room/matching/get-refuse', 'VideoRoomController@refuseMatchingRequest')->name('room.get-refuse');
+
 
 
 /*

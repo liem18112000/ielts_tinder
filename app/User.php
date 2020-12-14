@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'provider'
+        'name', 'email', 'password', 'provider', 'status'
     ];
 
     /**
@@ -52,19 +52,7 @@ class User extends Authenticatable
     //Show list of rooms containing a user.
     public function rooms()
     {
-        return $this->belongsToMany(VideoRoom::class, 'joins');
-    }
-
-    //Show list of notifications sent by a user.
-    public function sentNotifications()
-    {
-        return $this->hasMany(Notification::class, 'sender_id');
-    }
-
-    //Show list of notifications received by a user.
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class, 'receiver_id');
+        return $this->belongsToMany(Room::class, 'joins');
     }
 
     //Show list of tests done by a user.
@@ -72,10 +60,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Test::class);
     }
-    
+
     //Show list of tests to mark for an examiner.
     public function testsToMark()
     {
         return $this->hasMany(Test::class, 'examiner');
+    }
+
+    public function user_status()
+    {
+        return $this->hasOne(UserStatus::class);
     }
 }

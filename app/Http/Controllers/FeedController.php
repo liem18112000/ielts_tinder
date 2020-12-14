@@ -46,10 +46,23 @@ class FeedController extends Controller
         return $feeds;
     }
 
+    public function getResources()
+    {
+        $resources = [];
+        foreach(Feed::all() as $feed)
+        {
+            $resources[] = "storage/media/" . $feed->media;
+        }
+
+        return response()->json([
+            'resources' => $resources
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -60,27 +73,10 @@ class FeedController extends Controller
         ]);
     }
 
-    public function getMedia(Feed $feed)
-    {
-        $path = storage_path($feed->media);
-
-        if (!File::exists($path)) abort(404, "Media not found...");
-
-        $file = File::get($path);
-
-        $type = File::mimeType($path);
-
-        $response = Response::make($file, 200);
-
-        $response->header("Content-Type", $type);
-
-        return $response;
-    }
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function moment()
     {
@@ -92,7 +88,7 @@ class FeedController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -103,18 +99,33 @@ class FeedController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
-        $media = $this->storeMedia($request, 'media', 'public/media');
+        $media = $this->storeMediaCloudinary($request, 'media');
 
-        Feed::create([
-            'media' => $media,
-            'title' => $request->title,
-            'content' => $request->content,
-            'user_id' => Auth::user()->id
+        $feed = Feed::create([
+            'media'     => $this->encrypt($media),
+            'title'     => $this->encrypt($request->title),
+            'content'   => $this->encrypt($request->content),
+            'user_id'   => Auth::user()->id,
+            'status'    => 1,
         ]);
+
+        activity()
+            ->performedOn($feed)
+            ->causedBy(Auth::user())
+            ->log('Create new feed');
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Upload sucess!',
+                'It look nice!',
+                'success'
+            )"
+        );
 
         return redirect(route('feeds.index'));
     }
@@ -123,7 +134,7 @@ class FeedController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Feed  $feed
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Feed $feed)
     {
@@ -136,7 +147,7 @@ class FeedController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Feed  $feed
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function editContent(Feed $feed)
     {
@@ -149,7 +160,7 @@ class FeedController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Feed  $feed
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function editMedia(Feed $feed)
     {
@@ -163,23 +174,28 @@ class FeedController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Feed  $feed
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function updateMedia(Request $request, Feed $feed)
     {
 
-        $media = $this->storeMedia($request, 'media', 'public/media');
+        $media = $this->storeMediaCloudinary($request, 'media');
 
         $feed->update([
-            'media'     => $media,
+            'media'     => $this->encrypt($media),
         ]);
+
+        activity()
+            ->performedOn($feed)
+            ->causedBy(Auth::user())
+            ->log('Update new feed media');
 
         Session::flash(
             'message',
                 "Swal.fire(
-                'Update failed!',
-                'Please try again!',
-                'warning'
+                'Update sucess!',
+                'It look nice!',
+                'success'
             )"
         );
 
@@ -190,9 +206,14 @@ class FeedController extends Controller
     {
 
         $feed->update([
-            'title'     => $request->title,
-            'content'   => $request->content
+            'title'     => $this->encrypt($request->title),
+            'content'   => $this->encrypt($request->content)
         ]);
+
+        activity()
+            ->performedOn($feed)
+            ->causedBy(Auth::user())
+            ->log('Update new feed content');
 
         Session::flash(
             'message',
@@ -210,10 +231,13 @@ class FeedController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Feed  $feed
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function destroy(Feed $feed)
+    public function delete(Feed $feed)
     {
-        //
+        $feed->update([
+            'status' => 0,
+        ]);
+        return redirect(route('feeds.index'));
     }
 }

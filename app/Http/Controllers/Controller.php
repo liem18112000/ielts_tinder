@@ -6,6 +6,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+use JD\Cloudder\Facades\Cloudder;
 
 class Controller extends BaseController
 {
@@ -36,5 +39,68 @@ class Controller extends BaseController
         }
 
         return $fileNameToStore;
+    }
+
+    public function storeMediaCloudinary($request, $field)
+    {
+        $fileNameToStore = 'untitled';
+
+        // Handle File Upload
+        if ($request->hasFile($field)) {
+
+            $media = $request->file($field);
+
+            // dd($media->getMimeType());
+
+            $media_type = explode('/', $media->getMimeType())[0];
+
+            $media_ext = explode('/', $media->getMimeType())[1];
+
+            $media_name = $media->getRealPath();
+
+            list($width, $height) = getimagesize($media_name);
+
+            if ($media_type == 'video' || $media_type == 'audio') {
+                Cloudder::uploadVideo($media_name, null);
+
+                if($media_type == 'video')
+                {
+                    $media_url = 'https://res.cloudinary.com/ieltstinder/video/upload/' . Cloudder::getPublicId() . "." . $media_ext;
+                }else{
+                    $media_url = Cloudder::secureShow(Cloudder::getPublicId(), [
+                        'resource_type' => 'video',
+                        'format' => 'mp3'
+                    ]);
+                }
+            } else {
+                Cloudder::upload($media_name, null);
+                $media_url = Cloudder::secureShow(Cloudder::getPublicId(), [
+                    'resource_type' => $media_type,
+                    'format' => $media_ext,
+                    "width" => $width,
+                    "height" => $height
+                ]);
+            }
+
+            return $media_url;
+        }
+
+        return $fileNameToStore;
+    }
+
+    public function encrypt($data)
+    {
+        return Crypt::encryptString($data);
+    }
+
+    public function decrypt($encryptString)
+    {
+        try
+        {
+            return Crypt::decryptString($encryptString);
+
+        } catch (DecryptException $e) {
+            //
+        }
     }
 }

@@ -9,7 +9,7 @@
 
     <div class="content">
 
-        <div class='container' style="padding-bottom: 8%">
+        <div class='container' style="padding-bottom: 15vh">
 
             <h2 class='text-center' style='padding-top: 8%'>Feed Upload</h2>
 
@@ -18,7 +18,7 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="title">Feeds Title</label>
-                    <input type="text" name="title" id="title" class="form-control" value='{{ $feed->title }}'
+                    <input type="text" name="title" id="title" class="form-control" value='{{ $feed->decrypt($feed->title) }}'
                         placeholder="Enter feed title" aria-describedby="helpId" required="required" inactive>
                 </div>
 
@@ -27,7 +27,26 @@
                     <input type="file" class="form-control-file" name="media" id="media" placeholder="Choose a file to upload">
                 </div>
 
+                <div class="form-group mt-4">
+                    <div class="row">
+                        <img src='{{ $feed->decrypt($feed->media) }}' style='object-fit:contain; width: 100%; height: 100%;' id="reviewImage"class="avatar-profile" alt="">
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function PreviewImage() {
+                        var fileReader = new FileReader();
+                        fileReader.readAsDataURL(document.getElementById("media").files[0]);
+
+                        fileReader.onload = function (fileEvent) {
+                            document.getElementById("reviewImage").src = fileEvent.target.result;
+                        };
+                    };
+                </script>
+
                 <button type="submit" class="btn btn-primary btn-block">Done</button>
+
+                <a name="" id="" class="btn btn-secondary btn-block" style='color:white' href="{{route('feeds.index')}}" role="button">Back</a>
             </form>
 
         </div>

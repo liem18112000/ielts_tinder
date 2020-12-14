@@ -20,7 +20,7 @@ class LastUserActivity
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            $expiresAt = Carbon::now()->addMinutes(1); // keep online for 1 min
+            $expiresAt = Carbon::now()->addMinutes(5); // keep online for 5 mins
             Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
 
             // last seen
