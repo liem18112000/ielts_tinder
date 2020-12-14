@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Criteria;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -22,7 +23,7 @@ class CriteriaController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -32,8 +33,8 @@ class CriteriaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -44,8 +45,8 @@ class CriteriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Criteria  $criteria
-     * @return \Illuminate\Http\Response
+     * @param Criteria $criteria
+     * @return Response
      */
     public function show(Criteria $criteria)
     {
@@ -57,8 +58,8 @@ class CriteriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Criteria  $criteria
-     * @return \Illuminate\Http\Response
+     * @param Criteria $criteria
+     * @return Response
      */
     public function edit(Criteria $criteria)
     {
@@ -70,9 +71,9 @@ class CriteriaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Criteria  $criteria
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Criteria $criteria
+     * @return Response
      */
     public function update(Request $request, Criteria $criteria)
     {
@@ -83,8 +84,8 @@ class CriteriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Criteria  $criteria
-     * @return \Illuminate\Http\Response
+     * @param Criteria $criteria
+     * @return Response
      */
     public function destroy(Criteria $criteria)
     {

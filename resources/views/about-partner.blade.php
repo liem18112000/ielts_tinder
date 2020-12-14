@@ -10,10 +10,14 @@
         @csrf
         @method('POST')
         <h3>About your partner</h3>
-        <input type="radio" id="male" name="gender" value="male">
-        <label for="male">Male</label>
-        <input type="radio" id="female" name="gender" value="female">
-        <label for="female ">Female</label>
+        <div class="form-group">
+            <label for="">Partner's Gender</label>
+            <select class="form-control" name="gender" id="" style='background:none; border: black 0 0 2px 0; color:white'>
+                <option style='color:black' value='male'>Male</option>
+                <option style='color:black' value='female'>Female</option>
+                <option style='color:black' value='other'>Other</option>
+            </select>
+        </div>
         <input type="number" class="Input " placeholder="Age">
         <input type="text" class="Input " placeholder="Hometown">
         <input type="text" class="Input " placeholder="Practime">
