@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Notifications\MatchRequest;
+use App\Notifications\RefuseMatchRequest;
 use App\Jobs\CloseRoomJob;
 
 class VideoRoomController extends Controller
@@ -62,6 +63,10 @@ class VideoRoomController extends Controller
             ]);
         }
 
+        Auth::user()->user_status->update([
+            'status' => 'in-room'
+        ]);
+
         return view('room.room',[
             'accessToken'   => $token->toJWT(),
             'room'          => $room,
@@ -85,10 +90,24 @@ class VideoRoomController extends Controller
                 }
             }
         }
+
         DB::table('joins')->where('user_id', Auth::user()->id)->where('room_id', Room::where('name', $roomName)->first()->id)->update([
             'status' => '0',
             'close_stamp' => Carbon::now(),
         ]);
+
+        Auth::user()->user_status->update([
+            'status' => 'idle'
+        ]);
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Done',
+                'You have end your matching!',
+                'success'
+            )"
+        );
 
         foreach(Room::where('name', $roomName)->get() as $room)
         {
@@ -162,11 +181,6 @@ class VideoRoomController extends Controller
         ]);
     }
 
-    public function topic()
-    {
-        return view('room.topic');
-    }
-
     protected function updateRoomStatus($allRoomNames)
     {
         foreach(Room::where('status', '1')->get() as $room)
@@ -197,7 +211,8 @@ class VideoRoomController extends Controller
         $onlineUsers = [];
 
         foreach ($users as $user) {
-            if (Cache::has('user-is-online-' . $user->id) && $user->status == 1)
+            if (Cache::has('user-is-online-' . $user->id) && $user->status == 1
+                && $user->user_status->status == 'idle' && $user->id != Auth::id())
                $onlineUsers[] = $user;
         }
 
@@ -259,11 +274,48 @@ class VideoRoomController extends Controller
         ]);
     }
 
+    public function refuse(User $invitor, string $token)
+    {
+        $invitor->notify(new RefuseMatchRequest(Auth::user(), $invitor, $token));
+
+        return response()->json([
+            'message' => 'notify refuse request'
+        ]);
+
+    }
+
     public function getMatchingRequest(){
 
-        $notifications = Auth()->user()->unreadNotifications->where('type', 'App\Notifications\MatchRequest')->all();
+        if(Auth::user()->user_status->status == 'idle'){
 
-        if(count($notifications) == 0){
+            $notifications = Auth()->user()->unreadNotifications->where('type', 'App\Notifications\MatchRequest')->all();
+
+            if (count($notifications) == 0) {
+                return response()->json([
+                    'message' => null
+                ]);
+            }
+
+            foreach ($notifications as $notification) {
+                $notification->markAsRead();
+            }
+
+            return response()->json([
+                'message' => 'Get all matching request',
+                'notifications' => $notifications
+            ]);
+        }
+
+        return response()->json([
+            'message'   => null
+        ]);
+    }
+
+    public function refuseMatchingRequest(){
+
+        $notifications = Auth()->user()->unreadNotifications->where('type', 'App\Notifications\RefuseMatchRequest')->all();
+
+        if (count($notifications) == 0) {
             return response()->json([
                 'message' => null
             ]);
@@ -274,9 +326,53 @@ class VideoRoomController extends Controller
         }
 
         return response()->json([
-            'message' => 'Get all matching request',
+            'message' => 'Get refuse matching request',
             'notifications' => $notifications
         ]);
+
+    }
+
+    public function onRefuse(string $token){
+
+        $client = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+
+        $rooms = $client->video->rooms->read([]);
+
+        foreach ($rooms as $room) {
+            if ($room->uniqueName == $token) {
+                $room->update("completed");
+                $ps = $room->participants->read(array("status" => "connected"));;
+                foreach ($ps as $participant) {
+                    $participant->update(array("status" => "disconnected"));
+                }
+            }
+        }
+
+        DB::table('joins')->where('user_id', Auth::user()->id)->where('room_id', Room::where('name', $token)->first()->id)->update([
+            'status' => '0',
+            'close_stamp' => Carbon::now(),
+        ]);
+
+        Auth::user()->user_status->update([
+            'status' => 'idle'
+        ]);
+
+        Session::flash(
+            'message',
+            "Swal.fire(
+                'Opps',
+                'Your request has been denied!',
+                'error'
+            )"
+        );
+
+        foreach (Room::where('name', $token)->get() as $room) {
+            $room->update([
+                'status'        => 0,
+            ]);
+        }
+
+        return redirect()->route('room.index');
 
     }
 }

@@ -9,11 +9,11 @@
      <div class="content">
         <div class="container">
 
-        <br/>
-        <h1 class='text-center'>Matching Results</h1>
+            <br/>
+            <h1 class='text-center'>Matching Results</h1>
 
-        @foreach($onlineUsers as $user)
-            @if($user->id != Auth::user()->id)
+            <div id='user-load'>
+            @foreach($onlineUsers as $user)
                 <div class="noti">
                     <div class="row">
 
@@ -65,8 +65,8 @@
                         </div>
                     </div>
                 </div>
-            @endif
-        @endforeach
+            @endforeach
+            </div>
         </div>
 
         <div class="icon">
@@ -97,6 +97,7 @@
 @endsection
 
 @section('scripts')
+
 
 @endsection
 

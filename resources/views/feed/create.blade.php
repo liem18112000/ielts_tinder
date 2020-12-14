@@ -9,7 +9,7 @@
 
     <div class="content">
 
-        <div class='container' style="padding-bottom: 8%">
+        <div class='container' style="padding-bottom: 15vh">
 
             <h2 class='text-center' style='padding-top: 8%'>Feed Upload</h2>
 
@@ -57,6 +57,8 @@
                 </script>
 
                 <button type="submit" class="btn btn-primary btn-block">Done</button>
+
+                <a name="" id="" class="btn btn-secondary btn-block" style='color:white' href="{{route('feeds.index')}}" role="button">Back</a>
             </form>
 
         </div>

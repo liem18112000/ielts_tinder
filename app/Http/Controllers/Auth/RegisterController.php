@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications\Welcome;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\UserStatus;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -109,6 +110,15 @@ class RegisterController extends Controller
             ->performedOn($profile)
             ->causedBy($user)
             ->log('New profile created');
+
+        $user_status = UserStatus::create([
+            'user_id'   => $user->id,
+        ]);
+
+        activity()
+            ->performedOn($profile)
+            ->causedBy($user_status)
+            ->log('New user status created');
 
         Session::flash(
             'message',

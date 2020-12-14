@@ -105,7 +105,8 @@ Twilio.Video.createLocalTracks({
     });
 });
 
-function startTimer(duration, display) {
+function startTimer(duration, display)
+{
     var timer = duration, minutes, seconds;
     var interval = setInterval(function () {
         minutes = parseInt(timer / 60, 10);

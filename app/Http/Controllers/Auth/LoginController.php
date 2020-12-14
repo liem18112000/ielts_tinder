@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use App\Profile;
+use App\UserStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -123,6 +124,15 @@ class LoginController extends Controller
 
         $user->status = 1;
         $user->save();
+
+        $user_status = UserStatus::create([
+            'user_id'   => $user->id,
+        ]);
+
+        activity()
+            ->performedOn($user_status)
+            ->causedBy($user)
+            ->log('New user status created');
 
         Session::flash(
             'message',

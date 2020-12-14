@@ -142,6 +142,14 @@ Route::get('room/end/{room}', 'VideoRoomController@endRoom')->name('room.end');
 
 Route::post('room/matching/request', 'VideoRoomController@getMatchingRequest')->name('room.request');
 
+Route::post('room/matching/refuse/{invitor}/{token}', 'VideoRoomController@refuse')->name('room.refuse');
+
+Route::get('room/matching/on-refuse/{token}', 'VideoRoomController@onRefuse')->name('room.on-refuse');
+
+Route::post('room/matching/get-refuse', 'VideoRoomController@refuseMatchingRequest')->name('room.get-refuse');
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Record Routes

@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Test::class, 'examiner');
     }
+
+    public function user_status()
+    {
+        return $this->hasOne(UserStatus::class);
+    }
 }

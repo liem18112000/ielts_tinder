@@ -49,16 +49,38 @@
         @yield('scripts')
 
         @auth
-        function getPendingRequest(){
+
+        function refuseMatchingRequest(invitor, token){
             // Notification for practice
-            console.log('notify pending request');
+            console.log('refuse matching request');
+
             var xhttp = new XMLHttpRequest();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            
+
+            $.ajax({
+                method: 'POST',
+
+                url: "http://localhost/ielts_tinder/public/room/matching/refuse/" + invitor + "/" + token,
+
+                success: function (data) {
+                    console.log('send refuse request done');
+                }
+            });
+        }
+
+        function getPendingRequest(){
+            // Notification for practice
+            var xhttp = new XMLHttpRequest();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             $.ajax({
                 method: 'POST',
 
@@ -77,7 +99,6 @@
                             Swal.fire({
                                 title: 'New matching request',
                                 text: 'Would you like to match with ' + data.from.name,
-                                position: 'top-end',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
                                 cancelButtonColor: '#d33',
@@ -86,21 +107,74 @@
                             }).then((result) => {
                                 if (result.value) {
                                     window.location.replace("http://localhost/ielts_tinder/public/room/join/" + data.token);
+                                }else{
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: 'What a pity!',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    });
+
+                                    refuseMatchingRequest(data.from.id, data.token)
+
                                 }
                             })
                         });
 
                     }
                 },
+                complete: function(data) {
+                    setTimeout(getPendingRequest, 1000)
+                }
             });
 
         }
 
-        getPendingRequest();
+        setTimeout(getPendingRequest(), 1000);
+
+        function getRefuseRequest(){
+            // Notification for practice
+            var xhttp = new XMLHttpRequest();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: 'POST',
+
+                url: "{{route('room.get-refuse')}}",
+
+                success: function (data) {
+
+                    if(data.message != null){
+
+                        var notifications = data.notifications;
+
+                        notifications.forEach(function(notification){
+
+                            var data = notification.data;
+
+                            console.log('on refuse matching request')
+
+                            window.location.replace("http://localhost/ielts_tinder/public/room/matching/on-refuse/" + data.token)
+
+                        });
+
+                    }
+                },
+                complete: function(data) {
+                    setTimeout(getRefuseRequest, 1000)
+                }
+            });
+
+        }
+
+        setTimeout(getRefuseRequest(), 1500);
 
         @endauth
-
-
 
         {!!
             Session::get('message');
