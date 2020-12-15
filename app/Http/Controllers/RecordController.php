@@ -32,28 +32,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = Record::all();
-
-        $client = new Client($this->sid, $this->token);
-
-        $mediaLocation = [];
-
-        foreach ($records as $record) {
-
-            $uri = "https://video.twilio.com/v1/" .
-            "Rooms/" . $record->RoomSid . "/" .
-            "Recordings/" . $record->RecordingSid . "/" .
-            "Media/";
-
-            $response = $client->request("GET", $uri);
-
-            $mediaLocation[$record->RecordingSid] = $response->getContent()["redirect_to"];
-        }
-
-        return view('record.index', [
-            'records' => $records,
-            'mediaLocation' => $mediaLocation
-        ]);
+        return view('record.index');
     }
 
     /**

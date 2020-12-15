@@ -1,36 +1,38 @@
-@extends('layouts.app')
+@extends('layouts.appWithoutNavbar')
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/stylesNotifications.css')}}">
+    <script src="https://kit.fontawesome.com/1918a957af.js" crossorigin="anonymous"></script>
+@endsection
 
 @section('content')
 <div class='content'>
     <div class="container">
-        <h3>Media Downloads</h3>
 
-        <table class='display' id='tableID'>
-            <thead class='thead-dark'>
-                <tr align="center">
-                    <th>ID</th>
-                    <th>RoomSid</th>
-                    <th>Links</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach($records as $record)
-                    <tr align="center">
-                        <td scope="row">{{$record->RecordingSid}}</td>
-                        <td>
-                            {{$record->RoomSid}}
-                        </td>
-                        <td>
-                            <a class="btn btn-primary btn-block" href="{{$mediaLocation[$record->RecordingSid]}}" role="button">Download</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-        </table>
+        <br/><br/><br/>
+
+        <video id="gum" playsinline autoplay muted ></video>
+        <video id="recorded" playsinline loop width='100%'></video>
+
+        <div class='row'>
+            <button class='btn btn-primary btn-block' id="start">Start camera</button>
+            <button class='btn btn-primary btn-block' id="record" disabled>Start Recording</button>
+            <button class='btn btn-primary btn-block' id="play" disabled>Play</button>
+            <button class='btn btn-primary btn-block' id="download" disabled>Download</button>
+        </div>
+
+        <div>
+            <h4>Media Stream Constraints options</h4>
+            <p>Echo cancellation: <input type="checkbox" id="echoCancellation"></p>
+        </div>
+
+        <div>
+            <span id="errorMsg"></span>
+        </div>
+
     </div>
 
-    {{-- <div class="icon">
+    <div class="icon">
         <div class="row align-items-center">
             <div class="col">
                 <a href="{{route('feeds.index')}}"> <img class="iconNewsfeed" src="{{asset('image/iconNewsfeed.png')}}" alt=""></a>
@@ -47,18 +49,22 @@
                 <a href="{{route('notify.index')}}"> <img class="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
             </div>
             <div class="col">
-                <a href="{{route('profile.show', Auth::user()->id)}}"> <img class="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
+                <a href="{{route('profile.show', Auth::user()->profile->id)}}"> <img class="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 </div>
 
-{{-- <div class="backgroundBar"></div>
-</div> --}}
+<div class="backgroundBar"></div>
+</div>
+
+<!-- include adapter for srcObject shim -->
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="{{ asset('js/record.js')}}" async></script>
 
 @endsection
 
 @section('scripts')
-    $('#tableID').DataTable();
+
 @endsection

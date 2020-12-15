@@ -9,59 +9,64 @@
      <div class="content">
         <div class="container">
 
-        @foreach($onlineUsers as $user)
-            @if($user->id != Auth::user()->id)
+            <br/>
+            <h1 class='text-center'>Matching Results</h1>
+
+            <div id='user-load'>
+            @foreach($onlineUsers as $user)
                 <div class="noti">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="row"> <img style='border-radius:10%;bottom:0;top:20px;' src="{{$user->profile->profile_image}}" class="avatar-profile" alt=""></div>
+                    <div class="row">
+
+                        <div class="col-6 mt-2" style='padding:0 0 0 10px; margin:0'>
+                            <img style='border-radius:10%;bottom:0;object-fit:cover;margin:0;' src="{{$user->profile->profile_image}}" class="avatar-profile" alt="">
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row mt-2" style="margin-bottom:5px">
+                                <h4 style='font-size:16px; font-weight:bold;'> {{$user->name}}</h4>
+                            </div>
+
+                            <div class="row" style="margin-bottom:5px">
+                                <img src="{{asset('image/score.png')}}" class="score" style='bottom: 0' alt="">
+                                <span class="detail">
+                                    @if(!$user->profile->band_score || $user->profile->band_score == 0.0)
+                                        Not Available
+                                    @else
+                                        {{$user->profile->band_score}}
+                                    @endif
+                                </span>
+                            </div>
+
+                            <div class="row">
+                                <img src="{{asset('image/Age.png')}}" style='bottom: 0' class="score" alt="">
+                                <span class="detail">
+                                    @if(!$user->profile->dob)
+                                        Not Available
+                                    @else
+                                        {{$user->profile->dob}}
+                                    @endif
+                                </span>
+                            </div>
+
+                        </div>
+
                     </div>
-                    <div class="col-6" style="margin-left:-15px; margin-right:-15px;">
-                        <span><h5 style='margin-top:10px; font-size:16px; font-weight:bold;'>{{$user->name}}</h5></span>
-                        <div class="row" style="margin-bottom:5px">
-                            <img src="{{asset('image/score.png')}}" class="score" alt="">
-                            <span class="detail">
-                                @if(!$user->profile->band_score || $user->profile->band_score == 0.0)
-                                    Not Available
-                                @else
-                                    {{$user->profile->band_score}}
-                                @endif
-                            </span>
+
+                    <hr/>
+
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <a class="btn btnMore btn-block" style="color:white;"
+                            href="{{ route('profile.show', $user->profile)}}" role="button">More</a>
                         </div>
-                        <div class="row" style="margin-bottom:5px">
-                            <img src="{{asset('image/player.png')}}" class="score" alt="">
-                            <span class="detail">
-                                ???
-                            </span>
-                        </div>
-                        <div class="row">
-                            <img src="{{asset('image/Age.png')}}" class="score" alt="">
-                            <span class="detail">
-                                @if(!$user->profile->dob)
-                                    Not Available
-                                @else
-                                    {{$user->profile->dob}}
-                                @endif
-                            </span>
+                        <div class="col-6">
+                            <a class="btn btnMatch btn-block" style="color:white;"
+                            href="{{ route('room.lounge', ['invite' => $user, 'token' => $token])}}" role="button">Match</a>
                         </div>
                     </div>
                 </div>
-                <div class="row descrip">
-                    <span>
-                        {{$user->profile->intro}}
-                    </span>
-                </div>
-                <div class="row" style="margin-bottom:10px">
-                    <div class="col-6">
-                        <a class="btnMore" href="" role="button">MORE</a>
-                    </div>
-                    <div class="col-6">
-                        <a class="btnMatch" style="color:white;" href="" role="button">MATCH</a>
-                    </div>
-                </div>
+            @endforeach
             </div>
-            @endif
-        @endforeach
         </div>
 
         <div class="icon">
@@ -87,13 +92,12 @@
         </div>
     </div>
 
-
-
     <div class="backgroundBar"></div>
     </div>
 @endsection
 
 @section('scripts')
+
 
 @endsection
 
