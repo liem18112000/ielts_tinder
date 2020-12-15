@@ -42,38 +42,37 @@ class ProfileController extends Controller
         return view('profile.create');
     }
 
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show($user_id)
+    public function show($profile)
     {
 
-        if(!Profile::where('user_id', $user_id)->exists()){
+        if(!Profile::where('id', $profile)->exists()){
 
-            $user = User::find($user_id);
-
-            $profile = Profile::create([
-                'user_id'       => $user->id,
-                'name'          => $user->name
+            Profile::create([
+                'user_id'       => Auth::user()->id,
+                'name'          => Auth::user()->name
             ]);
 
         }
 
-        // Check profile belogn to user or not
-        if(Auth::user()->id == $user_id){
+        // Check profile belong to user or not
+        if(Auth::user()->id == Profile::where('id', $profile)->first()->user->id){
 
             // Return private profile
             return view('profile.show', [
-                'profile' => Profile::where('user_id', $user_id)->firstOrFail(),
+                'profile' => Profile::where('id', $profile)->first(),
             ]);
         }
 
         // Return public profile
         return view('profile.public', [
-            'profile' => Profile::where('user_id', $user_id)->firstOrFail(),
+            'profile' => Profile::where('id', $profile)->first(),
         ]);
 
 

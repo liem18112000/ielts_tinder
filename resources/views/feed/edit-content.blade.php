@@ -61,7 +61,7 @@
                     <a href="{{route('notify.index')}}"> <img class="iconNoti" src="{{asset('image/notification.png')}}" alt=""></a>
                 </div>
                 <div class="col">
-                    <a href="{{route('profile.show', Auth::user()->id)}}"> <img class="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
+                    <a href="{{route('profile.show', Auth::user()->profile->id)}}"> <img class="iconProfile" src="{{asset('image/icon_profile.png')}}" alt=""></a>
                 </div>
             </div>
         </div>

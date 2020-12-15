@@ -88,7 +88,7 @@ Route::get('/feeds/{feed}/delete', 'FeedController@delete')->name('feeds.delete'
 |--------------------------------------------------------------------------
 */
 
-Route::get('/profile/{user_id}', 'ProfileController@show')->name('profile.show')->middleware('profile.exist');
+Route::get('/profile/{profile}', 'ProfileController@show')->name('profile.show')->middleware('profile.exist');
 
 Route::get('/profile/create', 'ProfileController@create')->name('profile.create');
 
