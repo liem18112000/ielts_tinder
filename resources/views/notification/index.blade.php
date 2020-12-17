@@ -13,6 +13,7 @@
      <div class="content">
         <div class="container">
 
+            <br/>
             <h3 style='margin-top: 10px'>Notifications</h3>
 
             <div class="noti">
@@ -23,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="noti" style="height: 60vh; overflow-y:scroll">
+            <div class="noti" style="height: 70vh; overflow-y:scroll">
                 @foreach ($notifications as $notification)
                     <div class="noti-1 row">
                         <div class="col-4 col-lg-2">
@@ -37,7 +38,7 @@
                             <div class="row timeNoti"><span>{{$notification->created_at->toDateTimeString()}}</span></div>
                         </div>
                         <div class="col-3" style="padding:0 5px 0 0; margin: 0;">
-                            <a class="btn btn-outline-dark btn-block" href="#">View</a>
+                            <a class="btn btn-outline-dark btn-block" href="{{route('notify.show', $notification->id)}}">View</a>
                         </div>
                     </div>
                 @endforeach
