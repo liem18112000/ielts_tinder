@@ -13,9 +13,6 @@
      <div class="content">
         <div class="container">
 
-            <div class="row">
-                <img src="{{asset('image/mess.png')}}" class="mess" alt="">
-            </div>
             <h3 style='margin-top: 10px'>Notifications</h3>
 
             <div class="noti">
