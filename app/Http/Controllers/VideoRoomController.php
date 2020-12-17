@@ -375,4 +375,14 @@ class VideoRoomController extends Controller
         return redirect()->route('room.index');
 
     }
+
+    public function dubbingSongChoosing()
+    {
+        return view('dubbing.song');
+    }
+
+    public function dubbing()
+    {
+        return view('dubbing.dubbing');
+    }
 }

@@ -150,7 +150,9 @@ Route::get('room/matching/on-refuse/{token}', 'VideoRoomController@onRefuse')->n
 
 Route::post('room/matching/get-refuse', 'VideoRoomController@refuseMatchingRequest')->name('room.get-refuse');
 
+Route::get('dubbing/choose', 'VideoRoomController@dubbingSongChoosing')->name('room.dubsong');
 
+Route::get('dubbing', 'VideoRoomController@dubbing')->name('room.dubbing');
 
 /*
 |--------------------------------------------------------------------------
