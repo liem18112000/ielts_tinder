@@ -29,6 +29,13 @@
                 <a href="{{route('login.provider', 'google')}}"><img src="{{asset('image/logo-GG.png')}}" class="logo-signin" alt="logo-google"></a>
                 <a href="{{route('login.provider', 'facebook')}}"><img src="{{asset('image/logo-FB.png')}}" class="logo-signin" alt="logo-facebook"></a>
         </div>
+        <!-- test -->
+        <div class="sign-in-width">
+                <span>Sign in with </span>
+                <a href="{{route('login.provider', 'google')}}"><img src="{{asset('image/logo-GG.png')}}" class="logo-signin" alt="logo-google"></a>
+                <a href="{{route('login.provider', 'facebook')}}"><img src="{{asset('image/logo-FB.png')}}" class="logo-signin" alt="logo-facebook"></a>
+        </div>
+        <!-- test -->
     </div>
 </div>
 
