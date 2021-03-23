@@ -12,23 +12,45 @@ use Illuminate\Support\Facades\Session;
 class FeedController extends Controller
 {
 
+    /**
+     * AUDIO_EXT
+     *
+     * @var array
+     */
     protected $AUDIO_EXT = [
         'mp3',
         'wav',
         'ogg'
     ];
 
+    /**
+     * VIDEO_EXT
+     *
+     * @var array
+     */
     protected $VIDEO_EXT = [
         'mp4',
         'webm',
         'ogg'
     ];
 
+
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * mediaAnalyze
+     *
+     * @param  mixed $feeds
+     * @return void
+     */
     protected function mediaAnalyze($feeds){
         for ($i = 0; $i < count($feeds); $i++) {
             $tmp = explode(".", $feeds[$i]->media);
@@ -46,6 +68,11 @@ class FeedController extends Controller
         return $feeds;
     }
 
+    /**
+     * getResources
+     *
+     * @return void
+     */
     public function getResources()
     {
         $resources = [];
@@ -69,7 +96,7 @@ class FeedController extends Controller
         $feeds = Feed::orderBy('updated_at', 'DESC')->get();
 
         return view('feed.index', [
-          'feeds' => $this->mediaAnalyze($feeds),
+        	'feeds' => $this->mediaAnalyze($feeds),
         ]);
     }
 
@@ -95,6 +122,30 @@ class FeedController extends Controller
         return view('feed.create');
     }
 
+
+	protected function validateNewFeed(Request $request)
+	{
+		return [
+			'content' => $this->validateNewFeedContent($request),
+			'media' => $this->validateNewFeedMedia($request)
+		];
+	}
+
+	protected function validateNewFeedContent(Request $request)
+	{
+		return $request->validate([
+			'title'		=> 'required|max:50',
+			'content'	=> 'required',
+		]);
+	}
+
+	protected function validateNewFeedMedia(Request $request)
+	{
+		return $request->validate([
+			'media'		=> 'required',
+		]);
+	}
+
     /**
      * Store a newly created resource in storage.
      *
@@ -103,6 +154,8 @@ class FeedController extends Controller
      */
     public function store(Request $request)
     {
+		$this->validateNewFeed($request);
+
         $media = $this->storeMediaCloudinary($request, 'media');
 
         $feed = Feed::create([
@@ -179,6 +232,8 @@ class FeedController extends Controller
     public function updateMedia(Request $request, Feed $feed)
     {
 
+		$this->validateNewFeedMedia($request);
+
         $media = $this->storeMediaCloudinary($request, 'media');
 
         $feed->update([
@@ -202,8 +257,16 @@ class FeedController extends Controller
         return redirect(route('feeds.index'));
     }
 
+    /**
+     * updateContent
+     *
+     * @param  mixed $request
+     * @param  mixed $feed
+     * @return void
+     */
     public function updateContent(Request $request, Feed $feed)
     {
+		$this->validateNewFeedContent($request);
 
         $feed->update([
             'title'     => $this->encrypt($request->title),
