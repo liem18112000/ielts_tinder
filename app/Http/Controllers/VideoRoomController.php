@@ -22,6 +22,10 @@ use App\Notifications\MatchRequest;
 use App\Notifications\RefuseMatchRequest;
 use App\Jobs\CloseRoomJob;
 
+/**
+* Author : Liem + Vu
+*/
+
 class VideoRoomController extends Controller
 {
     protected $sid;
@@ -39,6 +43,12 @@ class VideoRoomController extends Controller
     }
 
 
+    /**
+     * join
+     *
+     * @param  mixed $room
+     * @return void
+     */
     public function join($room)
     {
         // A unique identifier for this user

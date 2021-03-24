@@ -8,6 +8,8 @@ use App\Profile;
 
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Auth;
+
 class CheckProfileExist
 {
     /**
@@ -24,37 +26,19 @@ class CheckProfileExist
         }
 
         if (!Profile::where('user_id', $request->user()->id)->exists()) {
-            return redirect(route('profile.create'));
+            $user = Auth::user();
+            $profile = Profile::create([
+                'user_id'       => $user->id,
+                'name'          => $user->name
+            ]);
+
+            activity()
+            ->performedOn($profile)
+            ->causedBy($user)
+            ->log('New profile created');
+
+            return redirect()->route('profile.show', $profile);
         }
-
-        $profile = Profile::where('user_id', $request->user()->id)->first();
-
-        if (!is_object($request->profile)) {
-            if ($profile->id != $request->profile) {
-                Session::flash(
-                    'message',
-                    "Swal.fire(
-                        'Access denied!',
-                        'It is not your profile',
-                        'warning'
-                    )"
-                );
-                return redirect(route('home'));
-            }
-        } else {
-            if ($profile->id != $request->profile->id) {
-                Session::flash(
-                    'message',
-                    "Swal.fire(
-                        'Access denied!',
-                        'It is not your profile',
-                        'warning'
-                    )"
-                );
-                return redirect(route('home'));
-            }
-        }
-
 
         return $next($request);
     }

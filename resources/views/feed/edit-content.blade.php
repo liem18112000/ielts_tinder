@@ -13,6 +13,16 @@
 
             <h2 class='text-center' style='padding-top: 8%'>Feed Upload</h2>
 
+			@if ($errors->any())
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+
             <form action = '{{route('feeds.update-content', $feed)}}' method='post'>
                 @csrf
                 @method('PUT')

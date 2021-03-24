@@ -297,7 +297,7 @@
                 <div class="col-6 info">
                     <h2 style='margin-top:50px'>{{$profile->user->name}}</h2>
                     <div class="row">
-                        <img src="{{asset('image/location.png')}}" class="age" alt="">
+                        <!-- <img src="{{asset('image/location.png')}}" class="age" alt=""> -->
                         <span class="detail">
                             @if(!$profile->home)
                                 Not Available
@@ -316,12 +316,12 @@
                             @endif
                         </span>
                     </div>
-                    <div class="row">
+                    <div class="row2">
                         <div class="col-4">
-                            <a href='{{ route('profile.edit', $profile)}}' class="btn btnEdit">Edit</a>
+                            <a href='{{ route('profile.edit', $profile)}}' class="btn btnEdit2">Edit Profile</a>
                         </div>
-                        <div class="col-4">
-                            <a class="btn btnEdit" href="{{ route('logout') }}"
+                        <div class="col-8">
+                            <a class="btn btnEdit2" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -342,7 +342,7 @@
                     {!!$profile->intro!!}
                 </span>
             </div>
-            <div class="row">
+            <div class="row3">
                 <div class="col-1"></div>
                 <div class="col-5">
                     <span class="amount-follower">31</span> Follower
@@ -354,7 +354,7 @@
             </div>
 
             <hr>
-            <div class="row descrip">
+            <div class="row descrip2">
                 <input type="button" class="button" value="Update New Audio">
             </div>
             <div class="row learn">
@@ -367,9 +367,9 @@
 
                 <div class="row score1">
                     <img src="{{asset('image/playaudio.png')}}" id="score1" alt="">
-                    <span class="score-detail"> My Audio: </span>
-
+                    <span class="score-detail"> Audio Collection: </span>
                 </div>
+
                 <div class="displayvideo">
                     <iframe width="180" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY">
                     </iframe>
@@ -377,25 +377,14 @@
                     </iframe>
                 </div>
 
-                <div class="row score1">
-                    <img src="{{asset('image/birthday.png')}}" id="score1" alt="">
-                    <span class="score-detail"> Birthday: </span>
-                     <span class="current-score">{{$profile->dob}}</span>   <!--profile-> đi qua đâu? -->
+                <div class="row score2">
+                    <img src="{{asset('image/sharing.png')}}" id="score1" alt="">
+                    <span class="score-detail"> Sharing Collection: </span>
                 </div>
 
-                <div class="row score1">
-                    <img src="{{asset('image/like.png')}}" id="score1" alt="">
-                    <span class="score-detail"> Liked: </span>
-                    <span class="current-score">{{$profile->band_score}}</span>   <!--profile-> đi qua đâu? -->
-                </div>
         </div>
-        <div class="row score1">
-                    <span class="score-detail"> About me </span>
-        </div>
-        <div class="textne">
-            <p> I am interested in talking about American TV series , books , travel , daily life events and street food.</p>
-            <p>Wants to practice languages with: patient since I am still learning. Has interest in teaching the languages. </p>
-         </div>
+
+
                 <div class="row evalution">
                     <div id="chart-container"></div>
                 </div>

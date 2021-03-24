@@ -20,6 +20,9 @@ class ProfileController extends Controller
         return $this->middleware('auth');
     }
 
+	// Create a validator for the profile fields
+	
+
     /**
      * Store a newly created resource in storage.
      *

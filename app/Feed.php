@@ -8,6 +8,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 class Feed extends Model
 {
+
     protected $guarded = [];
 
     //Show user that created a feed.

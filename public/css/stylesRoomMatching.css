@@ -151,9 +151,12 @@ h3
 }
 .noti
 {
-    margin: 10px 10px 10px 10px;
-    border: 1px grey solid;
+    /* border: 1px grey solid;
+    border-radius: 20px; */
+    margin: 10px 0px 0px 0px;
+    background-color: white;
     border-radius: 20px;
+
 }
 span
 {
@@ -193,6 +196,9 @@ a,a:hover,a:visited
         padding-bottom: 15%
     }
 }
+
+
+
 
 /* 1 */
 .iconNewsfeed {
@@ -274,3 +280,59 @@ a,a:hover,a:visited
     font-weight: 600;
     line-height: 1.5rem;
 }
+
+
+.swiper-container {
+    width: 80%;
+    height: 290px;
+    margin-top: 10%;
+    border: 1px grey solid;
+    border-radius: 20px;
+    background-color: white;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: black;
+  
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .swiper-wrapper
+  {
+      /* background-color: black; */
+      margin: 0px 0px 0px 0px;
+  }
+
+  .row4
+  {
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .cornerimage {
+    border: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+   } 
+
+   .avatarr{
+       position: relative;
+       width: 100%;
+   }
