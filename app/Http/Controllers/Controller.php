@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Session;
 use JD\Cloudder\Facades\Cloudder;
 
 class Controller extends BaseController
@@ -102,5 +103,19 @@ class Controller extends BaseController
         } catch (DecryptException $e) {
             //
         }
+    }
+
+    public function commingSoon()
+    {
+        Session::flash(
+            'message',
+            'Swal.fire(
+                "Comming soon",
+                "The function is under development!",
+                "info"
+            )'
+        );
+
+        return redirect()->back();
     }
 }

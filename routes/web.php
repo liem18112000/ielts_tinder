@@ -118,6 +118,8 @@ Route::post('/notify', 'NotificationController@store')->name('notify.store');
 
 Route::put('/notify', 'NotificationController@update')->name('notify.update');
 
+Route::get('/notify/{notification_id}', 'NotificationController@show')->name('notify.show');
+
 
 
 /*
